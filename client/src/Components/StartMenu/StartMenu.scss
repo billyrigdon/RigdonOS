@@ -1,0 +1,14 @@
+$mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
+$lightPurple: #776d87;
+$darkColor: #4A4453;
+
+#startMenu {
+	display: flex;
+	position: absolute;
+	bottom: 6vh;
+	left: 1rem;
+	background-color: $lightPurple;
+	height: 40vh;
+	width: 20vw;
+	z-index: 5;
+}

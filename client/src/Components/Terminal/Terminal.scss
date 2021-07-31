@@ -1,0 +1,23 @@
+$mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
+$lightPurple: #776d87;
+$darkColor: #4A4453;
+
+/* width */
+::-webkit-scrollbar {
+	width: 0px;
+  }
+
+#terminal {
+	width: 45vw;
+	height:45vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.windowBar {
+	width: 100%;
+	height:7%;
+	background-color: $lightPurple;
+}

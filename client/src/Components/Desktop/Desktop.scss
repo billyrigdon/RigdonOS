@@ -1,0 +1,11 @@
+#desktop {
+	display: flex;
+	position: absolute;
+	width:100vw;
+	height: 95vh;
+	bottom: 5vh;
+	left: 0;
+	z-index: -1;
+	background-image: url("background.jpg");
+	background-size: cover;
+}
