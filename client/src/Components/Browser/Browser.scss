@@ -7,9 +7,9 @@ $darkColor: #4A4453;
 	width: 0px;
   }
 
-#terminal {
-	width: 45vw;
-	height:45vh;
+#browser {
+	width: 70vw;
+	height:80vh;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
@@ -23,5 +23,7 @@ $darkColor: #4A4453;
 	background-color: $lightPurple;
 }
 
-
-
+#webPage {
+	width:100%;
+	height:100%;
+}

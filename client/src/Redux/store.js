@@ -1,9 +1,13 @@
 import { createStore } from "redux";
 
 const TOGGLEMENU = "TOGGLEMENU";
+const TOGGLETERMINAL = "OPENTERMINAL";
+const TOGGLEBROWSER = "TOGGLEBROWSER";
 
 const initialState = {
-	menuOpen: false
+	menuOpen: false,
+	terminalOpen: false,
+	browserOpen: false
 };
 
 const toggleMenu = (menuOpen) => {
@@ -12,18 +16,40 @@ const toggleMenu = (menuOpen) => {
 	}
 };
 
-const menuReducer = (state = initialState, action) => {
+const toggleTerminal = (terminalOpen) => {
+	return {
+		type: TOGGLETERMINAL
+	}
+}
+
+const toggleBrowser = (browserOpen) => {
+	return {
+		type: TOGGLEBROWSER
+	}
+}
+
+const osReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case TOGGLEMENU:
 			return {
 				...state, 
 				menuOpen: !state.menuOpen 
 			}
+		case TOGGLETERMINAL:
+			return {
+				...state,
+				terminalOpen: !state.terminalOpen
+			}
+		case TOGGLEBROWSER:
+			return {
+				...state,
+				browserOpen: !state.browserOpen
+			}
 		default:
 			return state
 	}
 }
 
-const store = createStore(menuReducer);
+const store = createStore(osReducer);
 
-export { store, toggleMenu };
+export { store, toggleMenu, toggleTerminal, toggleBrowser };
