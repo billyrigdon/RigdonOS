@@ -8,30 +8,6 @@ import Terminal from "../Terminal/Terminal";
 import browserIcon from "../../Icons/browser.svg"
 
 
-
-const mapStateToProps = (state) => {
-	return {
-		menuOpen: state.menuOpen,
-		terminalOpen: state.terminalOpen,
-		browserOpen: state.browserOpen
-	}
-};
-
-const mapDispatchToProps = (dispatch) => {
-	return {
-		openMenu: (menuOpen) => {
-			dispatch(toggleMenu(menuOpen));
-		},
-		openTerminal: (terminalOpen) => {
-			dispatch(toggleTerminal(terminalOpen))
-		},
-		openBrowser: (browserOpen) => {
-			dispatch(toggleBrowser(browserOpen))
-		}
-	}
-}
-
-
 const Taskbar = (props) => {
 
 	const [currentTime, setCurrentTime] = useState(new Date());
@@ -72,4 +48,4 @@ const Taskbar = (props) => {
 
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Taskbar);
+export default Taskbar;

@@ -7,8 +7,12 @@ import "./Terminal.scss"
 const Terminal = (props) => {
 	return (
 		<Draggable className="window">
-				<div id="terminal">
-					<div className="windowBar"></div>
+				<div className="terminal">
+					<div className="windowBar">
+						<div className="windowButtons minimize"></div>
+						<div className="windowButtons maximize"></div>
+						<div className="windowButtons close"></div>
+					</div>
 					<ReactTerminal theme={{
 						background: '#141313',
 						promptSymbolColor: '#6effe6',	
