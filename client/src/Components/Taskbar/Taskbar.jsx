@@ -7,6 +7,7 @@ import terminalIcon from "../../Icons/terminal.svg";
 import Terminal from "../Terminal/Terminal";
 import browserIcon from "../../Icons/browser.svg"
 import notesIcon from "../../Icons/notepad-48.svg"
+import startIcon from "../../Icons/syspeek-90.svg"
 
 
 const Taskbar = (props) => {
@@ -41,7 +42,7 @@ const Taskbar = (props) => {
 	return (
 		<div>
 			<div id="taskbar">
-				<button id="startMenuButton" onClick={openMenu}>Start</button>
+				<img id="startMenuButton" src={startIcon} alt="Start" onClick={openMenu} height="100%" width="auto"/>
 				<div id="taskbarApps">
 					<img src={notesIcon} alt="Notes" onClick={openNotes} width="100%" height="100%" />
 					<img src={terminalIcon} alt="Terminal" onClick={openTerminal} width="100%" height="100%" />

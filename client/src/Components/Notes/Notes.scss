@@ -1,8 +1,14 @@
+$mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
+
 #notes {
 	width:100%;
 	height:100%;
 	border: none;
-	padding: 1rem;
+	
+}
+
+textarea:focus {
+	outline:none;
 }
 
 .notepad {
@@ -13,4 +19,5 @@
 	flex-direction: column;
 	align-items: center;
 	resize: both;
+	box-shadow: $mediumShadow;
 }

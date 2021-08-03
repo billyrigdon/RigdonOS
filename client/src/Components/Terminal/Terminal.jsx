@@ -67,7 +67,7 @@ const Terminal = (props) => {
 					spacing: '1%',
 					fontFamily: 'monospace',
 					width: '100%',
-					height: '90%'
+					height: '100%'
 				}}/>
 			</div>
 		)

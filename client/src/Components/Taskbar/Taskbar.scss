@@ -17,10 +17,7 @@ $darkColor: #4A4453;
 }
 
 #startMenuButton {
-	padding: .4rem 1.3rem .4rem 1.3rem;
-	margin: 1rem;
-	background-color: $lightPurple;
-	color:white;
+	margin-left: .5rem;
 }
 
 #taskbarTime {
@@ -31,4 +28,9 @@ $darkColor: #4A4453;
 #taskbarApps {
 	display: flex;
 	height:90%;
+}
+
+#taskbarApps img {
+	margin-left: .5rem;
+	margin-right: .5rem;
 }

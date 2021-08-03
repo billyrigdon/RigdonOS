@@ -8,13 +8,14 @@ $darkColor: #4A4453;
   }
 
 .terminal {
-	width: 45vw;
+	width: 35vw;
 	height:45vh;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	resize: both;
+	box-shadow: $mediumShadow;
 }
 
 

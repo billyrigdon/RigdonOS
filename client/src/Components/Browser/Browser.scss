@@ -12,9 +12,12 @@ $darkColor: #4A4453;
 	flex-direction: column;
 	align-items: center;
 	resize: both;
+	box-shadow: $mediumShadow;
+	
 }
 
 #webPage {
 	width:100%;
 	height:100%;
+	border:none;
 }

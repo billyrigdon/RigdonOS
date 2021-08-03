@@ -1,10 +1,19 @@
 $mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
 $lightPurple: #776d87;
 $darkColor: #4A4453;
+$trafficRed: #e18999;
+$trafficYellow: #f9f871;
+$trafficGreen: #00c9a4;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 
 .windowBar {
 	width: 100%;
-	height:7%;
+	height:2.5rem;
 	background-color: $lightPurple;
 	display: flex;
 	align-items: center;
@@ -19,15 +28,16 @@ $darkColor: #4A4453;
 }
 
 .minimize {
-	background-color: yellow;
+	background-color: $trafficYellow;
 }
 
 .maximize {
-	background-color: blue;
+	background-color: $trafficGreen;
 }
 
 .close {
-	background-color: red;
+	background-color: $trafficRed;
+	margin-right: .5rem;
 }
 
 .maximized {

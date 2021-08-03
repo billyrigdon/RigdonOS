@@ -1,17 +1,42 @@
 import "./StartMenu.scss";
+import terminalIcon from "../../Icons/terminal.svg";
+import browserIcon from "../../Icons/browser.svg"
+import notesIcon from "../../Icons/notepad-48.svg"
+import startIcon from "../../Icons/syspeek-90.svg"
+import { toggleTerminal, toggleMenu, store, toggleBrowser } from "../../Redux/store";
+
 
 const StartMenu = (props) => {
+
+	const openTerminal = () => {
+		props.openTerminal(props.terminalOpen);
+		console.log(props);
+	}
+
+	const openBrowser = () => {
+		props.openBrowser(props.browserOpen);
+		console.log(props);
+	}
+
+	const openNotes = () => {
+		props.openNotes(props.notesOpen);
+		console.log(props);
+	}
+
 	return (
 		<div id="startMenu">
-			<ul>
-				<li>App</li>
-				<li>App</li>
-				<li>App</li>
-				<li>App</li>
-				<li>App</li>
-				<li>App</li>
-				<li>App</li>
-			</ul>
+				<div className="startApps" onClick={openTerminal}>
+					<img src={terminalIcon} alt="Terminal" />
+					<p>Terminal</p>
+				</div>
+				<div className="startApps" onClick={openBrowser}>
+					<img src={browserIcon} alt="Browser" />
+					<p>Browser</p>
+				</div>
+				<div className="startApps">
+					<img src={notesIcon} alt="Notes" onClick={openNotes}/>
+					<p>Notes</p>
+				</div>
 		</div>
 	)
 }
