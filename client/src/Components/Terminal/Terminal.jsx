@@ -7,12 +7,15 @@ import "./Terminal.scss"
 const Terminal = (props) => {
 
 	const [termClass, setTermClass] = useState("terminal");
+	const [maximized, setMaximized] = useState(false);
 
 	const maxTerm = () => {
 		if (termClass !== "maximized") {
-			setTermClass("maximized")
+			setTermClass("maximized");
+			setMaximized(true);
 		} else {
-			setTermClass("terminal")
+			setTermClass("terminal");
+			setMaximized(false);
 		}
 	}
 
@@ -21,29 +24,54 @@ const Terminal = (props) => {
 		console.log(props);
 	}
 	
-	return (
-		<Draggable className="window">
-				<div id="terminal" className={termClass}>
-					<div className="windowBar">
-						<div className="windowButtons minimize"></div>
-						<div className="windowButtons maximize" onClick={maxTerm}></div>
-						<div className="windowButtons close" onClick={closeTerminal}></div>
+	if (!maximized) {
+
+		return (
+			<Draggable className="window">
+					<div id="terminal" className={termClass}>
+						<div className="windowBar">
+							<div className="windowButtons minimize" onClick={closeTerminal}></div>
+							<div className="windowButtons maximize" onClick={maxTerm}></div>
+							<div className="windowButtons close" onClick={closeTerminal}></div>
+						</div>
+						<ReactTerminal theme={{
+							background: '#141313',
+							promptSymbolColor: '#6effe6',	
+							commandColor: '#fcfcfc',
+							outputColor: '#fcfcfc',
+							errorOutputColor: '#ff89bd',
+							fontSize: '1.1rem',
+							spacing: '1%',
+							fontFamily: 'monospace',
+							width: '100%',
+							height: '90%'
+						}}/>
 					</div>
-					<ReactTerminal theme={{
-						background: '#141313',
-						promptSymbolColor: '#6effe6',	
-						commandColor: '#fcfcfc',
-						outputColor: '#fcfcfc',
-						errorOutputColor: '#ff89bd',
-						fontSize: '1.1rem',
-						spacing: '1%',
-						fontFamily: 'monospace',
-						width: '100%',
-						height: '90%'
-					}}/>
+			</Draggable>
+		)
+	} else if (maximized) {
+		return (
+			<div id="terminal" className={termClass}>
+				<div className="windowBar">
+					<div className="windowButtons minimize" onClick={closeTerminal}></div>
+					<div className="windowButtons maximize" onClick={maxTerm}></div>
+					<div className="windowButtons close" onClick={closeTerminal}></div>
 				</div>
-		</Draggable>
-	)
+				<ReactTerminal theme={{
+					background: '#141313',
+					promptSymbolColor: '#6effe6',	
+					commandColor: '#fcfcfc',
+					outputColor: '#fcfcfc',
+					errorOutputColor: '#ff89bd',
+					fontSize: '1.1rem',
+					spacing: '1%',
+					fontFamily: 'monospace',
+					width: '100%',
+					height: '90%'
+				}}/>
+			</div>
+		)
+	}
 }
 
 export default Terminal;
