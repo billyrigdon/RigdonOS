@@ -4,8 +4,9 @@ import Desktop from "../Desktop/Desktop";
 import Terminal from "../Terminal/Terminal";
 import StartMenu from "../StartMenu/StartMenu";
 import Browser from "../Browser/Browser";
+import Notes from "../Notes/Notes"
 import { connect } from "react-redux";
-import { maximizeBrowser, maximizeTerminal, toggleBrowser, toggleTerminal, toggleMenu, store } from "../../Redux/store";
+import { toggleNotes, toggleBrowser, toggleTerminal, toggleMenu, store } from "../../Redux/store";
 
 
 const mapStateToProps = (state) => {
@@ -13,8 +14,7 @@ const mapStateToProps = (state) => {
 		menuOpen: state.menuOpen,
 		terminalOpen: state.terminalOpen,
 		browserOpen: state.browserOpen,
-		terminalMaximized: state.terminalMaximized,
-		browserMaximized: state.browserMaximized
+		notesOpen: state.notesOpen
 	}
 };
 
@@ -29,11 +29,8 @@ const mapDispatchToProps = (dispatch) => {
 		openBrowser: (browserOpen) => {
 			dispatch(toggleBrowser(browserOpen))
 		},
-		maxTerminal: (terminalMaximized) => {
-			dispatch(maximizeTerminal(terminalMaximized))
-		},
-		maxBrowser: (browserMaximized) => {
-			dispatch(maximizeBrowser(browserMaximized))
+		openNotes: (notesOpen) => {
+			dispatch(toggleNotes(notesOpen))
 		}
 
 	}
@@ -47,6 +44,7 @@ const App = (props) => {
 			{props.menuOpen && <ConnectedStartMenu />}
 			{props.terminalOpen && <ConnectedTerminal  />}
 			{props.browserOpen && <ConnectedBrowser />}
+			{props.notesOpen && <ConnectedNotes />}
 		</div>
   );
 };
@@ -56,5 +54,6 @@ const ConnectedBrowser = connect(mapStateToProps,mapDispatchToProps)(Browser);
 const ConnectedDesktop = connect(mapStateToProps,mapDispatchToProps)(Desktop);
 const ConnectedTerminal = connect(mapStateToProps,mapDispatchToProps)(Terminal);
 const ConnectedStartMenu = connect(mapStateToProps, mapDispatchToProps)(StartMenu);
+const ConnectedNotes = connect(mapStateToProps, mapDispatchToProps)(Notes);
 
 export default connect(mapStateToProps,null)(App);

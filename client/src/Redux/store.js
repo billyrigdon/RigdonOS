@@ -3,15 +3,14 @@ import { createStore } from "redux";
 const TOGGLEMENU = "TOGGLEMENU";
 const TOGGLETERMINAL = "OPENTERMINAL";
 const TOGGLEBROWSER = "TOGGLEBROWSER";
-const MAXTERMINAL = "MAXTERMINAL";
-const MAXBROWSER = "MAXBROWSER";
+const TOGGLENOTES = "TOGGLENOTES";
+
 
 const initialState = {
 	menuOpen: false,
 	terminalOpen: false,
 	browserOpen: false,
-	terminalMaximized: false,
-	browserMaximized: false
+	notesOpen: false
 };
 
 const toggleMenu = (menuOpen) => {
@@ -32,17 +31,12 @@ const toggleBrowser = (browserOpen) => {
 	}
 }
 
-const maximizeTerminal = (terminalMaximized) => {
+const toggleNotes = (notesOpen) => {
 	return {
-		type: MAXTERMINAL
+		type: TOGGLENOTES
 	}
 }
 
-const maximizeBrowser = (browserMaximized) => {
-	return {
-		type: MAXBROWSER
-	}
-}
 
 const osReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -61,15 +55,10 @@ const osReducer = (state = initialState, action) => {
 				...state,
 				browserOpen: !state.browserOpen
 			}
-		case MAXTERMINAL:
+		case TOGGLENOTES:
 			return {
 				...state,
-				terminalMaximized: !state.terminalMaximized
-			}
-		case MAXBROWSER:
-			return {
-				...state,
-				browserMaximized: state.browserMaximized
+				notesOpen: !state.notesOpen
 			}
 		default:
 			return state
@@ -78,4 +67,4 @@ const osReducer = (state = initialState, action) => {
 
 const store = createStore(osReducer);
 
-export { store, toggleMenu, toggleTerminal, toggleBrowser, maximizeBrowser, maximizeTerminal };
+export { store, toggleMenu, toggleTerminal, toggleBrowser, toggleNotes };

@@ -6,6 +6,7 @@ import StartMenu from "../StartMenu/StartMenu";
 import terminalIcon from "../../Icons/terminal.svg";
 import Terminal from "../Terminal/Terminal";
 import browserIcon from "../../Icons/browser.svg"
+import notesIcon from "../../Icons/notepad-48.svg"
 
 
 const Taskbar = (props) => {
@@ -32,11 +33,17 @@ const Taskbar = (props) => {
 		console.log(props);
 	}
 
+	const openNotes = () => {
+		props.openNotes(props.notesOpen);
+		console.log(props);
+	}
+
 	return (
 		<div>
 			<div id="taskbar">
 				<button id="startMenuButton" onClick={openMenu}>Start</button>
 				<div id="taskbarApps">
+					<img src={notesIcon} alt="Notes" onClick={openNotes} width="100%" height="100%" />
 					<img src={terminalIcon} alt="Terminal" onClick={openTerminal} width="100%" height="100%" />
 					<img src={browserIcon} alt="Browser" onClick={openBrowser} width="100%" height="100%" />
 				</div>
