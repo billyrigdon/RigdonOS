@@ -40,7 +40,7 @@ const Taskbar = (props) => {
 	}
 
 	return (
-		<div>
+		<div id="taskbar-container">
 			<div id="taskbar">
 				<img id="startMenuButton" src={startIcon} alt="Start" onClick={openMenu} height="100%" width="auto"/>
 				<div id="taskbarApps">
