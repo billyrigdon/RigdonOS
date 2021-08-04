@@ -1,13 +1,15 @@
 import React, { Component, useEffect, useState } from "react";
 import ReactTerminal from "react-terminal-component";
 import Draggable, {DraggableCore} from 'react-draggable';
-import "./Terminal.scss"
+import "./Terminal.scss";
+
 
 
 const Terminal = (props) => {
 
 	const [termClass, setTermClass] = useState("terminal");
 	const [maximized, setMaximized] = useState(false);
+	
 
 	const maxTerm = () => {
 		if (termClass !== "maximized") {
@@ -23,12 +25,20 @@ const Terminal = (props) => {
 		props.openTerminal(props.terminalOpen);
 		console.log(props);
 	}
+
+	const focusTerminal = () => {
+		setTermClass("focused");
+	}
+
+	const blurTerminal = () => {
+		setTermClass("terminal");
+	}
 	
 	if (!maximized) {
 
 		return (
 			<Draggable className="window">
-					<div id="terminal" className={termClass}>
+					<div id="terminal" className={termClass} tabIndex="0" onFocus={focusTerminal} onBlur={blurTerminal}>
 						<div className="windowBar">
 							<div className="windowButtons minimize" onClick={closeTerminal}></div>
 							<div className="windowButtons maximize" onClick={maxTerm}></div>
@@ -47,7 +57,7 @@ const Terminal = (props) => {
 							height: '90%'
 						}}/>
 					</div>
-			</Draggable>
+			</Draggable> 
 		)
 	} else if (maximized) {
 		return (

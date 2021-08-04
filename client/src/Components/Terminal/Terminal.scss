@@ -16,7 +16,27 @@ $darkColor: #4A4453;
 	align-items: center;
 	resize: both;
 	box-shadow: $mediumShadow;
+	position: absolute;
+	top:30%;
+	left:30%;
+	z-index:1;
 }
+
+.focused {
+	width: 35vw;
+	height:45vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	resize: both;
+	box-shadow: $mediumShadow;
+	position: absolute;
+	top:30%;
+	left:30%;
+	z-index:2;
+}
+
 
 
 
