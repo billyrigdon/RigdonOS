@@ -19,10 +19,9 @@ $darkColor: #4A4453;
 	position: absolute;
 	top:30%;
 	left:30%;
-	z-index:1;
 }
 
-.focused {
+.terminal-focused {
 	width: 35vw;
 	height:45vh;
 	overflow: hidden;
@@ -34,7 +33,7 @@ $darkColor: #4A4453;
 	position: absolute;
 	top:30%;
 	left:30%;
-	z-index:2;
+	z-index:6;
 }
 
 

@@ -7,7 +7,7 @@ import "./Terminal.scss";
 
 const Terminal = (props) => {
 
-	const [termClass, setTermClass] = useState("terminal");
+	const [termClass, setTermClass] = useState("terminal-focused");
 	const [maximized, setMaximized] = useState(false);
 	
 
@@ -16,7 +16,7 @@ const Terminal = (props) => {
 			setTermClass("maximized");
 			setMaximized(true);
 		} else {
-			setTermClass("terminal");
+			setTermClass("terminal-focused");
 			setMaximized(false);
 		}
 	}
@@ -27,7 +27,7 @@ const Terminal = (props) => {
 	}
 
 	const focusTerminal = () => {
-		setTermClass("focused");
+		setTermClass("terminal-focused");
 	}
 
 	const blurTerminal = () => {
