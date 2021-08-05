@@ -1,10 +1,11 @@
 import "./Notes.scss"
-import { useState, useEffect } from "react";
+import React, { useRef, Component, useEffect, useState } from "react";
 import Draggable, {DraggableCore} from 'react-draggable';
 
 const Notes = (props) => {
 
 	const [maximized, setMaximized] = useState(false);
+	const [noteClass, setNoteClass] = useState("notepad-focused");
 	
 	const closeNotes = () => {
 		props.openNotes(props.notesOpen);
@@ -19,10 +20,18 @@ const Notes = (props) => {
 		}
 	}
 
+	const focusNotes = () => {
+		setNoteClass("notepad-focused");
+	}
+
+	const blurNotes = () => {
+		setNoteClass("notepad");
+	}
+
 	if (!maximized) {
 		return (
-			<Draggable className="window">
-				<div className="notepad">
+			<Draggable>
+				<div id="notes-window" ref={innerRef} className={noteClass} tabIndex={1} onFocus={focusNotes} onBlur={blurNotes}>
 					<div className="windowBar">
 						<div className="windowButtons minimize" onClick={closeNotes}></div>
 						<div className="windowButtons maximize" onClick={setMax}></div>

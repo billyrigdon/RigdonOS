@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useRef, Component, useEffect, useState } from "react";
 import ReactTerminal from "react-terminal-component";
 import Draggable, {DraggableCore} from 'react-draggable';
 import "./Terminal.scss";
@@ -33,18 +33,19 @@ const Terminal = (props) => {
 	const blurTerminal = () => {
 		setTermClass("terminal");
 	}
+
 	
 	if (!maximized) {
 
 		return (
 			<Draggable className="window">
-					<div id="terminal" className={termClass} tabIndex="0" onFocus={focusTerminal} onBlur={blurTerminal}>
+					<div id="terminal" className={termClass} tabIndex={0} onFocus={focusTerminal} onBlur={blurTerminal}>
 						<div className="windowBar">
 							<div className="windowButtons minimize" onClick={closeTerminal}></div>
 							<div className="windowButtons maximize" onClick={maxTerm}></div>
 							<div className="windowButtons close" onClick={closeTerminal}></div>
 						</div>
-						<ReactTerminal theme={{
+						<ReactTerminal clickToFocus={true} autoFocus={false} theme={{
 							background: '#141313',
 							promptSymbolColor: '#6effe6',	
 							commandColor: '#fcfcfc',

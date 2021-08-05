@@ -20,4 +20,23 @@ textarea:focus {
 	align-items: center;
 	resize: both;
 	box-shadow: $mediumShadow;
+	position:absolute;
+	top:30%;
+	left:30%;
+	z-index:1;
+}
+
+.notepad-focused {
+	width: 40vw;
+	height:80vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	resize: both;
+	box-shadow: $mediumShadow;
+	z-index:6;
+	position:absolute;
+	top:30%;
+	left:30%;
 }
