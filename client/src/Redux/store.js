@@ -4,13 +4,15 @@ const TOGGLEMENU = "TOGGLEMENU";
 const TOGGLETERMINAL = "OPENTERMINAL";
 const TOGGLEBROWSER = "TOGGLEBROWSER";
 const TOGGLENOTES = "TOGGLENOTES";
+const TOGGLERESUME = "TOGGLERESUME";
 
 
 const initialState = {
 	menuOpen: false,
 	terminalOpen: false,
 	browserOpen: false,
-	notesOpen: false
+	notesOpen: false,
+	resumeOpen: true
 };
 
 const toggleMenu = (menuOpen) => {
@@ -37,6 +39,11 @@ const toggleNotes = (notesOpen) => {
 	}
 }
 
+const toggleResume = (resumeOpen) => {
+	return {
+		type: TOGGLERESUME
+	}
+}
 
 const osReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -60,6 +67,11 @@ const osReducer = (state = initialState, action) => {
 				...state,
 				notesOpen: !state.notesOpen
 			}
+		case TOGGLERESUME:
+			return {
+				...state,
+				resumeOpen: !state.resumeOpen
+			}
 		default:
 			return state
 	}
@@ -67,4 +79,4 @@ const osReducer = (state = initialState, action) => {
 
 const store = createStore(osReducer);
 
-export { store, toggleMenu, toggleTerminal, toggleBrowser, toggleNotes };
+export { store, toggleMenu, toggleTerminal, toggleBrowser, toggleNotes, toggleResume };
