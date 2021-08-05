@@ -53,7 +53,7 @@ const Browser = (props) => {
 					<div className="windowButtons maximize" onClick={setMax}></div>
 					<div className="windowButtons close" onClick={closeBrowser}></div>
 				</div>
-				<iframe id="webPage" src="http://bing.com"></iframe>
+				<iframe id="webPage" src="https://bing.com"></iframe>
 			</div>
 		)
 	}
