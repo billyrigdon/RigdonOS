@@ -5,7 +5,9 @@ import "./Browser.scss"
 const Browser = (props) => {
 
 	const [maximized, setMaximized] = useState(true);
-	
+	const [browserClass, setBrowserClass] = useState("browser-focused");
+
+
 	const closeBrowser = () => {
 		props.openBrowser(props.browserOpen);
 		console.log(props);
@@ -19,18 +21,26 @@ const Browser = (props) => {
 		}
 	}
 
+	const focusBrowser = () => {
+		setBrowserClass("browser-focused");
+	}
+
+	const blurBrowser = () => {
+		setBrowserClass("browser");
+	}
+
 
 	if (!maximized) {
 
 		return (
 			<Draggable className="window">
-				<div className="browser">
+				<div id="browser-window" className={browserClass} tabIndex={0} onFocus={focusBrowser} onBlur={blurBrowser}>
 					<div className="windowBar">
 						<div className="windowButtons minimize" onClick={closeBrowser}></div>
 						<div className="windowButtons maximize" onClick={setMax}></div>
 						<div className="windowButtons close" onClick={closeBrowser}></div>
 					</div>
-					<iframe id="webPage" src="https://bing.com"></iframe>
+					<iframe onFocus={focusBrowser} onBlur={blurBrowser} id="webPage" src="https://bing.com"></iframe>
 				</div>
 			</Draggable>
 		)

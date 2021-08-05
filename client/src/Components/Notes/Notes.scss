@@ -21,9 +21,9 @@ textarea:focus {
 	resize: both;
 	box-shadow: $mediumShadow;
 	position:absolute;
-	top:30%;
-	left:30%;
-	z-index:1;
+	top:15%;
+	left:15%;
+	z-index: 1;
 }
 
 .notepad-focused {
@@ -37,6 +37,6 @@ textarea:focus {
 	box-shadow: $mediumShadow;
 	z-index:6;
 	position:absolute;
-	top:30%;
-	left:30%;
+	top:15%;
+	left:15%;
 }
