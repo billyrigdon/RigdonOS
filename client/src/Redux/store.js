@@ -12,7 +12,7 @@ const initialState = {
 	terminalOpen: false,
 	browserOpen: false,
 	notesOpen: false,
-	resumeOpen: true
+	resumeOpen: false
 };
 
 const toggleMenu = (menuOpen) => {
