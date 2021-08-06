@@ -1,6 +1,7 @@
 $mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
 $lightPurple: #776d87;
 $darkColor: rgba(74, 68, 83, 0.85);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Ubuntu&display=swap');
 
 #taskbar-container {
 	background-color: red;
@@ -21,12 +22,21 @@ $darkColor: rgba(74, 68, 83, 0.85);
 	z-index: 7;
 }
 
+#start-container {
+	height: 100%;
+	width: 10%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
 #startMenuButton {
 	margin-left: .5rem;
+	height: 100%;
+	width: auto;
 }
 
 #taskbarTime {
-	color: white;
 	padding: .4rem
 }
 
@@ -38,4 +48,17 @@ $darkColor: rgba(74, 68, 83, 0.85);
 #taskbarApps img {
 	margin-left: .5rem;
 	margin-right: .5rem;
+}
+
+p {
+	font-size: 1rem;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 600;
+	color: #dadada;
+	text-align: right;
+	margin-right: .5rem;
+}
+
+#time-container {
+	width:10%;
 }

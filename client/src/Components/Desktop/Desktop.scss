@@ -1,6 +1,8 @@
 $mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
 $lightPurple: #776d87;
 $darkColor: rgba(74, 68, 83, 0.85);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Ubuntu&display=swap');
+
 
 #desktop {
 	display: grid;
@@ -38,4 +40,7 @@ $darkColor: rgba(74, 68, 83, 0.85);
 	border-radius: 5px;
 	padding:.3rem;
 	font-size: .75rem;
+	color:#dadada;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 600;
 }

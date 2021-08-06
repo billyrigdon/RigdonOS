@@ -1,4 +1,5 @@
 $mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Ubuntu&display=swap');
 
 #notes {
 	width:100%;
@@ -39,4 +40,12 @@ textarea:focus {
 	position:absolute;
 	top:15%;
 	left:15%;
+}
+
+textarea {
+	padding: 2rem;
+	background-color:#dadada;
+	color:#1b1b1b;
+	font-size: 2rem;
+	font-family: "Montserrat", sans-serif;
 }

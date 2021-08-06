@@ -23,8 +23,13 @@ const StartMenu = (props) => {
 		console.log(props);
 	}
 
+	const openMenu = () => {
+		props.openMenu(props.menuOpen);
+		console.log(props);
+	};
+
 	return (
-		<div id="startMenu">
+		<div id="startMenu" tabIndex={0} onBlur={openMenu}>
 				<div className="startApps" onClick={openTerminal}>
 					<img src={terminalIcon} alt="Terminal" />
 					<p>Terminal</p>

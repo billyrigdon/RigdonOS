@@ -42,13 +42,17 @@ const Taskbar = (props) => {
 	return (
 		<div id="taskbar-container">
 			<div id="taskbar">
-				<img id="startMenuButton" src={startIcon} alt="Start" onClick={openMenu} height="100%" width="auto"/>
+				<div id="start-container">
+					<img id="startMenuButton" src={startIcon} alt="Start" onClick={openMenu} height="100%" width="auto"/>
+				</div>
 				<div id="taskbarApps">
 					<img src={notesIcon} alt="Notes" onClick={openNotes} width="100%" height="100%" />
 					<img src={terminalIcon} alt="Terminal" onClick={openTerminal} width="100%" height="100%" />
 					<img src={browserIcon} alt="Browser" onClick={openBrowser} width="100%" height="100%" />
 				</div>
-				<p id="taskbarTime">{currentTime.toLocaleString()}</p>
+				<div id="time-container">
+					<p id="taskbarTime">{currentTime.toLocaleString()}</p>
+				</div>
 			</div>
 		</div>
 	)
