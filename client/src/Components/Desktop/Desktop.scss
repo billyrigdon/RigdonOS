@@ -1,16 +1,15 @@
 $mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
 $lightPurple: #776d87;
 $darkColor: rgba(74, 68, 83, 0.85);
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Ubuntu&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Ubuntu&display=swap");
 
 #desktop {
 	display: grid;
-	grid-template-columns: repeat(8,1fr);
+	grid-template-columns: repeat(8, 1fr);
 	position: absolute;
-	width:100vw;
+	width: 100vw;
 	height: 100vh;
-	top:0;
+	top: 0;
 	left: 0;
 	z-index: -3;
 	background-image: url("background.jpg");
@@ -20,52 +19,50 @@ $darkColor: rgba(74, 68, 83, 0.85);
 #shortcutContainer {
 	display: flex;
 	flex-direction: column;
-	width:100%;
-	height:100%;
+	width: 100%;
+	height: 100%;
 	justify-content: flex-start;
 	align-items: center;
 }
 
 .shortcut {
-	display:flex;
+	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	height: 10%;
-	width:100%;
+	width: 100%;
 }
 
 .shortcut img {
 	height: 45%;
 	width: auto;
-	margin-bottom:.2rem;
+	margin-bottom: 0.2rem;
 	box-shadow: $mediumShadow;
 }
 
 .shortcut a {
 	text-decoration: none;
-	width:30%;
+	width: 30%;
 	height: 45%;
 	text-align: center;
-	color:white;
-	margin-bottom: .2rem;
+	color: white;
+	margin-bottom: 0.2rem;
 }
 
 #github img {
-	height:auto;
-	width:87%;
+	height: 100%;
+	width: 60%;
 	box-shadow: none;
 }
 
-
-
 .shortcut p {
 	background-color: $darkColor;
-	color:white;
+	color: white;
 	border-radius: 5px;
-	padding:.3rem;
-	font-size: .75rem;
-	color:#dadada;
+	padding: 0.3rem;
+	font-size: 0.75rem;
+	color: #dadada;
 	font-family: "Montserrat", sans-serif;
 	font-weight: 600;
 }
