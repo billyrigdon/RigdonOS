@@ -38,8 +38,8 @@ const StartMenu = (props) => {
 					<img src={browserIcon} alt="Browser" />
 					<p>Browser</p>
 				</div>
-				<div className="startApps">
-					<img src={notesIcon} alt="Notes" onClick={openNotes}/>
+				<div className="startApps" onClick={openNotes}>
+					<img src={notesIcon} alt="Notes" />
 					<p>Notes</p>
 				</div>
 		</div>
