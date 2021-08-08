@@ -31,12 +31,12 @@ $darkColor: rgba(74, 68, 83, 0.85);
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: 20%;
+	height: 10%;
 	width:100%;
 }
 
 .shortcut img {
-	height: 25%;
+	height: 45%;
 	width: auto;
 	margin-bottom:.2rem;
 	box-shadow: $mediumShadow;
@@ -45,12 +45,14 @@ $darkColor: rgba(74, 68, 83, 0.85);
 .shortcut a {
 	text-decoration: none;
 	width:25%;
-	height: 100%;
+	height: 45%;
 	text-align: center;
+	color:white;
+	margin-bottom: .2rem;
 }
 
 #github img {
-	height:auto;
+	height:100%;
 	width:100%;
 	box-shadow: none;
 }

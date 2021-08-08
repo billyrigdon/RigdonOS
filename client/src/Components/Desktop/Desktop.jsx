@@ -3,7 +3,7 @@ import resumeIcon from "../../Icons/resume-icon.svg";
 import { userSelector, useDispatch, connect } from "react-redux";
 import { toggleResume } from "../../Redux/store";
 import { useState, useEffect } from "react";
-import githubIcon from "../../Icons/github.svg";
+import githubIcon from "../../Icons/github.png";
 
 const Desktop = (props) => {
 
@@ -22,8 +22,8 @@ const Desktop = (props) => {
 				<div id="github" className="shortcut">
 					<a href="https://github.com/billyrigdon" target="_blank">
 						<img src={githubIcon} alt="Github Icon" onDoubleClick={openResume} href="https://github.com"/>
-						<p>Github</p>
 					</a>
+					<p>Github</p>
 				</div>
 			</div>
 		</div>
