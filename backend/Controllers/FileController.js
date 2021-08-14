@@ -4,16 +4,29 @@ const asyncHandler = require("express-async-handler");
 const getFiles = asyncHandler(async (req, res) => {
 	const currentDir = req.body.currentDir;
 
-	Files.find(
-		{
-			name: new RegExp(currentDir + ".*?", "g"),
-		},
-		(err, files) => {
-			if (err) return res.status(400).send("Couldn't find files");
-			console.log("Files found");
-			res.status(200).json(files);
-		}
-	);
+	if (currentDir === "/") {
+		Files.find(
+			{
+				name: new RegExp("\/(.*?)/", "g"),
+			},
+			(err, files) => {
+				if (err) return res.status(400).send("Couldn't find files");
+				console.log("Files found");
+				res.status(200).json(files);
+			}
+		);
+	} else {
+		Files.find(
+			{
+				name: new RegExp(currentDir + "/.*(?!/).*", "g"),
+			},
+			(err, files) => {
+				if (err) return res.status(400).send("Couldn't find files");
+				console.log("Files found");
+				res.status(200).json(files);
+			}
+		);
+	}
 });
 
 const createFile = asyncHandler(async (req, res) => {
