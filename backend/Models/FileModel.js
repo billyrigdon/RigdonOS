@@ -7,6 +7,10 @@ const fileSchema = new mongoose.Schema({
 	},
 	isDirectory: Boolean,
 	contents: String,
+	parentDir: {
+		type: String,
+		required: true,
+	},
 });
 
 const Files = mongoose.model("Files", fileSchema);

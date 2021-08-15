@@ -2,66 +2,133 @@ const Files = require("../Models/FileModel");
 const asyncHandler = require("express-async-handler");
 
 const getFiles = asyncHandler(async (req, res) => {
-	const currentDir = req.body.currentDir;
-
-	if (currentDir === "/") {
+	try {
 		Files.find(
 			{
-				name: new RegExp("\/(.*?)/", "g"),
+				parentDir: req.body.currentDir,
 			},
 			(err, files) => {
-				if (err) return res.status(400).send("Couldn't find files");
-				console.log("Files found");
-				res.status(200).json(files);
+				if (err) {
+					res.status(400).send("Couldn't find files");
+					console.log(err);
+				} else if (files) {
+					console.log("Files found");
+					res.status(200).json(files);
+				} else {
+					res.status(400).send("Couldn't find files");
+					console.log(
+						"Unknown Error. Check property names in POST request"
+					);
+				}
 			}
 		);
-	} else {
-		Files.find(
-			{
-				name: new RegExp(currentDir + "/.*(?!/).*", "g"),
-			},
-			(err, files) => {
-				if (err) return res.status(400).send("Couldn't find files");
-				console.log("Files found");
-				res.status(200).json(files);
-			}
-		);
+	} catch {
+		res.status(400).send("Couldn't find files");
 	}
 });
 
 const createFile = asyncHandler(async (req, res) => {
-	const fileExists = await Files.find(
-		{
-			name: req.body.name,
-		},
-		(err, files) => {
-			if (err) {
-				console.log(err);
-			}
-			return files;
-		}
-	);
-
-	console.log(fileExists);
-
-	if (fileExists.length > 0) {
-		res.status(400).send("File already exists");
-	} else {
-		await Files.create(
+	try {
+		const fileExists = await Files.find(
 			{
 				name: req.body.name,
-				isDirectory: req.body.isDirectory,
-				contents: req.body.contents,
+				parentDir: req.body.parentDir,
 			},
-			(err, file) => {
+			(err, files) => {
 				if (err) {
-					res.status(400).send("File couldn't be created");
+					console.log(err);
 				}
-				console.log("Created new file: " + file.name);
-				res.status(200).send("File created successfully");
+				return files;
 			}
 		);
+
+		console.log(fileExists);
+
+		if (fileExists.length > 0) {
+			res.status(400).send("File already exists");
+		} else {
+			await Files.create(
+				{
+					name: req.body.name,
+					isDirectory: req.body.isDirectory,
+					contents: req.body.contents,
+					parentDir: req.body.parentDir,
+				},
+				(err, file) => {
+					if (err) {
+						res.status(400).send("File couldn't be created");
+					} else if (file) {
+						console.log("Created new file: " + file.name);
+						res.status(200).send("File created successfully");
+					} else {
+						res.status(400).send("Couldn't create files");
+						console.log(
+							"Unknown Error. Check property names in POST request"
+						);
+					}
+				}
+			);
+		}
+	} catch {
+		res.status(400).send("Couldn't create file");
 	}
 });
 
-module.exports = { createFile, getFiles };
+const editFile = asyncHandler(async (req, res) => {
+	try {
+		await Files.findOne(
+			{
+				name: req.body.name,
+				parentDir: req.body.parentDir,
+			},
+			(err, file) => {
+				if (err) {
+					res.status(400).send("Couldn't update file");
+					return console.log(err);
+				}
+				file.name = req.body.newName;
+				file.contents = req.body.newContents;
+				file.save((err, updatedFile) => {
+					if (err) {
+						res.status(400).send("Couldn't update file");
+						return console.log(err);
+					} else if (updatedFile) {
+						res.status(200).json(updatedFile);
+					} else {
+						res.status(400).send("Couldn't edit files");
+						console.log(
+							"Unknown Error. Check property names in POST request"
+						);
+					}
+				});
+			}
+		);
+	} catch {
+		res.status(400).send("Couldn't edit file");
+	}
+});
+
+const deleteFile = asyncHandler(async (req, res) => {
+	try {
+		await Files.findOneAndRemove(
+			{
+				name: req.body.name,
+				parentDir: req.body.parentDir,
+			},
+			(err, file) => {
+				if (err) {
+					res.status(400).send("Couldn't delete file");
+					return console.log(err);
+				} else if (file) {
+					res.status(200).send("File Deleted Successfully");
+				} else {
+					res.status(400).send("Couldn't delete file");
+				}
+			}
+		);
+	} catch {
+		res.status(400).send("Couldn't delete files");
+	}
+});
+
+module.exports = { createFile, getFiles, editFile, deleteFile };
