@@ -8,7 +8,7 @@ const initialState = {
 	resumeOpen: false,
 	fileManagerOpen: false,
 	currentDir: "/",
-	files: [],
+	fileContent: "",
 };
 
 const toggleMenu = (menuOpen) => {
@@ -54,6 +54,13 @@ const changeDirectory = (newDir) => {
 	};
 };
 
+const setFileContent = (content) => {
+	return {
+		type: "SETFILECONTENT",
+		payload: content,
+	};
+};
+
 const osReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case "TOGGLEMENU":
@@ -91,6 +98,11 @@ const osReducer = (state = initialState, action) => {
 				...state,
 				currentDir: action.payload,
 			};
+		case "SETFILECONTENT":
+			return {
+				...state,
+				fileContent: action.payload
+			}
 		default:
 			return state;
 	}
@@ -107,4 +119,5 @@ export {
 	toggleResume,
 	toggleFileManager,
 	changeDirectory,
+	setFileContent
 };

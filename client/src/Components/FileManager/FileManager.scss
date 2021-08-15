@@ -1,6 +1,11 @@
 $mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
 
-#file-manager-window {
+#max-file {
+	background-color: #dadada;
+	color: #1b1b1b;
+}
+
+.file-manager {
 	width: 35vw;
 	height: 45vh;
 	overflow: hidden;
@@ -13,7 +18,22 @@ $mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
 	left: 30%;
 	background-color: #dadada;
 	color: #1b1b1b;
+}
 
+.file-manager-focused {
+	width: 35vw;
+	height: 45vh;
+	overflow: hidden;
+	flex-direction: column;
+	align-items: center;
+	resize: both;
+	box-shadow: $mediumShadow;
+	position: absolute;
+	top: 30%;
+	left: 30%;
+	background-color: #dadada;
+	color: #1b1b1b;
+	z-index:6;
 }
 
 #file-view {
@@ -36,4 +56,10 @@ $mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
 .file img {
 	width:70%;
 	height:auto;
+}
+
+.file p {
+	font-weight: 400;
+	font-family: "Ubuntu", sans-serif;
+	color: #1b1b1b;
 }

@@ -17,6 +17,14 @@ const FileManager = (props) => {
 		setNewDir(dirName);
 	};
 
+	const openFile = (content) => {
+		props.setContent(content);
+		console.log(props.fileContent);
+		if (!props.notesOpen) {
+			props.openNotes(props.notesOpen);
+		}
+	};
+
 	const changeDirectory = (name) => {
 		console.log(name);
 		props.changeFolder(name);
@@ -80,7 +88,14 @@ const FileManager = (props) => {
 		} else if (!item.isDirectory) {
 			return (
 				<div className="file">
-					<img value={item.name} src={fileIcon} alt="File Icon" />
+					<img
+						value={item.name}
+						src={fileIcon}
+						alt="File Icon"
+						onDoubleClick={() => {
+							openFile(item.contents);
+						}}
+					/>
 					<p>{item.name}</p>
 				</div>
 			);
@@ -91,7 +106,6 @@ const FileManager = (props) => {
 		return (
 			<Draggable className="window">
 				<div
-					id="file-manager-window"
 					className={fileManagerClass}
 					tabIndex={0}
 					onFocus={focusFileManager}
@@ -117,7 +131,7 @@ const FileManager = (props) => {
 		);
 	} else if (maximized) {
 		return (
-			<div className="maximized">
+			<div id="max-file" className="maximized">
 				<div className="windowBar">
 					<div
 						className="windowButtons minimize"
@@ -132,6 +146,7 @@ const FileManager = (props) => {
 						onClick={closeFileManager}
 					></div>
 				</div>
+				<div id="file-view">{fileItem}</div>
 			</div>
 		);
 	}

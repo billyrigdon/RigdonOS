@@ -17,6 +17,7 @@ import {
 	toggleFileManager,
 	changeDirectory,
 	store,
+	setFileContent,
 } from "../../Redux/store";
 
 const mapStateToProps = (state) => {
@@ -28,6 +29,7 @@ const mapStateToProps = (state) => {
 		resumeOpen: state.resumeOpen,
 		fileManagerOpen: state.fileManagerOpen,
 		currentDir: state.currentDir,
+		fileContent: state.fileContent,
 	};
 };
 
@@ -54,6 +56,9 @@ const mapDispatchToProps = (dispatch) => {
 		changeFolder: (newDir) => {
 			dispatch(changeDirectory(newDir));
 		},
+		setContent: (content) => {
+			dispatch(setFileContent(content))
+		}
 	};
 };
 

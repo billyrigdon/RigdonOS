@@ -4,11 +4,13 @@ $darkColor: #4A4453;
 $trafficRed: #e18999;
 $trafficYellow: #f9f871;
 $trafficGreen: #00c9a4;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Ubuntu&display=swap');
 
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: "Montserrat", sans-serif;	
 }
 
 
