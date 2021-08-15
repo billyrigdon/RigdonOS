@@ -13,9 +13,11 @@ const FileManager = (props) => {
 	const [prevDir, setPrevDir] = useState();
 	const [files, setFiles] = useState([]);
 
-	const openFile = (content) => {
-		props.setContent(content);
-		console.log(props.fileContent);
+	const openFile = async (fileObj) => {
+		
+		props.setFile(fileObj);
+		props.setContent(fileObj.contents);
+		
 		if (!props.notesOpen) {
 			props.openNotes(props.notesOpen);
 		}
@@ -30,7 +32,7 @@ const FileManager = (props) => {
 	const backDirectory = () => {
 		props.changeFolder(prevDir);
 		console.log(prevDir);
-	}
+	};
 
 	const closeFileManager = () => {
 		props.openFileManager(props.fileManagerOpen);
@@ -57,20 +59,19 @@ const FileManager = (props) => {
 		const fetchParent = async () => {
 			try {
 				const config = {
-					headers: { "Content-Type": "application/json" }
-				}
+					headers: { "Content-Type": "application/json" },
+				};
 
 				const returnedFile = await axios.post("/api/files/parent", {
-					currentDir: props.currentDir
+					currentDir: props.currentDir,
 				});
 				console.log(returnedFile);
 				setPrevDir(returnedFile.data.parentDir);
 				console.log(prevDir);
-			}
-			catch {
+			} catch {
 				console.log("Fetch failed");
 			}
-		}
+		};
 		const fetchDir = async () => {
 			try {
 				const config = {
@@ -112,7 +113,7 @@ const FileManager = (props) => {
 						src={fileIcon}
 						alt="File Icon"
 						onDoubleClick={() => {
-							openFile(item.contents);
+							openFile(item);
 						}}
 					/>
 					<p>{item.name}</p>
@@ -131,7 +132,13 @@ const FileManager = (props) => {
 					onBlur={blurFileManager}
 				>
 					<div className="windowBarAdvanced">
-						<span onClick={backDirectory} id="backButton" className="material-icons">arrow_back</span>
+						<span
+							onClick={backDirectory}
+							id="backButton"
+							className="material-icons"
+						>
+							arrow_back
+						</span>
 						<div className="windowButtonsContainer">
 							<div
 								className="windowButtons minimize"

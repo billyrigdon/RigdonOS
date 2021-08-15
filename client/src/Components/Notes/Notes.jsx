@@ -1,11 +1,33 @@
 import "./Notes.scss";
 import React, { useRef, Component, useEffect, useState } from "react";
 import Draggable, { DraggableCore } from "react-draggable";
+import axios from "axios";
 
 const Notes = (props) => {
 	const [maximized, setMaximized] = useState(false);
 	const [noteClass, setNoteClass] = useState("notepad-focused");
 	const [noteContent, setNoteContent] = useState(props.fileContent);
+
+	const saveNotes = async () => {
+		try {
+			console.log(props.currentFile);
+
+			const config = {
+				"Content-Type": "application.json",
+			};
+
+			const updatedNote = await axios.post("/api/files/edit", {
+				name: props.currentFile.name,
+				parentDir: props.currentFile.parentDir,
+				newContents: noteContent,
+				newName: props.currentFile.name,
+			});
+
+			console.log(updatedNote);
+		} catch {
+			console.log("failed");
+		}
+	};
 
 	const closeNotes = () => {
 		props.openNotes(props.notesOpen);
@@ -42,7 +64,53 @@ const Notes = (props) => {
 					onFocus={focusNotes}
 					onBlur={blurNotes}
 				>
-					<div className="windowBar">
+					<div className="windowBarAdvanced">
+						<span
+							onClick={() => {
+								saveNotes();
+							}}
+							id="saveButton"
+							class="material-icons"
+						>
+							save
+						</span>
+						<div className="windowButtonsContainer">
+							<div
+								className="windowButtons minimize"
+								onClick={closeNotes}
+							></div>
+							<div
+								className="windowButtons maximize"
+								onClick={setMax}
+							></div>
+							<div
+								className="windowButtons close"
+								onClick={closeNotes}
+							></div>
+						</div>
+					</div>
+					<textarea
+						onChange={handleNotesChange}
+						value={noteContent}
+						id="notes"
+					/>
+				</div>
+			</Draggable>
+		);
+	} else if (maximized) {
+		return (
+			<div className="maximized">
+				<div className="windowBarAdvanced">
+					<span
+						onClick={() => {
+							saveNotes();
+						}}
+						id="saveButton"
+						class="material-icons"
+					>
+						save
+					</span>
+					<div className="windowButtonsContainer">
 						<div
 							className="windowButtons minimize"
 							onClick={closeNotes}
@@ -56,30 +124,6 @@ const Notes = (props) => {
 							onClick={closeNotes}
 						></div>
 					</div>
-					<textarea
-						onChange={handleNotesChange}
-						value={noteContent}
-						id="notes"
-					/>
-				</div>
-			</Draggable>
-		);
-	} else if (maximized) {
-		return (
-			<div className="maximized">
-				<div className="windowBar">
-					<div
-						className="windowButtons minimize"
-						onClick={closeNotes}
-					></div>
-					<div
-						className="windowButtons maximize"
-						onClick={setMax}
-					></div>
-					<div
-						className="windowButtons close"
-						onClick={closeNotes}
-					></div>
 				</div>
 				<textarea
 					onChange={handleNotesChange}
