@@ -6,9 +6,18 @@ import StartMenu from "../StartMenu/StartMenu";
 import Browser from "../Browser/Browser";
 import Notes from "../Notes/Notes";
 import Resume from "../Resume/Resume";
+import FileManager from "../FileManager/FileManager";
 import { connect } from "react-redux";
-import { toggleResume, toggleNotes, toggleBrowser, toggleTerminal, toggleMenu, store } from "../../Redux/store";
-
+import {
+	toggleResume,
+	toggleNotes,
+	toggleBrowser,
+	toggleTerminal,
+	toggleMenu,
+	toggleFileManager,
+	changeDirectory,
+	store,
+} from "../../Redux/store";
 
 const mapStateToProps = (state) => {
 	return {
@@ -16,8 +25,10 @@ const mapStateToProps = (state) => {
 		terminalOpen: state.terminalOpen,
 		browserOpen: state.browserOpen,
 		notesOpen: state.notesOpen,
-		resumeOpen: state.resumeOpen
-	}
+		resumeOpen: state.resumeOpen,
+		fileManagerOpen: state.fileManagerOpen,
+		currentDir: state.currentDir,
+	};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -26,20 +37,25 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(toggleMenu(menuOpen));
 		},
 		openTerminal: (terminalOpen) => {
-			dispatch(toggleTerminal(terminalOpen))
+			dispatch(toggleTerminal(terminalOpen));
 		},
 		openBrowser: (browserOpen) => {
-			dispatch(toggleBrowser(browserOpen))
+			dispatch(toggleBrowser(browserOpen));
 		},
 		openNotes: (notesOpen) => {
-			dispatch(toggleNotes(notesOpen))
+			dispatch(toggleNotes(notesOpen));
 		},
 		openResume: (resumeOpen) => {
-			dispatch(toggleResume(resumeOpen))
-		}
-
-	}
-}
+			dispatch(toggleResume(resumeOpen));
+		},
+		openFileManager: (fileManagerOpen) => {
+			dispatch(toggleFileManager(fileManagerOpen));
+		},
+		changeFolder: (newDir) => {
+			dispatch(changeDirectory(newDir));
+		},
+	};
+};
 
 const App = (props) => {
 	return (
@@ -47,20 +63,34 @@ const App = (props) => {
 			<ConnectedDesktop />
 			<ConnectedTaskbar />
 			{props.menuOpen && <ConnectedStartMenu />}
-			{props.terminalOpen && <ConnectedTerminal  />}
+			{props.terminalOpen && <ConnectedTerminal />}
 			{props.browserOpen && <ConnectedBrowser />}
 			{props.notesOpen && <ConnectedNotes />}
 			{props.resumeOpen && <ConnectedResume />}
+			{props.fileManagerOpen && <ConnectedFileManager />}
 		</div>
-  );
+	);
 };
 
-const ConnectedTaskbar = connect(mapStateToProps,mapDispatchToProps)(Taskbar);
-const ConnectedBrowser = connect(mapStateToProps,mapDispatchToProps)(Browser);
-const ConnectedDesktop = connect(mapStateToProps,mapDispatchToProps)(Desktop);
-const ConnectedTerminal = connect(mapStateToProps,mapDispatchToProps)(Terminal);
-const ConnectedStartMenu = connect(mapStateToProps, mapDispatchToProps)(StartMenu);
+const ConnectedTaskbar = connect(mapStateToProps, mapDispatchToProps)(Taskbar);
+const ConnectedBrowser = connect(mapStateToProps, mapDispatchToProps)(Browser);
+const ConnectedDesktop = connect(mapStateToProps, mapDispatchToProps)(Desktop);
 const ConnectedNotes = connect(mapStateToProps, mapDispatchToProps)(Notes);
 const ConnectedResume = connect(mapStateToProps, mapDispatchToProps)(Resume);
 
-export default connect(mapStateToProps,null)(App);
+const ConnectedTerminal = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Terminal);
+
+const ConnectedStartMenu = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(StartMenu);
+
+const ConnectedFileManager = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(FileManager);
+
+export default connect(mapStateToProps, null)(App);

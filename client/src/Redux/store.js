@@ -1,82 +1,110 @@
 import { createStore } from "redux";
 
-const TOGGLEMENU = "TOGGLEMENU";
-const TOGGLETERMINAL = "OPENTERMINAL";
-const TOGGLEBROWSER = "TOGGLEBROWSER";
-const TOGGLENOTES = "TOGGLENOTES";
-const TOGGLERESUME = "TOGGLERESUME";
-
-
 const initialState = {
 	menuOpen: false,
 	terminalOpen: false,
 	browserOpen: false,
 	notesOpen: false,
-	resumeOpen: false
+	resumeOpen: false,
+	fileManagerOpen: false,
+	currentDir: "/",
+	files: [],
 };
 
 const toggleMenu = (menuOpen) => {
 	return {
-		type: TOGGLEMENU
-	}
+		type: "TOGGLEMENU",
+	};
 };
 
 const toggleTerminal = (terminalOpen) => {
 	return {
-		type: TOGGLETERMINAL
-	}
-}
+		type: "TOGGLETERMINAL",
+	};
+};
 
 const toggleBrowser = (browserOpen) => {
 	return {
-		type: TOGGLEBROWSER
-	}
-}
+		type: "TOGGLEBROWSER",
+	};
+};
 
 const toggleNotes = (notesOpen) => {
 	return {
-		type: TOGGLENOTES
-	}
-}
+		type: "TOGGLENOTES",
+	};
+};
 
 const toggleResume = (resumeOpen) => {
 	return {
-		type: TOGGLERESUME
-	}
-}
+		type: "TOGGLERESUME",
+	};
+};
+
+const toggleFileManager = (fileManagerOpen) => {
+	return {
+		type: "TOGGLEFILEMANAGER",
+	};
+};
+
+const changeDirectory = (newDir) => {
+	return {
+		type: "CHANGEDIR",
+		payload: newDir,
+	};
+};
 
 const osReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case TOGGLEMENU:
-			return {
-				...state, 
-				menuOpen: !state.menuOpen 
-			}
-		case TOGGLETERMINAL:
+		case "TOGGLEMENU":
 			return {
 				...state,
-				terminalOpen: !state.terminalOpen
-			}
-		case TOGGLEBROWSER:
+				menuOpen: !state.menuOpen,
+			};
+		case "TOGGLETERMINAL":
 			return {
 				...state,
-				browserOpen: !state.browserOpen
-			}
-		case TOGGLENOTES:
+				terminalOpen: !state.terminalOpen,
+			};
+		case "TOGGLEBROWSER":
 			return {
 				...state,
-				notesOpen: !state.notesOpen
-			}
-		case TOGGLERESUME:
+				browserOpen: !state.browserOpen,
+			};
+		case "TOGGLENOTES":
 			return {
 				...state,
-				resumeOpen: !state.resumeOpen
-			}
+				notesOpen: !state.notesOpen,
+			};
+		case "TOGGLERESUME":
+			return {
+				...state,
+				resumeOpen: !state.resumeOpen,
+			};
+		case "TOGGLEFILEMANAGER":
+			return {
+				...state,
+				fileManagerOpen: !state.fileManagerOpen,
+			};
+		case "CHANGEDIR":
+			return {
+				...state,
+				currentDir: action.payload,
+			};
 		default:
-			return state
+			return state;
 	}
-}
+};
 
 const store = createStore(osReducer);
 
-export { store, toggleMenu, toggleTerminal, toggleBrowser, toggleNotes, toggleResume };
+export {
+	store,
+	toggleMenu,
+	toggleTerminal,
+	toggleBrowser,
+	toggleNotes,
+	toggleResume,
+	toggleFileManager,
+	changeDirectory,
+};
