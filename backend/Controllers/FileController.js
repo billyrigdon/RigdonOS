@@ -1,6 +1,32 @@
 const Files = require("../Models/FileModel");
 const asyncHandler = require("express-async-handler");
 
+const getParent = asyncHandler(async (req, res) => {
+	try {
+		Files.findOne(
+			{
+				name: req.body.currentDir,
+			},
+			(err, file) => {
+				if (err) {
+					res.status(400).send("Couldn't find file");
+					console.log(err);
+				} else if (file) {
+					console.log("File found");
+					res.status(200).json(file);
+				} else {
+					res.status(400).send("Couldn't find file");
+					console.log(
+						"Unknown Error. Check property names in POST request"
+					);
+				}
+			}
+		);
+	} catch {
+		res.status(400).send("Couldn't find files");
+	}
+});
+
 const getFiles = asyncHandler(async (req, res) => {
 	try {
 		Files.find(
@@ -131,4 +157,4 @@ const deleteFile = asyncHandler(async (req, res) => {
 	}
 });
 
-module.exports = { createFile, getFiles, editFile, deleteFile };
+module.exports = { createFile, getFiles, editFile, deleteFile, getParent };

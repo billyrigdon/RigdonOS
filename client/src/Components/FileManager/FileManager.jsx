@@ -10,12 +10,8 @@ const FileManager = (props) => {
 	const [fileManagerClass, setFileManagerClass] = useState(
 		"file-manager-focused"
 	);
-	const [newDir, setNewDir] = useState("");
-	const [files, setFiles] = useState([{ name: "test" }]);
-
-	const selectNewDir = (dirName) => {
-		setNewDir(dirName);
-	};
+	const [prevDir, setPrevDir] = useState();
+	const [files, setFiles] = useState([]);
 
 	const openFile = (content) => {
 		props.setContent(content);
@@ -30,6 +26,11 @@ const FileManager = (props) => {
 		props.changeFolder(name);
 		console.log(props);
 	};
+
+	const backDirectory = () => {
+		props.changeFolder(prevDir);
+		console.log(prevDir);
+	}
 
 	const closeFileManager = () => {
 		props.openFileManager(props.fileManagerOpen);
@@ -53,7 +54,24 @@ const FileManager = (props) => {
 	};
 
 	useEffect(() => {
-		const fetchCurrentDir = async () => {
+		const fetchParent = async () => {
+			try {
+				const config = {
+					headers: { "Content-Type": "application/json" }
+				}
+
+				const returnedFile = await axios.post("/api/files/parent", {
+					currentDir: props.currentDir
+				});
+				console.log(returnedFile);
+				setPrevDir(returnedFile.data.parentDir);
+				console.log(prevDir);
+			}
+			catch {
+				console.log("Fetch failed");
+			}
+		}
+		const fetchDir = async () => {
 			try {
 				const config = {
 					headers: { "Content-Type": "application/json" },
@@ -67,7 +85,8 @@ const FileManager = (props) => {
 				console.log("Fetch failed");
 			}
 		};
-		fetchCurrentDir();
+		fetchParent();
+		fetchDir();
 	}, [props.currentDir]);
 
 	const fileItem = files.map((item, index) => {
@@ -111,19 +130,22 @@ const FileManager = (props) => {
 					onFocus={focusFileManager}
 					onBlur={blurFileManager}
 				>
-					<div className="windowBar">
-						<div
-							className="windowButtons minimize"
-							onClick={closeFileManager}
-						></div>
-						<div
-							className="windowButtons maximize"
-							onClick={setMax}
-						></div>
-						<div
-							className="windowButtons close"
-							onClick={closeFileManager}
-						></div>
+					<div className="windowBarAdvanced">
+						<span onClick={backDirectory} id="backButton" className="material-icons">arrow_back</span>
+						<div className="windowButtonsContainer">
+							<div
+								className="windowButtons minimize"
+								onClick={closeFileManager}
+							></div>
+							<div
+								className="windowButtons maximize"
+								onClick={setMax}
+							></div>
+							<div
+								className="windowButtons close"
+								onClick={closeFileManager}
+							></div>
+						</div>
 					</div>
 					<div id="file-view">{fileItem}</div>
 				</div>
