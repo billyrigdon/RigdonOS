@@ -5,6 +5,8 @@ import folderIcon from "../../Icons/default-folder.svg";
 import fileIcon from "../../Icons/resume-icon.svg";
 import axios from "axios";
 
+const URL = "https://billyrigdon.dev:1313";
+
 const FileManager = (props) => {
 	const [maximized, setMaximized] = useState(false);
 	const [fileManagerClass, setFileManagerClass] = useState(
@@ -14,10 +16,9 @@ const FileManager = (props) => {
 	const [files, setFiles] = useState([]);
 
 	const openFile = async (fileObj) => {
-		
 		props.setFile(fileObj);
 		props.setContent(fileObj.contents);
-		
+
 		if (!props.notesOpen) {
 			props.openNotes(props.notesOpen);
 		}
@@ -62,9 +63,12 @@ const FileManager = (props) => {
 					headers: { "Content-Type": "application/json" },
 				};
 
-				const returnedFile = await axios.post("/api/files/parent", {
-					currentDir: props.currentDir,
-				});
+				const returnedFile = await axios.post(
+					URL + "/api/files/parent",
+					{
+						currentDir: props.currentDir,
+					}
+				);
 				console.log(returnedFile);
 				setPrevDir(returnedFile.data.parentDir);
 				console.log(prevDir);
@@ -78,7 +82,7 @@ const FileManager = (props) => {
 					headers: { "Content-Type": "application/json" },
 				};
 
-				const returnedFiles = await axios.post("/api/files/", {
+				const returnedFiles = await axios.post(URL + "/api/files/", {
 					currentDir: props.currentDir,
 				});
 				setFiles(returnedFiles.data);
