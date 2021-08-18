@@ -2,6 +2,7 @@ import "./Notes.scss";
 import React, { useRef, Component, useEffect, useState } from "react";
 import Draggable, { DraggableCore } from "react-draggable";
 import axios from "axios";
+import { gsap } from "gsap";
 
 const Notes = (props) => {
 	const [maximized, setMaximized] = useState(false);
@@ -54,6 +55,16 @@ const Notes = (props) => {
 		setNoteContent(event.target.value);
 	};
 
+	const noteRef = useRef();
+
+	useEffect(() => {
+		gsap.from(noteRef.current, {
+			y: 300,
+			x:50,
+			duration: 0.2,
+		});
+	}, [props.notesOpen])
+
 	if (!maximized) {
 		return (
 			<Draggable>
@@ -63,6 +74,7 @@ const Notes = (props) => {
 					tabIndex={1}
 					onFocus={focusNotes}
 					onBlur={blurNotes}
+					ref={noteRef}
 				>
 					<div className="windowBarAdvanced">
 						<span

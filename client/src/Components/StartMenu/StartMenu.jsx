@@ -4,16 +4,17 @@ import browserIcon from "../../Icons/browser.svg";
 import notesIcon from "../../Icons/notepad-48.svg";
 import startIcon from "../../Icons/syspeek-90.svg";
 import filesIcon from "../../Icons/file-manager.svg";
+import { gsap } from "gsap";
 import {
 	toggleTerminal,
 	toggleMenu,
 	store,
 	toggleBrowser,
-	openFile
+	openFile,
 } from "../../Redux/store";
+import { useEffect, useRef } from "react";
 
 const StartMenu = (props) => {
-
 	const openFileManager = () => {
 		props.openFileManager(props.fileManagerOpen);
 		console.log(props);
@@ -39,8 +40,20 @@ const StartMenu = (props) => {
 		console.log(props);
 	};
 
+	const startRef = useRef();
+
+	useEffect(() => {
+		gsap.from(startRef.current, {
+			y: 300,
+			x: -50,
+			duration: 0.5,
+			opacity: 0,
+			ease: "back"
+		});
+	}, [props.menuOpen]);
+
 	return (
-		<div id="startMenu" tabIndex={0} onBlur={openMenu}>
+		<div id="startMenu" tabIndex={0} onBlur={openMenu} ref={startRef}>
 			<div className="startApps" onClick={openFileManager}>
 				<img src={filesIcon} alt="File Manager" />
 				<p>Files</p>

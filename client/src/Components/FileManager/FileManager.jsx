@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Draggable, { DraggableCore } from "react-draggable";
 import "./FileManager.scss";
 import folderIcon from "../../Icons/default-folder.svg";
 import fileIcon from "../../Icons/resume-icon.svg";
 import axios from "axios";
+import { gsap } from "gsap";
 
-const URL = "https://billyrigdon.dev:1313";
+const URL = "https://billyrigdon.dev";
 
 const FileManager = (props) => {
 	const [maximized, setMaximized] = useState(false);
@@ -94,6 +95,16 @@ const FileManager = (props) => {
 		fetchDir();
 	}, [props.currentDir]);
 
+	const fileRef = useRef();
+
+	useEffect(() => {
+		gsap.from(fileRef.current, {
+			y: 300,
+			x: 50,
+			duration: 0.2,
+		});
+	}, [props.fileManagerOpen]);
+
 	const fileItem = files.map((item, index) => {
 		if (item.isDirectory) {
 			return (
@@ -134,6 +145,7 @@ const FileManager = (props) => {
 					tabIndex={0}
 					onFocus={focusFileManager}
 					onBlur={blurFileManager}
+					ref={fileRef}
 				>
 					<div className="windowBarAdvanced">
 						<span
