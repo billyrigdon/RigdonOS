@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const App = (props) => {
 	return (
-		<div>
+		<div id="app-container">
 			<ConnectedDesktop />
 			<ConnectedTaskbar />
 			{isMobile && <MobileBar />}

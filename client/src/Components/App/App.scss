@@ -13,7 +13,9 @@ $trafficGreen: #00c9a4;
 	font-family: "Montserrat", sans-serif;	
 }
 
-
+#app-container {
+	overflow:hidden;
+}
 
 .windowBar {
 	width: 100%;

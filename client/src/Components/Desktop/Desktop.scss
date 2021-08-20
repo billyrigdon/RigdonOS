@@ -77,7 +77,8 @@ $darkColor: rgba(74, 68, 83, 0.85);
 	}	
 
 	#desktop {
-		top:1rem;
+		top:2vh;
+		height:98vh;
 		grid-template-columns: repeat(4,1fr);
 	}
 }
