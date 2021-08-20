@@ -14,6 +14,7 @@ import {
 } from "../../Redux/store";
 import { useEffect, useRef } from "react";
 
+
 const StartMenu = (props) => {
 	const openFileManager = () => {
 		props.openFileManager(props.fileManagerOpen);
@@ -45,8 +46,7 @@ const StartMenu = (props) => {
 	useEffect(() => {
 		gsap.from(startRef.current, {
 			y: 300,
-			x: -50,
-			duration: 0.5,
+			duration: 0.2,
 			opacity: 0,
 			ease: "back"
 		});

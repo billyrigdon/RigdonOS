@@ -5,6 +5,12 @@ import folderIcon from "../../Icons/default-folder.svg";
 import fileIcon from "../../Icons/resume-icon.svg";
 import axios from "axios";
 import { gsap } from "gsap";
+import {
+	BrowserView,
+	MobileView,
+	isBrowser,
+	isMobile,
+} from "react-device-detect";
 
 const URL = "https://billyrigdon.dev";
 
@@ -137,7 +143,19 @@ const FileManager = (props) => {
 		}
 	});
 
-	if (!maximized) {
+	if (isMobile) {
+		return (
+			<div id="max-file" className="maximized">
+				<div className="windowBar">
+					<div
+						className="windowButtons close"
+						onClick={closeFileManager}
+					></div>
+				</div>
+				<div id="file-view">{fileItem}</div>
+			</div>
+		);
+	} else if (!maximized) {
 		return (
 			<Draggable className="window">
 				<div

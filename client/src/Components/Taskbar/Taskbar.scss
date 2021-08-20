@@ -62,3 +62,13 @@ $darkColor: rgba(74, 68, 83, 0.85);
 #time-container {
 	width:20%;
 }
+
+@media only screen and (max-width: 600px) {
+	#startMenuButton {
+		display: none;
+	}
+
+	#time-container p {
+		display: none;
+	}
+}

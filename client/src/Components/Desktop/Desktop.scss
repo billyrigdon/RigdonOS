@@ -69,3 +69,15 @@ $darkColor: rgba(74, 68, 83, 0.85);
 	font-family: "Montserrat", sans-serif;
 	font-weight: 600;
 }
+
+@media only screen and (max-width:600px) {
+	#github img {
+		height: 90%;
+		width: 100%;
+	}	
+
+	#desktop {
+		top:1rem;
+		grid-template-columns: repeat(4,1fr);
+	}
+}

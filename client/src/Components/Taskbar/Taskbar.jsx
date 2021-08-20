@@ -14,6 +14,12 @@ import browserIcon from "../../Icons/browser.svg";
 import notesIcon from "../../Icons/notepad-48.svg";
 import startIcon from "../../Icons/syspeek-90.svg";
 import filesIcon from "../../Icons/file-manager.svg";
+import {
+	BrowserView,
+	MobileView,
+	isBrowser,
+	isMobile,
+} from "react-device-detect";
 
 const Taskbar = (props) => {
 	const [currentTime, setCurrentTime] = useState(new Date());

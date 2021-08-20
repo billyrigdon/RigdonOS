@@ -3,6 +3,12 @@ import React, { useRef, Component, useEffect, useState } from "react";
 import Draggable, { DraggableCore } from "react-draggable";
 import axios from "axios";
 import { gsap } from "gsap";
+import {
+	BrowserView,
+	MobileView,
+	isBrowser,
+	isMobile,
+} from "react-device-detect";
 
 const Notes = (props) => {
 	const [maximized, setMaximized] = useState(false);
@@ -65,7 +71,34 @@ const Notes = (props) => {
 		});
 	}, [props.notesOpen])
 
-	if (!maximized) {
+	if (isMobile) {
+		return (
+			<div className="maximized">
+				<div className="windowBarAdvanced">
+					<span
+						onClick={() => {
+							saveNotes();
+						}}
+						id="saveButton"
+						class="material-icons"
+					>
+						save
+					</span>
+					<div className="windowButtonsContainer">
+						<div
+							className="windowButtons close"
+							onClick={closeNotes}
+						></div>
+					</div>
+				</div>
+				<textarea
+					onChange={handleNotesChange}
+					value={noteContent}
+					id="notes"
+				/>
+			</div>
+		)	
+	} else if (!maximized) {
 		return (
 			<Draggable>
 				<div

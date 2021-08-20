@@ -3,6 +3,12 @@ import ReactTerminal from "react-terminal-component";
 import Draggable, { DraggableCore } from "react-draggable";
 import "./Terminal.scss";
 import { gsap } from "gsap";
+import {
+	BrowserView,
+	MobileView,
+	isBrowser,
+	isMobile,
+} from "react-device-detect";
 
 const Terminal = (props) => {
 	const [termClass, setTermClass] = useState("terminal-focused");
@@ -40,6 +46,13 @@ const Terminal = (props) => {
 			duration: 0.2,
 		});
 	}, [props.terminalOpen]);
+
+	useEffect(() => {
+		if (isMobile) {
+			setTermClass("maximized");
+			setMaximized(true);
+		}
+	})
 
 	if (!maximized) {
 		return (

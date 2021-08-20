@@ -2,6 +2,12 @@ import { useState, useEffect } from "react";
 import Draggable, {DraggableCore} from 'react-draggable';
 import "./Resume.scss";
 import resume from "./resume.pdf";
+import {
+	BrowserView,
+	MobileView,
+	isBrowser,
+	isMobile,
+} from "react-device-detect";
 
 const Resume = (props) => {
 
@@ -30,9 +36,13 @@ const Resume = (props) => {
 		setResumeClass("resume");
 	}
 
+	useEffect(() => {
+		if (isMobile) {
+			setMaximized(true);
+		}
+	})
 
 	if (!maximized) {
-
 		return (
 			<Draggable className="window">
 				<div id="resume-window" className={resumeClass} tabIndex={0} onFocus={focusResume} onBlur={blurResume}>

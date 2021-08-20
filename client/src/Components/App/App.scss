@@ -43,6 +43,7 @@ $trafficGreen: #00c9a4;
 	width:.8rem;
 	border-radius: 360px;
 	margin:.2rem;
+	cursor: pointer;
 }
 
 .minimize {
@@ -68,5 +69,21 @@ $trafficGreen: #00c9a4;
 	flex-direction: column;
 	align-items: center;
 	z-index:5;
+}
+
+@media only screen and (max-width:600px) {
+	
+	.minimize {
+		display: none;
+	}
+
+	.maximize {
+		display: none;
+	}
+	
+	.windowButtons {
+		height:1.2rem;
+		width: 1.2rem;
+		}
 }
 

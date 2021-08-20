@@ -4,6 +4,7 @@ import Desktop from "../Desktop/Desktop";
 import Terminal from "../Terminal/Terminal";
 import StartMenu from "../StartMenu/StartMenu";
 import Browser from "../Browser/Browser";
+import MobileBar from "../MobileBar/MobileBar";
 import Notes from "../Notes/Notes";
 import Resume from "../Resume/Resume";
 import FileManager from "../FileManager/FileManager";
@@ -20,6 +21,12 @@ import {
 	setFileContent,
 	openFile,
 } from "../../Redux/store";
+import {
+	BrowserView,
+	MobileView,
+	isBrowser,
+	isMobile,
+} from "react-device-detect";
 
 const mapStateToProps = (state) => {
 	return {
@@ -63,7 +70,7 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		setFile: (fileObj) => {
 			dispatch(openFile(fileObj));
-		}
+		},
 	};
 };
 
@@ -72,6 +79,7 @@ const App = (props) => {
 		<div>
 			<ConnectedDesktop />
 			<ConnectedTaskbar />
+			{isMobile && <MobileBar />}
 			{props.menuOpen && <ConnectedStartMenu />}
 			{props.terminalOpen && <ConnectedTerminal />}
 			{props.browserOpen && <ConnectedBrowser />}
