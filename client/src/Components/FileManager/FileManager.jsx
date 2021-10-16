@@ -12,7 +12,7 @@ import {
 	isMobile,
 } from "react-device-detect";
 
-const URL = "https://billyrigdon.dev";
+const URL = "http://127.0.0.1:1313";
 
 const FileManager = (props) => {
 	const [maximized, setMaximized] = useState(false);
@@ -64,25 +64,25 @@ const FileManager = (props) => {
 	};
 
 	useEffect(() => {
-		const fetchParent = async () => {
-			try {
-				const config = {
-					headers: { "Content-Type": "application/json" },
-				};
-
-				const returnedFile = await axios.post(
-					URL + "/api/files/parent",
-					{
-						currentDir: props.currentDir,
-					}
-				);
-				console.log(returnedFile);
-				setPrevDir(returnedFile.data.parentDir);
-				console.log(prevDir);
-			} catch {
-				console.log("Fetch failed");
-			}
-		};
+		// const fetchParent = async () => {
+		// 	try {
+		// 		const config = {
+		// 			headers: { "Content-Type": "application/json" },
+		// 		};
+		//
+		// 		const returnedFile = await axios.post(
+		// 			URL + "/api/files/parent",
+		// 			{
+		// 				currentDir: props.currentDir,
+		// 			}
+		// 		);
+		// 		console.log(returnedFile);
+		// 		setPrevDir(returnedFile.data.parentDir);
+		// 		console.log(prevDir);
+		// 	} catch {
+		// 		console.log("Fetch failed");
+		// 	}
+		// };
 		const fetchDir = async () => {
 			try {
 				const config = {
@@ -97,7 +97,7 @@ const FileManager = (props) => {
 				console.log("Fetch failed");
 			}
 		};
-		fetchParent();
+		//fetchParent();
 		fetchDir();
 	}, [props.currentDir]);
 
@@ -120,7 +120,7 @@ const FileManager = (props) => {
 						src={folderIcon}
 						alt="Folder Icon"
 						onDoubleClick={() => {
-							changeDirectory(item.name);
+							changeDirectory(item.path);
 						}}
 					/>
 					<p>{item.name}</p>

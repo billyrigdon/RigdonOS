@@ -1,19 +1,19 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
+//const mongoose = require("mongoose");
 require("dotenv").config();
 const cors = require("cors");
 const fileRoute = require("./Routes/FileRoute");
 const path = require("path");
 
-mongoose.connect(
-	process.env.MONGO_URI,
-	{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
-	() => {
-		console.log("Connected to Database");
-	}
-);
-mongoose.set("useFindAndModify", false);
+// mongoose.connect(
+// 	process.env.MONGO_URI,
+// 	{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+// 	() => {
+// 		console.log("Connected to Database");
+// 	}
+// );
+//mongoose.set("useFindAndModify", false);
 
 //Middleware
 app.use(express.json());
