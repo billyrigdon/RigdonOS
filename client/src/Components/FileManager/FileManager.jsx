@@ -19,17 +19,7 @@ const FileManager = (props) => {
 	const [fileManagerClass, setFileManagerClass] = useState(
 		"file-manager-focused"
 	);
-	const [prevDir, setPrevDir] = useState();
 	const [files, setFiles] = useState([]);
-
-	const openFile = async (fileObj) => {
-		props.setFile(fileObj);
-		props.setContent(fileObj.contents);
-
-		if (!props.notesOpen) {
-			props.openNotes(props.notesOpen);
-		}
-	};
 
 	const changeDirectory = (name) => {
 		console.log(name);
@@ -37,9 +27,16 @@ const FileManager = (props) => {
 		console.log(props);
 	};
 
-	const backDirectory = () => {
-		props.changeFolder(prevDir);
-		console.log(prevDir);
+	const backDirectory = async () => {
+		const parentDir = await axios.post(URL + "/api/files/parent", {
+			currentDir: props.currentDir,
+		});
+		//console.log(parentDir);
+		props.changeFolder(parentDir.data.currentDir);
+	};
+
+	const openFile = (file) => {
+		console.log(file);
 	};
 
 	const closeFileManager = () => {
@@ -64,25 +61,6 @@ const FileManager = (props) => {
 	};
 
 	useEffect(() => {
-		// const fetchParent = async () => {
-		// 	try {
-		// 		const config = {
-		// 			headers: { "Content-Type": "application/json" },
-		// 		};
-		//
-		// 		const returnedFile = await axios.post(
-		// 			URL + "/api/files/parent",
-		// 			{
-		// 				currentDir: props.currentDir,
-		// 			}
-		// 		);
-		// 		console.log(returnedFile);
-		// 		setPrevDir(returnedFile.data.parentDir);
-		// 		console.log(prevDir);
-		// 	} catch {
-		// 		console.log("Fetch failed");
-		// 	}
-		// };
 		const fetchDir = async () => {
 			try {
 				const config = {
@@ -97,7 +75,6 @@ const FileManager = (props) => {
 				console.log("Fetch failed");
 			}
 		};
-		//fetchParent();
 		fetchDir();
 	}, [props.currentDir]);
 
@@ -111,7 +88,7 @@ const FileManager = (props) => {
 		});
 	}, [props.fileManagerOpen]);
 
-	const fileItem = files.map((item, index) => {
+	const dirItem = files.map((item, index) => {
 		if (item.isDirectory) {
 			return (
 				<div className="file">
@@ -126,7 +103,10 @@ const FileManager = (props) => {
 					<p>{item.name}</p>
 				</div>
 			);
-		} else if (!item.isDirectory) {
+		}
+	});
+	const fileItem = files.map((item, index) => {
+		if (!item.isDirectory) {
 			return (
 				<div className="file">
 					<img
@@ -150,9 +130,12 @@ const FileManager = (props) => {
 					<div
 						className="windowButtons close"
 						onClick={closeFileManager}
-					></div>
+					/>
 				</div>
-				<div id="file-view">{fileItem}</div>
+				<div id="file-view">
+					{dirItem}
+					{fileItem}
+				</div>
 			</div>
 		);
 	} else if (!maximized) {
@@ -177,18 +160,21 @@ const FileManager = (props) => {
 							<div
 								className="windowButtons minimize"
 								onClick={closeFileManager}
-							></div>
+							/>
 							<div
 								className="windowButtons maximize"
 								onClick={setMax}
-							></div>
+							/>
 							<div
 								className="windowButtons close"
 								onClick={closeFileManager}
-							></div>
+							/>
 						</div>
 					</div>
-					<div id="file-view">{fileItem}</div>
+					<div id="file-view">
+						{dirItem}
+						{fileItem}
+					</div>
 				</div>
 			</Draggable>
 		);
@@ -199,17 +185,17 @@ const FileManager = (props) => {
 					<div
 						className="windowButtons minimize"
 						onClick={closeFileManager}
-					></div>
-					<div
-						className="windowButtons maximize"
-						onClick={setMax}
-					></div>
+					/>
+					<div className="windowButtons maximize" onClick={setMax} />
 					<div
 						className="windowButtons close"
 						onClick={closeFileManager}
-					></div>
+					/>
 				</div>
-				<div id="file-view">{fileItem}</div>
+				<div id="file-view">
+					{dirItem}
+					{fileItem}
+				</div>
 			</div>
 		);
 	}
