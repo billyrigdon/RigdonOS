@@ -9,10 +9,26 @@ import {
 	isBrowser,
 	isMobile,
 } from "react-device-detect";
+import axios from "axios";
 
 const Terminal = (props) => {
 	const [termClass, setTermClass] = useState("terminal-focused");
 	const [maximized, setMaximized] = useState(false);
+	const [termHistory, setTermHistory] = useState([]);
+	const [command, setCommand] = useState("");
+	const URL = "http://127.0.0.1:1313";
+
+	const sendCommand = async (e) => {
+		e.preventDefault();
+		setTermHistory([...termHistory, command]);
+
+		const output = await axios.post(URL + "/api/terminal/command", {
+			command: command,
+		});
+
+		setTermHistory([...termHistory, output.data.output]);
+		setCommand("");
+	};
 
 	const maxTerm = () => {
 		if (termClass !== "maximized") {
@@ -52,7 +68,11 @@ const Terminal = (props) => {
 			setTermClass("maximized");
 			setMaximized(true);
 		}
-	})
+	});
+
+	const history = termHistory.map((item, index) => {
+		return <p className="terminal-line">{item}</p>;
+	});
 
 	if (!maximized) {
 		return (
@@ -79,7 +99,22 @@ const Terminal = (props) => {
 							onClick={closeTerminal}
 						></div>
 					</div>
-					<ReactTerminal
+					<div id="terminal-window">
+						{history}
+						<div id="prompt">
+							<p className="terminal-line">{props.currentDir}:</p>
+							<form onSubmit={sendCommand}>
+								<input
+									type="text"
+									value={command}
+									onChange={(e) => setCommand(e.target.value)}
+								/>
+								<input type="submit" />
+							</form>
+						</div>
+					</div>
+
+					{/* <ReactTerminal
 						clickToFocus={true}
 						autoFocus={false}
 						theme={{
@@ -94,7 +129,7 @@ const Terminal = (props) => {
 							width: "100%",
 							height: "90%",
 						}}
-					/>
+					/> */}
 				</div>
 			</Draggable>
 		);

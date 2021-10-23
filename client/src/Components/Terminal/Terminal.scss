@@ -21,6 +21,21 @@ $darkColor: #4A4453;
 	left:30%;
 }
 
+#terminal-window {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+	height: 100%;
+	background-color: #4A4453;
+}
+
+.terminal-line {
+	color: beige;
+	font-size: 1rem;
+}
+
 .terminal-focused {
 	width: 35vw;
 	height:45vh;

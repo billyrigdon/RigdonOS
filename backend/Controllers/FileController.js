@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const { exec } = require("child_process");
 const asyncHandler = require("express-async-handler");
 
 const getDirContents = asyncHandler(async (req, res) => {
@@ -42,18 +41,6 @@ const getParentDir = (req, res) => {
 	res.status(200).json({ currentDir: parentDir });
 };
 
-const runCommand = (command) => {
-	exec(command, (error, stdout, stderr) => {
-		if (error) {
-			return "An error occurred";
-		}
-		if (stderr) {
-			return stderr;
-		}
-		return stdout;
-	});
-};
-
 //getParentDir("/");
 
-module.exports = { getDirContents, runCommand, getParentDir };
+module.exports = { getDirContents, getParentDir };

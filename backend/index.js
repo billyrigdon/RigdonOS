@@ -4,6 +4,7 @@ const app = express();
 require("dotenv").config();
 const cors = require("cors");
 const fileRoute = require("./Routes/FileRoute");
+const terminalRoute = require("./Routes/TerminalRoute");
 const path = require("path");
 
 // mongoose.connect(
@@ -22,6 +23,7 @@ app.use(cors());
 
 //Routes
 app.use("/api/files", fileRoute);
+app.use("/api/terminal", terminalRoute);
 app.get("/", (req, res) => {
 	res.sendFile(path.join(__dirname, "build", "index.html"));
 });
