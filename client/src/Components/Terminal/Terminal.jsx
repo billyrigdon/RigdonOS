@@ -16,19 +16,33 @@ const Terminal = (props) => {
 	const [maximized, setMaximized] = useState(false);
 	const [termHistory, setTermHistory] = useState([]);
 	const [command, setCommand] = useState("");
+	const [workingDir, setWorkingDir] = useState("");
 	const URL = "http://127.0.0.1:1313";
 
 	const sendCommand = async (e) => {
 		e.preventDefault();
-		setTermHistory([...termHistory, command]);
 
 		const output = await axios.post(URL + "/api/terminal/command", {
 			command: command,
 		});
 
-		setTermHistory([...termHistory, output.data.output]);
+		setTermHistory([
+			...termHistory,
+			workingDir + ":root>" + command,
+			...output.data.output,
+		]);
 		setCommand("");
+		getWorkingDir();
 	};
+
+	const getWorkingDir = async () => {
+		const returnedDir = await axios.get(URL + "/api/terminal/directory");
+		setWorkingDir(returnedDir.data.workingDir);
+	};
+
+	useEffect(() => {
+		getWorkingDir();
+	}, []);
 
 	const maxTerm = () => {
 		if (termClass !== "maximized") {
@@ -102,14 +116,15 @@ const Terminal = (props) => {
 					<div id="terminal-window">
 						{history}
 						<div id="prompt">
-							<p className="terminal-line">{props.currentDir}:</p>
+							<p className="terminal-line">{workingDir}:root> </p>
 							<form onSubmit={sendCommand}>
 								<input
+									autoFocus
 									type="text"
 									value={command}
 									onChange={(e) => setCommand(e.target.value)}
 								/>
-								<input type="submit" />
+								{/* <input type="submit" /> */}
 							</form>
 						</div>
 					</div>
