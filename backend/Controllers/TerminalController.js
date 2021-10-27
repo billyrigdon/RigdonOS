@@ -1,46 +1,22 @@
-const { spawn, exec } = require("child_process");
 const asyncHandler = require("express-async-handler");
 const path = require("path");
+const Readable = require("stream").Readable;
 
-let commandHistory = [];
-
-const shell = spawn("sh", [], { detached: true });
-shell.on("close", (code) => {
-	console.log("[shell] terminated :", code);
-});
-
-process.stdin.pipe(shell.stdin);
-
-shell.stdout.on("data", (data) => {
-	commandHistory.push(`${data}`.split("\n")[0]);
-});
-
-const runCommand = asyncHandler(async (req, res) => {
-	let command = req.body.command;
-	req.body.command.pipe(shell.stdin);
-	res.status(200).json({ output: commandHistory });
-	// try {
-	// 	exec(command, (error, stdout, stderr) => {
-	// 		if (error) {
-	// 			res.status(500).json(error);
-	// 		} else if (stderr) {
-	// 			res.status(200).json({ output: stderr });
-	// 		}
-	// 		let stdoutArray = stdout.split("\n");
-	// 		res.status(200).json({ output: stdoutArray });
-	// 	});
-	// } catch (error) {
-	// 	res.status(500).json(error);
-	// }
-});
+const runCommand = (req, res, shell, history) => {
+	try {
+		//Readable.from("ls").pipe(shell.stdin);
+		shell.stdin.write(req.body.command + "\n");
+		setTimeout(() => {
+			res.status(200).json({ output: history });
+		}, 600);
+	} catch (err) {
+		res.status(500).json(err);
+	}
+};
 
 const getWorkingDir = (req, res) => {
 	let workingDir = path.resolve(process.cwd(), ".");
 	res.status(200).json({ workingDir: workingDir });
-};
-
-const interactiveCommand = () => {
-	const test = [];
 };
 
 module.exports = { runCommand, getWorkingDir };
