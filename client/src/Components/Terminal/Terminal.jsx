@@ -18,6 +18,7 @@ const Terminal = (props) => {
 	const [command, setCommand] = useState("");
 	const [workingDir, setWorkingDir] = useState("");
 	const URL = "http://127.0.0.1:1313";
+	const inputRef = useRef();
 
 	const sendCommand = async (e) => {
 		e.preventDefault();
@@ -26,11 +27,7 @@ const Terminal = (props) => {
 			command: command,
 		});
 
-		setTermHistory([
-			...termHistory,
-			workingDir + ":root>" + command,
-			...output.data.output,
-		]);
+		setTermHistory(output.data);
 		setCommand("");
 		getWorkingDir();
 	};
@@ -43,6 +40,10 @@ const Terminal = (props) => {
 	useEffect(() => {
 		getWorkingDir();
 	}, []);
+
+	useEffect(() => {
+		inputRef.current?.scrollIntoView({behavior: "smooth"});
+	}, [termHistory]);
 
 	const maxTerm = () => {
 		if (termClass !== "maximized") {
@@ -84,8 +85,14 @@ const Terminal = (props) => {
 		}
 	});
 
-	const history = termHistory.map((item, index) => {
-		return <p className="terminal-line">{item}</p>;
+	const history = termHistory.map((commandArr, index) => {
+		return commandArr.map((returnedCommand, idx) => {
+			return <p className="terminal-line">{returnedCommand}</p>;
+		});
+		//<p className="terminal-line">test</p>
+		// commandArr.map((returnedCommand, idx) => {
+		// console.log(returnedCommand);
+		// });
 	});
 
 	if (!maximized) {
@@ -115,8 +122,8 @@ const Terminal = (props) => {
 					</div>
 					<div id="terminal-window">
 						{history}
-						<div id="prompt">
-							<p className="terminal-line">{workingDir}:root> </p>
+						<div id="prompt" ref={inputRef}>
+							{/* <p className="terminal-line">{workingDir}:root> </p> */}
 							<form onSubmit={sendCommand}>
 								<input
 									autoFocus

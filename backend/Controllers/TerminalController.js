@@ -7,7 +7,7 @@ const runCommand = (req, res, shell, history) => {
 		//Readable.from("ls").pipe(shell.stdin);
 		shell.stdin.write(req.body.command + "\n");
 		setTimeout(() => {
-			res.status(200).json({ output: history });
+			res.status(200).json(history);
 		}, 600);
 	} catch (err) {
 		res.status(500).json(err);
