@@ -1,7 +1,8 @@
+import "./Terminal.scss";
+import "./xterm.css";
 import React, { useRef, Component, useEffect, useState } from "react";
 import ReactTerminal from "react-terminal-component";
 import Draggable, { DraggableCore } from "react-draggable";
-import "./Terminal.scss";
 import { gsap } from "gsap";
 import {
 	BrowserView,
@@ -10,41 +11,65 @@ import {
 	isMobile,
 } from "react-device-detect";
 import axios from "axios";
+import { Terminal } from "xterm";
+import { FitAddon } from "xterm-addon-fit";
+import io from "socket.io-client";
 
-const Terminal = (props) => {
+const fitAddon = new FitAddon();
+
+const RigdonOSTerminal = (props) => {
 	const [termClass, setTermClass] = useState("terminal-focused");
 	const [maximized, setMaximized] = useState(false);
 	const [termHistory, setTermHistory] = useState([]);
 	const [command, setCommand] = useState("");
 	const [workingDir, setWorkingDir] = useState("");
 	const URL = "http://127.0.0.1:1313";
-	const inputRef = useRef();
+	const termRef = useRef();
 
-	const sendCommand = async (e) => {
-		e.preventDefault();
+	useEffect(() => {
+		console.log("test");
+		//Create websocket
+		const socket = io(URL);
 
-		const output = await axios.post(URL + "/api/terminal/command", {
-			command: command,
+		//Create xterm terminal
+		const term = new Terminal({
+			convertEol: true,
+			fontFamily: `'Fira Mono', monospace`,
+			fontSize: 15,
+			fontWeight: 900,
+			//scrollback: 50,
+			// rendererType: "dom" // default is canvas
 		});
 
-		setTermHistory(output.data);
-		setCommand("");
-		getWorkingDir();
-	};
+		//Use fit addon so terminal takes up all available space
+		term.loadAddon(fitAddon);
 
-	const getWorkingDir = async () => {
-		const returnedDir = await axios.get(URL + "/api/terminal/directory");
-		setWorkingDir(returnedDir.data.workingDir);
-	};
+		//Set theme
+		term.setOption("theme", {
+			background: "black",
+			foreground: "white",
+		});
 
-	useEffect(() => {
-		getWorkingDir();
+		//On input, send to socket backend
+		term.onData((data) => {
+			socket.emit("input", data);
+		});
+
+		//When data is received from backend, write to terminal
+		socket.on("output", (data) => {
+			term.write(data);
+		});
+
+		//Attach terminal to #terminal-window
+		const termDiv = termRef.current;
+		term.open(termDiv);
+		fitAddon.fit();
+
+		//Kill socket when component unmounts
+		return () => socket.disconnect;
 	}, []);
 
-	useEffect(() => {
-		inputRef.current?.scrollIntoView({behavior: "smooth"});
-	}, [termHistory]);
-
+	//Maximize Terminal Window
 	const maxTerm = () => {
 		if (termClass !== "maximized") {
 			setTermClass("maximized");
@@ -55,44 +80,39 @@ const Terminal = (props) => {
 		}
 	};
 
+	//Close terminal
+	//Need to add logic for socket disconnect
 	const closeTerminal = () => {
 		props.openTerminal(props.terminalOpen);
 		console.log(props);
 	};
 
+	//Changes z-index of window to bring to front if in focus
 	const focusTerminal = () => {
 		setTermClass("terminal-focused");
 	};
 
 	const blurTerminal = () => {
-		setTermClass("terminal");
+		setTermClass("terminal-app");
 	};
 
-	const termRef = useRef();
+	const windowRef = useRef();
 
+	//Opening animation
 	useEffect(() => {
-		gsap.from(termRef.current, {
+		gsap.from(windowRef.current, {
 			y: 300,
 			x: 50,
 			duration: 0.2,
 		});
 	}, [props.terminalOpen]);
 
+	//Maximize window by default if mobile
 	useEffect(() => {
 		if (isMobile) {
 			setTermClass("maximized");
 			setMaximized(true);
 		}
-	});
-
-	const history = termHistory.map((commandArr, index) => {
-		return commandArr.map((returnedCommand, idx) => {
-			return <p className="terminal-line">{returnedCommand}</p>;
-		});
-		//<p className="terminal-line">test</p>
-		// commandArr.map((returnedCommand, idx) => {
-		// console.log(returnedCommand);
-		// });
 	});
 
 	if (!maximized) {
@@ -104,7 +124,7 @@ const Terminal = (props) => {
 					tabIndex={0}
 					onFocus={focusTerminal}
 					onBlur={blurTerminal}
-					ref={termRef}
+					ref={windowRef}
 				>
 					<div className="windowBar">
 						<div
@@ -121,37 +141,8 @@ const Terminal = (props) => {
 						></div>
 					</div>
 					<div id="terminal-window">
-						{history}
-						<div id="prompt" ref={inputRef}>
-							{/* <p className="terminal-line">{workingDir}:root> </p> */}
-							<form onSubmit={sendCommand}>
-								<input
-									autoFocus
-									type="text"
-									value={command}
-									onChange={(e) => setCommand(e.target.value)}
-								/>
-								{/* <input type="submit" /> */}
-							</form>
-						</div>
+						<div ref={termRef}></div>
 					</div>
-
-					{/* <ReactTerminal
-						clickToFocus={true}
-						autoFocus={false}
-						theme={{
-							background: "#141313",
-							promptSymbolColor: "#6effe6",
-							commandColor: "#fcfcfc",
-							outputColor: "#fcfcfc",
-							errorOutputColor: "#ff89bd",
-							fontSize: "1.1rem",
-							spacing: "1%",
-							fontFamily: "monospace",
-							width: "100%",
-							height: "90%",
-						}}
-					/> */}
 				</div>
 			</Draggable>
 		);
@@ -191,4 +182,4 @@ const Terminal = (props) => {
 	}
 };
 
-export default Terminal;
+export default RigdonOSTerminal;

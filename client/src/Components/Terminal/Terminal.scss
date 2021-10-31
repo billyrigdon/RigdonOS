@@ -8,9 +8,9 @@ $darkColor: #4a4453;
 	width: 0px;
 }
 
-.terminal {
-	width: 35vw;
-	height: 45vh;
+.terminal-app {
+	width: 699px;
+	height: 448px;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
@@ -23,14 +23,9 @@ $darkColor: #4a4453;
 }
 
 #terminal-window {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: flex-start;
 	width: 100%;
-	height: 100%;
-	background-color: #292d3e;
-	overflow-y: scroll;
+	height: calc(100% - 2.5rem);
+	box-sizing: content-box;
 }
 
 #prompt {
@@ -56,8 +51,8 @@ $darkColor: #4a4453;
 }
 
 .terminal-focused {
-	width: 35vw;
-	height: 45vh;
+	width: 699px;
+	height: 448px;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
