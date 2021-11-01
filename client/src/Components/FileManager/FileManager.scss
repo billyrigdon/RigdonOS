@@ -11,8 +11,8 @@ $mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
 }
 
 .file-manager {
-	width: 35vw;
-	height: 45vh;
+	width: 45vw;
+	height: 55vh;
 	overflow: hidden;
 	flex-direction: column;
 	align-items: center;
@@ -26,8 +26,8 @@ $mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
 }
 
 .file-manager-focused {
-	width: 35vw;
-	height: 45vh;
+	width: 45vw;
+	height: 55vh;
 	overflow: hidden;
 	flex-direction: column;
 	align-items: center;
@@ -42,9 +42,12 @@ $mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
 }
 
 #file-view {
-	display: grid;
-	grid-template-columns: repeat(6,1fr);
-	grid-template-rows: repeat(6,1fr);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: flex-start;
+	overflow-y: scroll;
 	height:calc(100% - 2.5rem);
 	width:100%;
 }
@@ -54,12 +57,13 @@ $mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 100%;
-	height:100%;
+	width: 10%;
+	height:auto;
+	margin-left: 1rem;
 }
 
 .file img {
-	width:70%;
+	width:100%;
 	height:auto;
 }
 
@@ -67,4 +71,6 @@ $mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
 	font-weight: 400;
 	font-family: "Ubuntu", sans-serif;
 	color: #1b1b1b;
+	font-size: .9rem;
+	
 }

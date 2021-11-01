@@ -10,7 +10,7 @@ const initialState = {
 	currentDir: "/",
 	fileContent: "",
 	currentFile: {},
-	musicPlayerOpen: true,
+	musicPlayerOpen: false,
 };
 
 const toggleMenu = (menuOpen) => {
@@ -124,8 +124,8 @@ const osReducer = (state = initialState, action) => {
 		case "TOGGLEMUSICPLAYER":
 			return {
 				...state,
-				musicPlayerOpen: !state.musicPlayerOpen
-			}
+				musicPlayerOpen: !state.musicPlayerOpen,
+			};
 		default:
 			return state;
 	}
@@ -144,5 +144,5 @@ export {
 	changeDirectory,
 	setFileContent,
 	openFile,
-	toggleMusicPlayer
+	toggleMusicPlayer,
 };
