@@ -8,4 +8,4 @@ cd ../backend;
 docker build -t rigdonos:latest .;
 docker kill RigdonOS;
 docker rm RigdonOS;
-docker run -d --name RigdonOS -p 1313:1313 rigdonos:latest;
+docker run -dit --name RigdonOS -p 1313:1313 rigdonos:latest;
