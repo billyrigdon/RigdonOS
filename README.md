@@ -18,17 +18,19 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 ## Prerequisites
 
+&nbsp;
+
 At a minimum, you will need to have npm and node.js installed on your machine. To take advantage of the automated build script you will also need to have docker installed.
 
 &nbsp;
 
-### The following will install all 3 on Manjaro and configure docker, but you can use the package manager and distro of your choice to do the same.
-
-###### Note:You may need to log out and log back in after adding yourself to the docker group.
+#### The following will install all 3 on Manjaro and configure docker, but you can use the package manager and distro of your choice to do the same.
 
     sudo pacman -S npm nodejs docker
     sudo systemctl enable --now docker.service
     sudo usermod -aG docker $USER
+
+###### Note:You may need to log out and log back in after adding yourself to the docker group.
 
 &nbsp;
 
@@ -57,9 +59,9 @@ At a minimum, you will need to have npm and node.js installed on your machine. T
 
 &nbsp;
 
-### In the main project directory, run the build.sh script.
+### In the main project directory, run the docker_build.sh script.
 
-    ./build.sh
+    ./docker_build.sh
 
 &nbsp;
 
