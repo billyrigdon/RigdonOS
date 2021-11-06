@@ -1,5 +1,6 @@
 import "./Taskbar.scss";
 import { useState, useEffect } from "react";
+import terminalIcon from "../../Icons/terminal.svg";
 import browserIcon from "../../Icons/browser.svg";
 import notesIcon from "../../Icons/notepad-48.svg";
 import startIcon from "../../Icons/syspeek-90.svg";
