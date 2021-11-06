@@ -18,9 +18,7 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 ## Prerequisites
 
-&nbsp;
-
-At a minimum, you will need to have npm and node.js installed on your machine. To take advantage of the automated build script you will also need to have docker installed.
+##### At a minimum, you will need to have npm and node.js installed on your machine. To take advantage of the automated build script you will also need to have docker installed.
 
 &nbsp;
 
