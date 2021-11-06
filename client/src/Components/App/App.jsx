@@ -18,17 +18,11 @@ import {
 	toggleMenu,
 	toggleFileManager,
 	changeDirectory,
-	store,
 	setFileContent,
 	openFile,
 	toggleMusicPlayer,
 } from "../../Redux/store";
-import {
-	BrowserView,
-	MobileView,
-	isBrowser,
-	isMobile,
-} from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 const mapStateToProps = (state) => {
 	return {
@@ -76,7 +70,7 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		openMusicPlayer: (musicPlayerOpen) => {
 			dispatch(toggleMusicPlayer(musicPlayerOpen));
-		}
+		},
 	};
 };
 

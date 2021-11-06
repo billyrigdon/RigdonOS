@@ -1,14 +1,9 @@
 import "./Notes.scss";
-import React, { useRef, Component, useEffect, useState } from "react";
-import Draggable, { DraggableCore } from "react-draggable";
+import React, { useRef, useEffect, useState } from "react";
+import Draggable from "react-draggable";
 import axios from "axios";
 import { gsap } from "gsap";
-import {
-	BrowserView,
-	MobileView,
-	isBrowser,
-	isMobile,
-} from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 const Notes = (props) => {
 	const [maximized, setMaximized] = useState(false);
@@ -18,10 +13,6 @@ const Notes = (props) => {
 	const saveNotes = async () => {
 		try {
 			console.log(props.currentFile);
-
-			const config = {
-				"Content-Type": "application.json",
-			};
 
 			const updatedNote = await axios.post("/api/files/edit", {
 				name: props.currentFile.name,
@@ -66,10 +57,10 @@ const Notes = (props) => {
 	useEffect(() => {
 		gsap.from(noteRef.current, {
 			y: 300,
-			x:50,
+			x: 50,
 			duration: 0.2,
 		});
-	}, [props.notesOpen])
+	}, [props.notesOpen]);
 
 	if (isMobile) {
 		return (
@@ -97,7 +88,7 @@ const Notes = (props) => {
 					id="notes"
 				/>
 			</div>
-		)	
+		);
 	} else if (!maximized) {
 		return (
 			<Draggable>

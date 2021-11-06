@@ -1,25 +1,9 @@
 import "./Taskbar.scss";
-import { userSelector, useDispatch, connect } from "react-redux";
-import {
-	toggleTerminal,
-	toggleMenu,
-	store,
-	toggleBrowser,
-} from "../../Redux/store";
 import { useState, useEffect } from "react";
-import StartMenu from "../StartMenu/StartMenu";
-import terminalIcon from "../../Icons/terminal.svg";
-import Terminal from "../Terminal/Terminal";
 import browserIcon from "../../Icons/browser.svg";
 import notesIcon from "../../Icons/notepad-48.svg";
 import startIcon from "../../Icons/syspeek-90.svg";
 import filesIcon from "../../Icons/file-manager.svg";
-import {
-	BrowserView,
-	MobileView,
-	isBrowser,
-	isMobile,
-} from "react-device-detect";
 
 const Taskbar = (props) => {
 	const [currentTime, setCurrentTime] = useState(new Date());

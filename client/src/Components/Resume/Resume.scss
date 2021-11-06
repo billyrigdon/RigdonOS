@@ -1,26 +1,24 @@
 $mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
 $lightPurple: #776d87;
-$darkColor: #4A4453;
-
-/* width */
+$darkColor: #4a4453;
 
 .resume {
 	width: 70vw;
-	height:80vh;
+	height: 80vh;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	resize: both;
 	box-shadow: $mediumShadow;
-	position:absolute;
+	position: absolute;
 	top: 10%;
-	left:15%;	
+	left: 15%;
 }
 
 .resume-focused {
 	width: 70vw;
-	height:80vh;
+	height: 80vh;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
@@ -28,13 +26,13 @@ $darkColor: #4A4453;
 	resize: both;
 	box-shadow: $mediumShadow;
 	z-index: 6;
-	position:absolute;
+	position: absolute;
 	top: 10%;
-	left:15%;
+	left: 15%;
 }
 
 #resumePage {
-	width:100%;
-	height:calc(100% - 2.5rem);
-	border:none;
+	width: 100%;
+	height: calc(100% - 2.5rem);
+	border: none;
 }

@@ -2,18 +2,9 @@ import "./StartMenu.scss";
 import terminalIcon from "../../Icons/terminal.svg";
 import browserIcon from "../../Icons/browser.svg";
 import notesIcon from "../../Icons/notepad-48.svg";
-import startIcon from "../../Icons/syspeek-90.svg";
 import filesIcon from "../../Icons/file-manager.svg";
 import { gsap } from "gsap";
-import {
-	toggleTerminal,
-	toggleMenu,
-	store,
-	toggleBrowser,
-	openFile,
-} from "../../Redux/store";
 import { useEffect, useRef } from "react";
-
 
 const StartMenu = (props) => {
 	const openFileManager = () => {
@@ -48,7 +39,7 @@ const StartMenu = (props) => {
 			y: 300,
 			duration: 0.2,
 			opacity: 0,
-			ease: "back"
+			ease: "back",
 		});
 	}, [props.menuOpen]);
 
