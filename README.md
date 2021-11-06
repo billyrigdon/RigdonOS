@@ -18,7 +18,7 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 ## Prerequisites
 
-##### At a minimum, you will need to have npm and node.js installed on your machine. To take advantage of the automated build script you will also need to have docker installed.
+###### At a minimum, you will need to have npm and node.js installed on your machine. To take advantage of the automated build script you will also need to have docker installed.
 
 &nbsp;
 
@@ -28,7 +28,7 @@ The desktop environment is available to play around with at https://billyrigdon.
     sudo systemctl enable --now docker.service
     sudo usermod -aG docker $USER
 
-###### Note:You may need to log out and log back in after adding yourself to the docker group.
+###### Note: You may need to log out and log back in after adding yourself to the docker group.
 
 &nbsp;
 
