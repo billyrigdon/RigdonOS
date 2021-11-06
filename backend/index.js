@@ -1,27 +1,24 @@
 const express = require("express");
 const app = express();
-require("dotenv").config();
 const cors = require("cors");
 const fileRoute = require("./Routes/FileRoute");
 const path = require("path");
 const http = require("http");
 const server = http.createServer(app);
-const { Server } = require("socket.io");
-//const io = new Server(server);
 const os = require("os");
 const pty = require("node-pty");
-
 const io = require("socket.io")(server, {
 	cors: {
 		origin: "http://127.0.0.1:3000",
 		methods: ["GET", "POST"],
 	},
 });
+require("dotenv").config();
 
 //Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-//app.use(cors());
+app.use(cors());
 
 //Routes
 app.use("/api/files", fileRoute);

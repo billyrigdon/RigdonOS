@@ -41,6 +41,4 @@ const getParentDir = (req, res) => {
 	res.status(200).json({ currentDir: parentDir });
 };
 
-//getParentDir("/");
-
 module.exports = { getDirContents, getParentDir };

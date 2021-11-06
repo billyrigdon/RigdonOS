@@ -25,8 +25,6 @@ const RigdonOSTerminal = (props) => {
 			fontFamily: `'Fira Mono', monospace`,
 			fontSize: 15,
 			fontWeight: 900,
-			//scrollback: 50,
-			// rendererType: "dom" // default is canvas
 		});
 
 		//Use fit addon so terminal takes up all available space

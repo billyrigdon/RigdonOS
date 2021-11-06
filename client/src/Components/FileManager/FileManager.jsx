@@ -1,16 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import Draggable, { DraggableCore } from "react-draggable";
+import Draggable from "react-draggable";
 import "./FileManager.scss";
 import folderIcon from "../../Icons/default-folder.svg";
 import fileIcon from "../../Icons/resume-icon.svg";
 import axios from "axios";
 import { gsap } from "gsap";
-import {
-	BrowserView,
-	MobileView,
-	isBrowser,
-	isMobile,
-} from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 const URL = "http://127.0.0.1:1313";
 
