@@ -18,7 +18,7 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 ## Prerequisites
 
-###### At a minimum, you will need to have npm and node.js installed on your machine. To take advantage of the automated build script you will also need to have docker installed.
+###### At a minimum, you will need to have npm and node.js installed on your machine. It is recommended install Docker as well and run the app in a container. 
 
 &nbsp;
 
@@ -32,24 +32,23 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 &nbsp;
 
-### Clone the repo onto your local machine and navigate into the project:
+#### Clone the repo onto your local machine and navigate into the project:
 
     git clone https://github.com/billyrigdon/RigdonOS.git
     cd RigdonOS
 
 &nbsp;
 
-### Create .env file with port number you'd like or rename example.env to use the default port
+#### Create .env file with port number you'd like or rename example.env to use the default port
 
     mv ./backend/example.env ./backend/.env
 
 &nbsp;
 
-#### Once the application is built and running, you can open a web browser and navigate to the web GUI using your server address and port number specified in the previous step.
+###### Once the application is built and running, you can open a web browser and navigate to the web GUI using your server address and port number specified in the previous step.
 
-&nbsp;
 
-#### If building locally with the default port, the address would be http://127.0.0.1:1313
+###### If building locally with the default port, the address would be http://127.0.0.1:1313
 
 &nbsp;
 
@@ -57,7 +56,7 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 &nbsp;
 
-### In the main project directory, run the docker_build.sh script.
+#### In the main project directory, run the docker_build.sh script.
 
     ./docker_build.sh
 
@@ -67,7 +66,7 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 &nbsp;
 
-### In the main project directory, run the local_build.sh script
+#### In the main project directory, run the local_build.sh script
 
     ./local_build.sh
 
@@ -77,29 +76,29 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 &nbsp;
 
-### Navigate into both the backend and frontend directories and install all dependencies
-
-##### Note: When installing the client dependencies, you will likely get some vulnerability warnings. The vulnerabilites are with the React build scripts and can be safely ignored as they aren't contained in the final build.
+#### Navigate into both the backend and frontend directories and install all dependencies
 
     cd ./backend
     npm install
     cd ../client
     npm install
 
+###### Note: When installing the client dependencies, you will likely get some vulnerability warnings. The vulnerabilites are with the React build scripts and can be safely ignored as they aren't contained in the final build.
+
 &nbsp;
 
-### In the client directory, run the React build tool to create the minified production build of the frontend.
+#### In the client directory, run the React build tool to create the minified production build of the frontend.
 
     npm run build
 
 &nbsp;
 
-### Move the build folder into the backend directory
+#### Move the build folder into the backend directory
 
     mv ./build ../backend/build
 
 &nbsp;
 
-### Change into the backend directory and start the app
+#### Change into the backend directory and start the app
 
     npm start
