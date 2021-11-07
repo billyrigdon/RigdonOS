@@ -56,19 +56,21 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 &nbsp;
 
-#### In the main project directory, run the docker_build.sh script.
+#### From inside the scripts directory, run the docker_build.sh script.
 
+    cd scripts
     ./docker_build.sh
 
 &nbsp;
 
-## Automated Local Build
+## Automated Local Install
 
 &nbsp;
 
-#### In the main project directory, run the local_build.sh script
+#### From inside the scripts directory, run the local_build.sh script
 
-    ./local_build.sh
+    cd scripts
+    ./local_install.sh
 
 &nbsp;
 
@@ -93,12 +95,45 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 &nbsp;
 
-#### Move the build folder into the backend directory
+#### Move the build folder into the backend directory and go back to main directory
 
     mv ./build ../backend/build
+    cd ..
 
 &nbsp;
 
-#### Change into the backend directory and start the app
+#### Create an app directory in /opt and move backend folder into said directory
 
-    npm start
+    sudo mkdir /opt/RigdonOS
+    sudo cp -r backend /opt/RigdonOS
+
+&nbsp;
+
+#### Copy the Systemd service file to the systemd directory and enable/start the service
+
+    sudo cp scripts/RigdonOS.service /etc/systemd/system/RigdonOS.servce
+    sudo systemctl enable --now RigdonOS.service
+
+###### Note: The service file uses port 1313. If you're using a different port, edit the file before moving.
+
+
+&nbsp;  
+
+## Uninstall
+
+&nbsp;
+
+### You can run local_uninstall.sh in the scripts directory to save yourself some time typing
+
+    cd scripts
+    ./local_uninstall.sh
+
+&nbsp;
+
+
+### If you really want to do the typing yourself, disable the systemd service, remove the service file, and remove the project from /opt
+
+    sudo systemctl disable --now RigdonOS.service
+    sudo rm /etc/systemd/system/RigdonOS.service
+    sudo rm -r /opt/RigdonOS
+

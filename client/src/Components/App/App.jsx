@@ -7,7 +7,6 @@ import Browser from "../Browser/Browser";
 import MobileBar from "../MobileBar/MobileBar";
 import Notes from "../Notes/Notes";
 import Resume from "../Resume/Resume";
-import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import FileManager from "../FileManager/FileManager";
 import { connect } from "react-redux";
 import {
@@ -86,7 +85,6 @@ const App = (props) => {
 			{props.notesOpen && <ConnectedNotes />}
 			{props.resumeOpen && <ConnectedResume />}
 			{props.fileManagerOpen && <ConnectedFileManager />}
-			{props.musicPlayerOpen && <ConnectedMusicPlayer />}
 		</div>
 	);
 };
@@ -96,10 +94,6 @@ const ConnectedBrowser = connect(mapStateToProps, mapDispatchToProps)(Browser);
 const ConnectedDesktop = connect(mapStateToProps, mapDispatchToProps)(Desktop);
 const ConnectedNotes = connect(mapStateToProps, mapDispatchToProps)(Notes);
 const ConnectedResume = connect(mapStateToProps, mapDispatchToProps)(Resume);
-const ConnectedMusicPlayer = connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(MusicPlayer);
 
 const ConnectedTerminal = connect(
 	mapStateToProps,

@@ -1,4 +1,5 @@
 #!/bin/bash
+cd ..
 rm -r ./backend/build;
 cd ./client;
 npm install
