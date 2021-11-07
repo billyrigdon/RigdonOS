@@ -18,7 +18,7 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 ## Prerequisites
 
-###### At a minimum, you will need to have npm and node.js installed on your machine. It is recommended install Docker as well and run the app in a container. 
+###### At a minimum, you will need to have npm and node.js installed on your machine. It is recommended install Docker as well and run the app in a container.
 
 &nbsp;
 
@@ -47,7 +47,6 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 ###### Once the application is built and running, you can open a web browser and navigate to the web GUI using your server address and port number specified in the previous step.
 
-
 ###### If building locally with the default port, the address would be http://127.0.0.1:1313
 
 &nbsp;
@@ -67,14 +66,14 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 &nbsp;
 
-#### From inside the scripts directory, run the local_build.sh script
+#### From inside the scripts directory, run the local_install.sh script
 
     cd scripts
     ./local_install.sh
 
 &nbsp;
 
-## Manual Local Build
+## Manual Local Install
 
 &nbsp;
 
@@ -116,8 +115,7 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 ###### Note: The service file uses port 1313. If you're using a different port, edit the file before moving.
 
-
-&nbsp;  
+&nbsp;
 
 ## Uninstall
 
@@ -130,10 +128,8 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 &nbsp;
 
-
 #### If you really want to do the typing yourself, disable the systemd service, remove the service file, and remove the project from /opt
 
     sudo systemctl disable --now RigdonOS.service
     sudo rm /etc/systemd/system/RigdonOS.service
     sudo rm -r /opt/RigdonOS
-
