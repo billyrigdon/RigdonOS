@@ -123,7 +123,7 @@ The desktop environment is available to play around with at https://billyrigdon.
 
 &nbsp;
 
-### You can run local_uninstall.sh in the scripts directory to save yourself some time typing
+#### You can run local_uninstall.sh in the scripts directory to save yourself some time typing
 
     cd scripts
     ./local_uninstall.sh
@@ -131,7 +131,7 @@ The desktop environment is available to play around with at https://billyrigdon.
 &nbsp;
 
 
-### If you really want to do the typing yourself, disable the systemd service, remove the service file, and remove the project from /opt
+#### If you really want to do the typing yourself, disable the systemd service, remove the service file, and remove the project from /opt
 
     sudo systemctl disable --now RigdonOS.service
     sudo rm /etc/systemd/system/RigdonOS.service
