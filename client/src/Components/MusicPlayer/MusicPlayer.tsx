@@ -14,8 +14,9 @@ import "./MusicPlayer.scss";
 // import imposterLyrics from "./imposterLyrics";
 import albumCover from "./27Club.jpg";
 import React from "react";
+import { Props } from "../App/App";
 
-const MusicPlayer = (props: any) => {
+const MusicPlayer = (props: Props) => {
 	interface Song {
 		song: string;
 		lyrics: string;

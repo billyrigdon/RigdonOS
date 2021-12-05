@@ -4,8 +4,9 @@ import "./Resume.scss";
 import resume from "./resume.pdf";
 import { isMobile } from "react-device-detect";
 import React from "react";
+import { Props } from "../App/App";
 
-const Resume = (props:any) => {
+const Resume = (props:Props) => {
 	const [maximized, setMaximized] = useState(false);
 	const [resumeClass, setResumeClass] = useState("resume-focused");
 

@@ -6,8 +6,9 @@ import notesIcon from "../../Icons/notepad-48.svg";
 import startIcon from "../../Icons/syspeek-90.svg";
 import filesIcon from "../../Icons/file-manager.svg";
 import React from "react";
+import { Props } from "../App/App";
 
-const Taskbar = (props: any) => {
+const Taskbar = (props: Props) => {
 	const [currentTime, setCurrentTime] = useState(new Date());
 
 	useEffect(() => {

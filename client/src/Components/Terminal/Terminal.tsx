@@ -6,10 +6,11 @@ import { gsap } from "gsap";
 import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
 import io from "socket.io-client";
+import { Props } from "../App/App";
 
 const fitAddon = new FitAddon();
 
-const RigdonOSTerminal = (props: any) => {
+const RigdonOSTerminal = (props: Props) => {
 	const [termClass, setTermClass] = useState("terminal-focused");
 	const URL = "http://127.0.0.1:1313";
 	const termRef = useRef<HTMLDivElement>(null);

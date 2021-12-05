@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./MobileBar.scss";
 import React from "react";
 
-const MobileBar = (props: any) => {
+const MobileBar = () => {
 	const [currentTime, setCurrentTime] = useState(new Date());
 
 	useEffect(() => {

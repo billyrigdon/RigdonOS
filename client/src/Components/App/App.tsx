@@ -8,7 +8,7 @@ import MobileBar from "../MobileBar/MobileBar";
 import Notes from "../Notes/Notes";
 import Resume from "../Resume/Resume";
 import FileManager from "../FileManager/FileManager";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import React from "react";
 import {
 	toggleResume,
@@ -23,8 +23,11 @@ import {
 	toggleMusicPlayer,
 } from "../../Redux/store";
 import { isMobile } from "react-device-detect";
+import { State } from "../../Interfaces/ReduxInterface";
+import { ThunkDispatch } from "redux-thunk";
+import { Action } from "redux";
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: State) => {
 	return {
 		menuOpen: state.menuOpen,
 		terminalOpen: state.terminalOpen,
@@ -39,7 +42,7 @@ const mapStateToProps = (state: any) => {
 	};
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>) => {
 	return {
 		openMenu: (menuOpen: boolean) => {
 			dispatch(toggleMenu(menuOpen));
@@ -73,6 +76,12 @@ const mapDispatchToProps = (dispatch: any) => {
 		},
 	};
 };
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export type Props = PropsFromRedux;
 
 const App = (props: any) => {
 	return (

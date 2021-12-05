@@ -7,21 +7,13 @@ import axios from "axios";
 import { gsap } from "gsap";
 import { isMobile } from "react-device-detect";
 import React from "react";
+import File from "../../Interfaces/FileInterface";
+import { Props } from "../App/App";
 
 const URL = "http://127.0.0.1:1313";
 
-const FileManager = (props: any) => {
-	
-	interface File {
-		name: string;
-		isDirectory: boolean;
-		path: string;
-	}
-
-	interface ParentDir {
-		currentDir: string;
-	} 
-
+const FileManager = (props: Props) => {
+	 
 	const [maximized, setMaximized] = useState(false);
 	const [fileManagerClass, setFileManagerClass] = useState(
 		"file-manager-focused"
@@ -128,22 +120,22 @@ const FileManager = (props: any) => {
 		}
 	});
 
-	// if (isMobile) {
-	// 	return (
-	// 		<div id="max-file" className="maximized">
-	// 			<div className="windowBar">
-	// 				<div
-	// 					className="windowButtons close"
-	// 					onClick={closeFileManager}
-	// 				/>
-	// 			</div>
-	// 			<div id="file-view">
-	// 				{dirItem}
-	// 				{fileItem}
-	// 			</div>
-	// 		</div>
-	// 	);
-	// } else if (!maximized) {
+	if (isMobile) {
+		return (
+			<div id="max-file" className="maximized">
+				<div className="windowBar">
+					<div
+						className="windowButtons close"
+						onClick={closeFileManager}
+					/>
+				</div>
+				<div id="file-view">
+					{dirItem}
+					{fileItem}
+				</div>
+			</div>
+		);
+	} else if (!maximized) {
 		return (
 			<Draggable>
 				<div
@@ -183,27 +175,27 @@ const FileManager = (props: any) => {
 				</div>
 			</Draggable>
 		);
-	// } else if (maximized) {
-	// 	return (
-	// 		<div id="max-file" className="maximized">
-	// 			<div className="windowBar">
-	// 				<div
-	// 					className="windowButtons minimize"
-	// 					onClick={closeFileManager}
-	// 				/>
-	// 				<div className="windowButtons maximize" onClick={setMax} />
-	// 				<div
-	// 					className="windowButtons close"
-	// 					onClick={closeFileManager}
-	// 				/>
-	// 			</div>
-	// 			<div id="file-view">
-	// 				{dirItem}
-	// 				{fileItem}
-	// 			</div>
-	// 		</div>
-	// 	);
-	// }
+	} else {
+		return (
+			<div id="max-file" className="maximized">
+				<div className="windowBar">
+					<div
+						className="windowButtons minimize"
+						onClick={closeFileManager}
+					/>
+					<div className="windowButtons maximize" onClick={setMax} />
+					<div
+						className="windowButtons close"
+						onClick={closeFileManager}
+					/>
+				</div>
+				<div id="file-view">
+					{dirItem}
+					{fileItem}
+				</div>
+			</div>
+		);
+	}
 };
 
 export default FileManager;

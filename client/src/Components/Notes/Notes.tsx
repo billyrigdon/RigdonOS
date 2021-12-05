@@ -4,9 +4,9 @@ import Draggable from "react-draggable";
 import axios from "axios";
 import { gsap } from "gsap";
 import { isMobile } from "react-device-detect";
+import { Props } from "../App/App";
 
-
-const Notes = (props: any) => {
+const Notes = (props: Props) => {
 	const [maximized, setMaximized] = useState(false);
 	const [noteClass, setNoteClass] = useState("notepad-focused");
 	const [noteContent, setNoteContent] = useState(props.fileContent);
@@ -63,7 +63,7 @@ const Notes = (props: any) => {
 		});
 	}, [props.notesOpen]);
 
-	//if (isMobile) {
+	if (isMobile) {
 		return (
 			<div className="maximized">
 				<div className="windowBarAdvanced">
@@ -90,86 +90,86 @@ const Notes = (props: any) => {
 				/>
 			</div>
 		);
-	// } else if (!maximized) {
-	// 	return (
-	// 		<Draggable>
-	// 			<div
-	// 				id="notes-window"
-	// 				className={noteClass}
-	// 				tabIndex={1}
-	// 				onFocus={focusNotes}
-	// 				onBlur={blurNotes}
-	// 				ref={noteRef}
-	// 			>
-	// 				<div className="windowBarAdvanced">
-	// 					<span
-	// 						onClick={() => {
-	// 							saveNotes();
-	// 						}}
-	// 						id="saveButton"
-	// 						class="material-icons"
-	// 					>
-	// 						save
-	// 					</span>
-	// 					<div className="windowButtonsContainer">
-	// 						<div
-	// 							className="windowButtons minimize"
-	// 							onClick={closeNotes}
-	// 						></div>
-	// 						<div
-	// 							className="windowButtons maximize"
-	// 							onClick={setMax}
-	// 						></div>
-	// 						<div
-	// 							className="windowButtons close"
-	// 							onClick={closeNotes}
-	// 						></div>
-	// 					</div>
-	// 				</div>
-	// 				<textarea
-	// 					onChange={handleNotesChange}
-	// 					value={noteContent}
-	// 					id="notes"
-	// 				/>
-	// 			</div>
-	// 		</Draggable>
-	// 	);
-	// } else if (maximized) {
-	// 	return (
-	// 		<div className="maximized">
-	// 			<div className="windowBarAdvanced">
-	// 				<span
-	// 					onClick={() => {
-	// 						saveNotes();
-	// 					}}
-	// 					id="saveButton"
-	// 					class="material-icons"
-	// 				>
-	// 					save
-	// 				</span>
-	// 				<div className="windowButtonsContainer">
-	// 					<div
-	// 						className="windowButtons minimize"
-	// 						onClick={closeNotes}
-	// 					></div>
-	// 					<div
-	// 						className="windowButtons maximize"
-	// 						onClick={setMax}
-	// 					></div>
-	// 					<div
-	// 						className="windowButtons close"
-	// 						onClick={closeNotes}
-	// 					></div>
-	// 				</div>
-	// 			</div>
-	// 			<textarea
-	// 				onChange={handleNotesChange}
-	// 				value={noteContent}
-	// 				id="notes"
-	// 			/>
-	// 		</div>
-	// 	);
-	// }
+	} else if (!maximized) {
+		return (
+			<Draggable>
+				<div
+					id="notes-window"
+					className={noteClass}
+					tabIndex={1}
+					onFocus={focusNotes}
+					onBlur={blurNotes}
+					ref={noteRef}
+				>
+					<div className="windowBarAdvanced">
+						<span
+							onClick={() => {
+								saveNotes();
+							}}
+							id="saveButton"
+							className="material-icons"
+						>
+							save
+						</span>
+						<div className="windowButtonsContainer">
+							<div
+								className="windowButtons minimize"
+								onClick={closeNotes}
+							></div>
+							<div
+								className="windowButtons maximize"
+								onClick={setMax}
+							></div>
+							<div
+								className="windowButtons close"
+								onClick={closeNotes}
+							></div>
+						</div>
+					</div>
+					<textarea
+						onChange={handleNotesChange}
+						value={noteContent}
+						id="notes"
+					/>
+				</div>
+			</Draggable>
+		);
+	} else {
+		return (
+			<div className="maximized">
+				<div className="windowBarAdvanced">
+					<span
+						onClick={() => {
+							saveNotes();
+						}}
+						id="saveButton"
+						className="material-icons"
+					>
+						save
+					</span>
+					<div className="windowButtonsContainer">
+						<div
+							className="windowButtons minimize"
+							onClick={closeNotes}
+						></div>
+						<div
+							className="windowButtons maximize"
+							onClick={setMax}
+						></div>
+						<div
+							className="windowButtons close"
+							onClick={closeNotes}
+						></div>
+					</div>
+				</div>
+				<textarea
+					onChange={handleNotesChange}
+					value={noteContent}
+					id="notes"
+				/>
+			</div>
+		);
+	}
 };
 
 export default Notes;

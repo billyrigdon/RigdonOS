@@ -6,8 +6,9 @@ import filesIcon from "../../Icons/file-manager.svg";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 import React from "react";
+import { Props } from "../App/App";
 
-const StartMenu = (props: any) => {
+const StartMenu = (props: Props) => {
 	const openFileManager = () => {
 		props.openFileManager(props.fileManagerOpen);
 		console.log(props);

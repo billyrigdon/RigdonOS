@@ -6,8 +6,9 @@ import { useState, useEffect } from "react";
 import githubIcon from "../../Icons/github.png";
 import React from "react";
 import background from "./background.jpg";
+import { Props } from "../App/App";
 
-const Desktop = (props: any) => {
+const Desktop = (props: Props) => {
 	const openResume = () => {
 		props.openResume(props.resumeOpen);
 		console.log(props);
