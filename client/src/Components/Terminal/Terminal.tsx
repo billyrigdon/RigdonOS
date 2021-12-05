@@ -1,5 +1,5 @@
 import "./Terminal.scss";
-import "./xterm.css";
+import "./xterm.scss";
 import React, { useRef, useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import { gsap } from "gsap";
@@ -9,10 +9,10 @@ import io from "socket.io-client";
 
 const fitAddon = new FitAddon();
 
-const RigdonOSTerminal = (props) => {
+const RigdonOSTerminal = (props: any) => {
 	const [termClass, setTermClass] = useState("terminal-focused");
 	const URL = "http://127.0.0.1:1313";
-	const termRef = useRef();
+	const termRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		console.log("test");
@@ -47,12 +47,16 @@ const RigdonOSTerminal = (props) => {
 		});
 
 		//Attach terminal to #terminal-window
-		const termDiv = termRef.current;
-		term.open(termDiv);
-		fitAddon.fit();
+		if (termRef.current !== null) {
+			const termDiv = termRef.current;
+			term.open(termDiv);
+			fitAddon.fit();
+		}
 
 		//Kill socket when component unmounts
-		return () => socket.disconnect;
+		return () => {
+			socket.disconnect;
+		};
 	}, []);
 
 	//Close terminal
@@ -70,7 +74,7 @@ const RigdonOSTerminal = (props) => {
 		setTermClass("terminal-app");
 	};
 
-	const windowRef = useRef();
+	const windowRef = useRef(null);
 
 	//Opening animation
 	useEffect(() => {
@@ -82,7 +86,7 @@ const RigdonOSTerminal = (props) => {
 	}, [props.terminalOpen]);
 
 	return (
-		<Draggable className="window">
+		<Draggable>
 			<div
 				id="terminal"
 				className={termClass}

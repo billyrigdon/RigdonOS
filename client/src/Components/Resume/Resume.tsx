@@ -3,8 +3,9 @@ import Draggable from "react-draggable";
 import "./Resume.scss";
 import resume from "./resume.pdf";
 import { isMobile } from "react-device-detect";
+import React from "react";
 
-const Resume = (props) => {
+const Resume = (props:any) => {
 	const [maximized, setMaximized] = useState(false);
 	const [resumeClass, setResumeClass] = useState("resume-focused");
 
@@ -35,9 +36,9 @@ const Resume = (props) => {
 		}
 	},[]);
 
-	if (!maximized) {
+	//if (!maximized) {
 		return (
-			<Draggable className="window">
+			<Draggable>
 				<div
 					id="resume-window"
 					className={resumeClass}
@@ -67,27 +68,27 @@ const Resume = (props) => {
 				</div>
 			</Draggable>
 		);
-	} else if (maximized) {
-		return (
-			<div className="maximized">
-				<div className="windowBar">
-					<div
-						className="windowButtons minimize"
-						onClick={closeResume}
-					></div>
-					<div
-						className="windowButtons maximize"
-						onClick={setMax}
-					></div>
-					<div
-						className="windowButtons close"
-						onClick={closeResume}
-					></div>
-				</div>
-				<embed id="resumePage" src={resume} type="application/pdf" />
-			</div>
-		);
-	}
+	// } else if (maximized) {
+	// 	return (
+	// 		<div className="maximized">
+	// 			<div className="windowBar">
+	// 				<div
+	// 					className="windowButtons minimize"
+	// 					onClick={closeResume}
+	// 				></div>
+	// 				<div
+	// 					className="windowButtons maximize"
+	// 					onClick={setMax}
+	// 				></div>
+	// 				<div
+	// 					className="windowButtons close"
+	// 					onClick={closeResume}
+	// 				></div>
+	// 			</div>
+	// 			<embed id="resumePage" src={resume} type="application/pdf" />
+	// 		</div>
+	// 	);
+	// }
 };
 
 export default Resume;

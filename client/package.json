@@ -1,55 +1,55 @@
 {
-	"name": "client",
-	"version": "0.1.0",
-	"proxy": "http://127.0.0.1:1313",
-	"private": true,
-	"dependencies": {
-		"@testing-library/jest-dom": "^5.14.1",
-		"@testing-library/react": "^11.2.7",
-		"@testing-library/user-event": "^12.8.3",
-		"axios": "^0.21.1",
-		"gsap": "^3.7.1",
-		"node-sass": "^6.0.1",
-		"path": "^0.12.7",
-		"react": "^17.0.2",
-		"react-audio-player": "^0.17.0",
-		"react-bootstrap": "^1.6.1",
-		"react-device-detect": "^1.17.0",
-		"react-dom": "^17.0.2",
-		"react-draggable": "^4.4.3",
-		"react-redux": "^7.2.4",
-		"react-router-dom": "^5.2.0",
-		"react-scripts": "4.0.3",
-		"redux": "^4.1.0",
-		"socket.io-client": "^4.3.2",
-		"styled-components": "^5.3.0",
-		"web-vitals": "^1.1.2",
-		"xterm": "^4.14.1",
-		"xterm-addon-attach": "^0.6.0",
-		"xterm-addon-fit": "^0.5.0"
-	},
+	"name": "rigdonos",
+	"version": "1.1.0",
+	"description": "RigdonOS is a desktop environment written in TypeScript and React",
+	"main": "src/index.jsx",
 	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"build": "webpack",
+		"dev": "webpack-dev-server --open"
 	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/billyrigdon/RigdonOS.git"
 	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
+	"author": "Billy Rigdon",
+	"license": "GPL-3.0",
+	"bugs": {
+		"url": "https://github.com/billyrigdon/RigdonOS/issues"
+	},
+	"homepage": "https://github.com/billyrigdon/RigdonOS#readme",
+	"devDependencies": {
+		"@babel/core": "^7.16.0",
+		"@babel/preset-env": "^7.16.4",
+		"@babel/preset-react": "^7.16.0",
+		"@types/react": "^17.0.37",
+		"@types/react-dom": "^17.0.11",
+		"babel-loader": "^8.2.3",
+		"css-loader": "^6.5.1",
+		"file-loader": "^6.2.0",
+		"html-loader": "^3.0.1",
+		"html-webpack-plugin": "^5.5.0",
+		"node-sass": "^6.0.1",
+		"resolve-url-loader": "^4.0.0",
+		"sass-loader": "^12.3.0",
+		"style-loader": "^3.3.1",
+		"ts-loader": "^9.2.6",
+		"typescript": "^4.5.2",
+		"webpack": "^5.64.4",
+		"webpack-cli": "^4.9.1",
+		"webpack-dev-server": "^4.6.0"
+	},
+	"dependencies": {
+		"@types/react-redux": "^7.1.20",
+		"axios": "^0.24.0",
+		"gsap": "^3.8.0",
+		"react": "^17.0.2",
+		"react-device-detect": "^2.1.2",
+		"react-dom": "^17.0.2",
+		"react-draggable": "^4.4.4",
+		"react-redux": "^7.2.6",
+		"redux": "^4.1.2",
+		"socket.io-client": "^4.4.0",
+		"xterm": "^4.15.0",
+		"xterm-addon-fit": "^0.5.0"
 	}
 }

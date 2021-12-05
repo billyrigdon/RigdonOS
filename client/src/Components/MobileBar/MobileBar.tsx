@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import "./MobileBar.scss";
+import React from "react";
 
-const MobileBar = (props) => {
+const MobileBar = (props: any) => {
 	const [currentTime, setCurrentTime] = useState(new Date());
 
 	useEffect(() => {
-		const timer = setInterval(setCurrentTime(new Date()), 1000);
+		const timer = setInterval(() => {
+			setCurrentTime(new Date());
+		}, 1000);
 		return function cleanup() {
 			clearInterval(timer);
 		};

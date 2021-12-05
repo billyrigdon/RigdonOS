@@ -5,8 +5,9 @@ import notesIcon from "../../Icons/notepad-48.svg";
 import filesIcon from "../../Icons/file-manager.svg";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
+import React from "react";
 
-const StartMenu = (props) => {
+const StartMenu = (props: any) => {
 	const openFileManager = () => {
 		props.openFileManager(props.fileManagerOpen);
 		console.log(props);
@@ -32,7 +33,7 @@ const StartMenu = (props) => {
 		console.log(props);
 	};
 
-	const startRef = useRef();
+	const startRef = useRef(null);
 
 	useEffect(() => {
 		gsap.from(startRef.current, {

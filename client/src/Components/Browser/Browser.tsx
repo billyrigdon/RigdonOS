@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
-import Draggable, {DraggableCore} from 'react-draggable';
-import "./Browser.scss"
+import { useState } from "react";
+import Draggable from 'react-draggable';
+import "./Browser.scss";
+import React from "react";
 
-const Browser = (props) => {
+const Browser = (props: any) => {
 
 	const [maximized, setMaximized] = useState(true);
 	const [browserClass, setBrowserClass] = useState("browser-focused");
@@ -30,10 +31,10 @@ const Browser = (props) => {
 	}
 
 
-	if (!maximized) {
+	//if (!maximized) {
 
 		return (
-			<Draggable className="window">
+			<Draggable>
 				<div id="browser-window" className={browserClass} tabIndex={0} onFocus={focusBrowser} onBlur={blurBrowser}>
 					<div className="windowBar">
 						<div className="windowButtons minimize" onClick={closeBrowser}></div>
@@ -45,18 +46,18 @@ const Browser = (props) => {
 			</Draggable>
 		)
 
-	} else if (maximized) {
-		return (
-			<div className="maximized">
-				<div className="windowBar">
-					<div className="windowButtons minimize" onClick={closeBrowser}></div>
-					<div className="windowButtons maximize" onClick={setMax}></div>
-					<div className="windowButtons close" onClick={closeBrowser}></div>
-				</div>
-				<iframe id="webPage" src="https://bing.com"></iframe>
-			</div>
-		)
-	}
+	// } else if (maximized) {
+	// 	return (
+	// 		<div className="maximized">
+	// 			<div className="windowBar">
+	// 				<div className="windowButtons minimize" onClick={closeBrowser}></div>
+	// 				<div className="windowButtons maximize" onClick={setMax}></div>
+	// 				<div className="windowButtons close" onClick={closeBrowser}></div>
+	// 			</div>
+	// 			<iframe id="webPage" src="https://bing.com"></iframe>
+	// 		</div>
+	// 	)
+	// }
 }
 
 export default Browser

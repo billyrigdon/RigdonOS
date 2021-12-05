@@ -6,17 +6,29 @@ import fileIcon from "../../Icons/resume-icon.svg";
 import axios from "axios";
 import { gsap } from "gsap";
 import { isMobile } from "react-device-detect";
+import React from "react";
 
 const URL = "http://127.0.0.1:1313";
 
-const FileManager = (props) => {
+const FileManager = (props: any) => {
+	
+	interface File {
+		name: string;
+		isDirectory: boolean;
+		path: string;
+	}
+
+	interface ParentDir {
+		currentDir: string;
+	} 
+
 	const [maximized, setMaximized] = useState(false);
 	const [fileManagerClass, setFileManagerClass] = useState(
 		"file-manager-focused"
 	);
-	const [files, setFiles] = useState([]);
+	const [files, setFiles] = useState<Array<File>>([]);
 
-	const changeDirectory = (name) => {
+	const changeDirectory = (name: string) => {
 		console.log(name);
 		props.changeFolder(name);
 		console.log(props);
@@ -30,7 +42,7 @@ const FileManager = (props) => {
 		props.changeFolder(parentDir.data.currentDir);
 	};
 
-	const openFile = (file) => {
+	const openFile = (file:any) => {
 		console.log(file);
 	};
 
@@ -73,7 +85,7 @@ const FileManager = (props) => {
 		fetchDir();
 	}, [props.currentDir]);
 
-	const fileRef = useRef();
+	const fileRef = useRef(null);
 
 	useEffect(() => {
 		gsap.from(fileRef.current, {
@@ -88,7 +100,6 @@ const FileManager = (props) => {
 			return (
 				<div className="file">
 					<img
-						value={item.name}
 						src={folderIcon}
 						alt="Folder Icon"
 						onDoubleClick={() => {
@@ -105,7 +116,6 @@ const FileManager = (props) => {
 			return (
 				<div className="file">
 					<img
-						value={item.name}
 						src={fileIcon}
 						alt="File Icon"
 						onDoubleClick={() => {
@@ -118,24 +128,24 @@ const FileManager = (props) => {
 		}
 	});
 
-	if (isMobile) {
+	// if (isMobile) {
+	// 	return (
+	// 		<div id="max-file" className="maximized">
+	// 			<div className="windowBar">
+	// 				<div
+	// 					className="windowButtons close"
+	// 					onClick={closeFileManager}
+	// 				/>
+	// 			</div>
+	// 			<div id="file-view">
+	// 				{dirItem}
+	// 				{fileItem}
+	// 			</div>
+	// 		</div>
+	// 	);
+	// } else if (!maximized) {
 		return (
-			<div id="max-file" className="maximized">
-				<div className="windowBar">
-					<div
-						className="windowButtons close"
-						onClick={closeFileManager}
-					/>
-				</div>
-				<div id="file-view">
-					{dirItem}
-					{fileItem}
-				</div>
-			</div>
-		);
-	} else if (!maximized) {
-		return (
-			<Draggable className="window">
+			<Draggable>
 				<div
 					className={fileManagerClass}
 					tabIndex={0}
@@ -173,27 +183,27 @@ const FileManager = (props) => {
 				</div>
 			</Draggable>
 		);
-	} else if (maximized) {
-		return (
-			<div id="max-file" className="maximized">
-				<div className="windowBar">
-					<div
-						className="windowButtons minimize"
-						onClick={closeFileManager}
-					/>
-					<div className="windowButtons maximize" onClick={setMax} />
-					<div
-						className="windowButtons close"
-						onClick={closeFileManager}
-					/>
-				</div>
-				<div id="file-view">
-					{dirItem}
-					{fileItem}
-				</div>
-			</div>
-		);
-	}
+	// } else if (maximized) {
+	// 	return (
+	// 		<div id="max-file" className="maximized">
+	// 			<div className="windowBar">
+	// 				<div
+	// 					className="windowButtons minimize"
+	// 					onClick={closeFileManager}
+	// 				/>
+	// 				<div className="windowButtons maximize" onClick={setMax} />
+	// 				<div
+	// 					className="windowButtons close"
+	// 					onClick={closeFileManager}
+	// 				/>
+	// 			</div>
+	// 			<div id="file-view">
+	// 				{dirItem}
+	// 				{fileItem}
+	// 			</div>
+	// 		</div>
+	// 	);
+	// }
 };
 
 export default FileManager;

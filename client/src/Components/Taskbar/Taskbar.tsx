@@ -5,13 +5,18 @@ import browserIcon from "../../Icons/browser.svg";
 import notesIcon from "../../Icons/notepad-48.svg";
 import startIcon from "../../Icons/syspeek-90.svg";
 import filesIcon from "../../Icons/file-manager.svg";
+import React from "react";
 
-const Taskbar = (props) => {
+const Taskbar = (props: any) => {
 	const [currentTime, setCurrentTime] = useState(new Date());
 
 	useEffect(() => {
-		const timer = setInterval(setCurrentTime(new Date()), 1000);
-		return function cleanup() {
+		
+		let timer = setInterval(() => {
+			setCurrentTime(new Date());
+		}, 1000);
+	
+		return () => {
 			clearInterval(timer);
 		};
 	});
