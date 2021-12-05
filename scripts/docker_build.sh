@@ -4,7 +4,7 @@ rm -r ./backend/build;
 cd ./client;
 npm install
 npm run build;
-mv ./build ../backend/build;
+mv ./dist ../backend/build;
 cd ../backend;
 docker build -t rigdonos:latest .;
 docker kill RigdonOS;
