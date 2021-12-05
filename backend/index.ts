@@ -1,11 +1,11 @@
-import express from "express"
+import express from "express";
 const app = express();
 import cors from "cors";
 import fileRoute from "./Routes/FileRoute";
 import path from "path";
 import http from "http";
 import os from "os";
-import pty from "node-pty"
+const pty = require("node-pty");
 import { Server, Socket } from "socket.io";
 require("dotenv").config();
 
@@ -17,7 +17,6 @@ const io = new Server(server, {
 		methods: ["GET", "POST"],
 	},
 });
-
 
 //Middleware
 app.use(express.json());
@@ -32,13 +31,14 @@ io.on("connection", (socket: Socket) => {
 	console.log("connected");
 	const shell = os.platform() === "win32" ? "powershell.exe" : "bash";
 
-	
+	console.log(shell);
+
 	const ptyProcess = pty.spawn(shell, [], {
 		name: "xterm-color",
 		cols: 80,
 		rows: 24,
 		cwd: process.env.HOME,
-		//env: process.env,
+		env: process.env,
 	});
 
 	socket.on("input", (input) => {
