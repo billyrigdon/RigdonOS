@@ -1,0 +1,36 @@
+- name: Deploy Docker
+  hosts: webservers
+  vars:
+      image_version: 0.4
+      container_name: RigdonOS
+  tasks:
+      - name: Finding container
+        docker_container_info:
+            name: "{{ container_name }}"
+        register: result
+
+      - name: Killing Container
+        command: "docker kill RigdonOS"
+        when: result.exists
+
+      - name: Removing Container
+        command: "docker rm RigdonOS"
+        when: result.exists
+
+      - name: Cleaning images
+        command: "docker image prune -af"
+
+      - name: Pulling new image
+        command: "docker pull billyrigdoniii/rigdonos:{{ image_version }}"
+
+      - name: Deploying new container
+        docker_container:
+            image: "billyrigdoniii/rigdonos:{{ image_version }}"
+            name: RigdonOS
+            state: started
+            restart_policy: always
+            tty: yes
+            interactive: yes
+            detach: yes
+            ports:
+                - "1313:1313"
