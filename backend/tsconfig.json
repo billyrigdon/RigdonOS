@@ -5,13 +5,13 @@
 		"module": "commonjs",
 		"allowJs": true,
 		"outDir": "./dist",
-		"rootDir": "./",
+		"rootDir": "./src",
 		"strict": true,
 		"moduleResolution": "node",
-		"baseUrl": "./",
-		"typeRoots": ["node_modules/@types"],
+		"baseUrl": "./src",
+		"typeRoots": ["node_modules/@types", "src/Types"],
 		"esModuleInterop": true
 	},
-	"include": ["./**/*"],
-	"exclude": ["node_modules", "build","dist"]
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "client", "dist"]
 }

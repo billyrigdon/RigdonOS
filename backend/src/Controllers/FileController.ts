@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import asyncHandler from "express-async-handler";
-import { File } from "../Interfaces/FileInterface";
+import { File } from "../Types/FileInterface";
 import { Request,Response } from "express";
 
 
@@ -44,4 +44,4 @@ export const getParentDir = (req: Request, res: Response) => {
 	res.status(200).json({ currentDir: parentDir });
 };
 
-//module.exports = { getDirContents, getParentDir };
+

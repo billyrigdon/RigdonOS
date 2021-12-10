@@ -1,17 +1,14 @@
+
+/*
+WORK IN PROGRESS
+This is unfinished and temporarily on hold. 
+Removed ability to access this component from client
+*/ 
+
 import { useState, useEffect, useRef } from "react";
-import Draggable, { DraggableCore } from "react-draggable";
-import {
-	BrowserView,
-	MobileView,
-	isBrowser,
-	isMobile,
-} from "react-device-detect";
-// import ReactAudioPlayer from "react-audio-player";
+import Draggable from "react-draggable";
+import { isMobile } from "react-device-detect";
 import "./MusicPlayer.scss";
-// import imposterSyndrome from "./imposterSyndrome.wav";
-// import bootstrapLyrics from "./bootstrapLyrics";
-// import bootstrapSong from "./Bootstrap.wav";
-// import imposterLyrics from "./imposterLyrics";
 import albumCover from "./27Club.jpg";
 import React from "react";
 import { Props } from "../App/App";

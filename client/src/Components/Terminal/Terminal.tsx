@@ -8,15 +8,12 @@ import { FitAddon } from "xterm-addon-fit";
 import io from "socket.io-client";
 import { Props } from "../App/App";
 
-const fitAddon = new FitAddon();
-
 const RigdonOSTerminal = (props: Props) => {
 	const [termClass, setTermClass] = useState("terminal-focused");
 	const URL = "http://127.0.0.1:1313";
 	const termRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		console.log("test");
 		//Create websocket
 		const socket = io(URL);
 
@@ -29,7 +26,10 @@ const RigdonOSTerminal = (props: Props) => {
 		});
 
 		//Use fit addon so terminal takes up all available space
+		const fitAddon = new FitAddon();
 		term.loadAddon(fitAddon);
+
+		term.options;
 
 		//Set theme
 		term.setOption("theme", {
@@ -63,7 +63,6 @@ const RigdonOSTerminal = (props: Props) => {
 	//Close terminal
 	const closeTerminal = () => {
 		props.openTerminal(props.terminalOpen);
-		console.log(props);
 	};
 
 	//Changes z-index of window to bring to front if in focus

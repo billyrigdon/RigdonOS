@@ -5,10 +5,11 @@ import fileRoute from "./Routes/FileRoute";
 import path from "path";
 import http from "http";
 import os from "os";
-const pty = require("node-pty");
+import * as pty from "node-pty";
 import { Server, Socket } from "socket.io";
-require("dotenv").config();
+import * as dotenv from "dotenv";
 
+//Initialize express and socket.io server
 const server = http.createServer(app);
 
 const io = new Server(server, {
@@ -18,10 +19,11 @@ const io = new Server(server, {
 	},
 });
 
-//Middleware
+//Express middleware configuration
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+dotenv.config();
 
 //Routes
 app.use("/api/files", fileRoute);
@@ -38,27 +40,27 @@ io.on("connection", (socket: Socket) => {
 		cols: 80,
 		rows: 24,
 		cwd: process.env.HOME,
-		env: process.env,
+		env: Object.assign(process.env),
 	});
 
 	socket.on("input", (input) => {
 		ptyProcess.write(input);
 	});
 
-	ptyProcess.on("data", (data: any) => {
+	ptyProcess.onData((data: any) => {
 		socket.emit("output", data);
 	});
 
 	socket.on("disconnect", () => {
-		//kill shell
+		ptyProcess.kill();
 	});
 });
 
 //Listen on port defined in .env and serve webpage
 app.get("/", (req, res) => {
-	res.sendFile(path.join(__dirname, "build", "index.html"));
+	res.sendFile(path.join(__dirname, "client", "index.html"));
 });
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "client")));
 
 server.listen(process.env.PORT, () => {
 	console.log("Server listening on port: " + process.env.PORT);

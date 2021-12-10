@@ -12,11 +12,10 @@ const Taskbar = (props: Props) => {
 	const [currentTime, setCurrentTime] = useState(new Date());
 
 	useEffect(() => {
-		
 		let timer = setInterval(() => {
 			setCurrentTime(new Date());
 		}, 1000);
-	
+
 		return () => {
 			clearInterval(timer);
 		};

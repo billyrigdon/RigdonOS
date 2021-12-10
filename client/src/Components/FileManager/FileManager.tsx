@@ -7,13 +7,12 @@ import axios from "axios";
 import { gsap } from "gsap";
 import { isMobile } from "react-device-detect";
 import React from "react";
-import File from "../../Interfaces/FileInterface";
+import File from "../../Types/FileInterface";
 import { Props } from "../App/App";
 
 const URL = "http://127.0.0.1:1313";
 
 const FileManager = (props: Props) => {
-	 
 	const [maximized, setMaximized] = useState(false);
 	const [fileManagerClass, setFileManagerClass] = useState(
 		"file-manager-focused"
@@ -30,11 +29,12 @@ const FileManager = (props: Props) => {
 		const parentDir = await axios.post(URL + "/api/files/parent", {
 			currentDir: props.currentDir,
 		});
-		//console.log(parentDir);
+
 		props.changeFolder(parentDir.data.currentDir);
 	};
 
-	const openFile = (file:any) => {
+	//PLACEHOLDER - No real functionality yet
+	const openFile = (file: File) => {
 		console.log(file);
 	};
 

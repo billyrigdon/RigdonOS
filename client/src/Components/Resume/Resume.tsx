@@ -37,7 +37,7 @@ const Resume = (props:Props) => {
 		}
 	},[]);
 
-	//if (!maximized) {
+	if (!maximized) {
 		return (
 			<Draggable>
 				<div
@@ -69,27 +69,27 @@ const Resume = (props:Props) => {
 				</div>
 			</Draggable>
 		);
-	// } else if (maximized) {
-	// 	return (
-	// 		<div className="maximized">
-	// 			<div className="windowBar">
-	// 				<div
-	// 					className="windowButtons minimize"
-	// 					onClick={closeResume}
-	// 				></div>
-	// 				<div
-	// 					className="windowButtons maximize"
-	// 					onClick={setMax}
-	// 				></div>
-	// 				<div
-	// 					className="windowButtons close"
-	// 					onClick={closeResume}
-	// 				></div>
-	// 			</div>
-	// 			<embed id="resumePage" src={resume} type="application/pdf" />
-	// 		</div>
-	// 	);
-	// }
+	} else {
+		return (
+			<div className="maximized">
+				<div className="windowBar">
+					<div
+						className="windowButtons minimize"
+						onClick={closeResume}
+					></div>
+					<div
+						className="windowButtons maximize"
+						onClick={setMax}
+					></div>
+					<div
+						className="windowButtons close"
+						onClick={closeResume}
+					></div>
+				</div>
+				<embed id="resumePage" src={resume} type="application/pdf" />
+			</div>
+		);
+	}
 };
 
 export default Resume;

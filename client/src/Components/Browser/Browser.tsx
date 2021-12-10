@@ -1,19 +1,17 @@
 import { useState } from "react";
-import Draggable from 'react-draggable';
+import Draggable from "react-draggable";
 import "./Browser.scss";
 import React from "react";
 import { Props } from "../App/App";
 
 const Browser = (props: Props) => {
-
 	const [maximized, setMaximized] = useState(true);
 	const [browserClass, setBrowserClass] = useState("browser-focused");
-
 
 	const closeBrowser = () => {
 		props.openBrowser(props.browserOpen);
 		console.log(props);
-	}
+	};
 
 	const setMax = () => {
 		if (maximized) {
@@ -21,44 +19,70 @@ const Browser = (props: Props) => {
 		} else if (!maximized) {
 			setMaximized(true);
 		}
-	}
+	};
 
 	const focusBrowser = () => {
 		setBrowserClass("browser-focused");
-	}
+	};
 
 	const blurBrowser = () => {
 		setBrowserClass("browser");
-	}
-
+	};
 
 	if (!maximized) {
-
 		return (
 			<Draggable>
-				<div id="browser-window" className={browserClass} tabIndex={0} onFocus={focusBrowser} onBlur={blurBrowser}>
+				<div
+					id="browser-window"
+					className={browserClass}
+					tabIndex={0}
+					onFocus={focusBrowser}
+					onBlur={blurBrowser}
+				>
 					<div className="windowBar">
-						<div className="windowButtons minimize" onClick={closeBrowser}></div>
-						<div className="windowButtons maximize" onClick={setMax}></div>
-						<div className="windowButtons close" onClick={closeBrowser}></div>
+						<div
+							className="windowButtons minimize"
+							onClick={closeBrowser}
+						></div>
+						<div
+							className="windowButtons maximize"
+							onClick={setMax}
+						></div>
+						<div
+							className="windowButtons close"
+							onClick={closeBrowser}
+						></div>
 					</div>
-					<iframe onFocus={focusBrowser} onBlur={blurBrowser} id="webPage" src="https://bing.com"></iframe>
+					<iframe
+						onFocus={focusBrowser}
+						onBlur={blurBrowser}
+						id="webPage"
+						src="https://bing.com"
+					></iframe>
 				</div>
 			</Draggable>
-		)
-
+		);
 	} else {
 		return (
 			<div className="maximized">
 				<div className="windowBar">
-					<div className="windowButtons minimize" onClick={closeBrowser}></div>
-					<div className="windowButtons maximize" onClick={setMax}></div>
-					<div className="windowButtons close" onClick={closeBrowser}></div>
+					<div
+						className="windowButtons minimize"
+						onClick={closeBrowser}
+					></div>
+					<div
+						className="windowButtons maximize"
+						onClick={setMax}
+					></div>
+					<div
+						className="windowButtons close"
+						onClick={closeBrowser}
+					></div>
 				</div>
 				<iframe id="webPage" src="https://bing.com"></iframe>
 			</div>
-		)
+		);
 	}
-}
+};
 
-export default Browser
+export default Browser;

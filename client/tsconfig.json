@@ -11,7 +11,7 @@
 		"strict": true,
 		"moduleResolution": "node",
 		"baseUrl": "./src",
-		"typeRoots": ["node_modules/@types", "src/typings"],
+		"typeRoots": ["node_modules/@types", "src/Types"],
 		"esModuleInterop": true
 	},
 	"include": ["src/**/*"],

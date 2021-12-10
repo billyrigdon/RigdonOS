@@ -6,7 +6,7 @@
 	"scripts": {
 		"build": "npm run clean && tsc && npm run copy-files",
 		"clean": "rm -rf ./dist",
-		"copy-files": "cp -r ./build ./dist/",
+		"copy-files": "cp -r ./client ./dist/",
 		"start": "npm run build && nodemon dist/index.js"
 	},
 	"repository": {

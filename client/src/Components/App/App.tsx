@@ -23,7 +23,7 @@ import {
 	toggleMusicPlayer,
 } from "../../Redux/store";
 import { isMobile } from "react-device-detect";
-import { State } from "../../Interfaces/ReduxInterface";
+import { State } from "../../Types/ReduxInterface";
 import { ThunkDispatch } from "redux-thunk";
 import { Action } from "redux";
 

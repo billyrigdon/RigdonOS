@@ -1,8 +1,5 @@
 import "./Desktop.scss";
 import resumeIcon from "../../Icons/resume-icon.svg";
-import { useSelector, useDispatch, connect } from "react-redux";
-import { toggleResume } from "../../Redux/store";
-import { useState, useEffect } from "react";
 import githubIcon from "../../Icons/github.png";
 import React from "react";
 import background from "./background.jpg";
@@ -27,10 +24,7 @@ const Desktop = (props: Props) => {
 				</div>
 				<div id="github" className="shortcut">
 					<a href="https://github.com/billyrigdon" target="_blank">
-						<img
-							src={githubIcon}
-							alt="Github Icon"
-						/>
+						<img src={githubIcon} alt="Github Icon" />
 					</a>
 					<p>Github</p>
 				</div>
