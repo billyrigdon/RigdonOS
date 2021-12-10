@@ -4,8 +4,9 @@ import Draggable from "react-draggable";
 import axios from "axios";
 import { gsap } from "gsap";
 import { isMobile } from "react-device-detect";
+import { Props } from "../App/App";
 
-const Notes = (props) => {
+const Notes = (props: Props) => {
 	const [maximized, setMaximized] = useState(false);
 	const [noteClass, setNoteClass] = useState("notepad-focused");
 	const [noteContent, setNoteContent] = useState(props.fileContent);
@@ -48,11 +49,11 @@ const Notes = (props) => {
 		setNoteClass("notepad");
 	};
 
-	const handleNotesChange = (event) => {
+	const handleNotesChange = (event: any) => {
 		setNoteContent(event.target.value);
 	};
 
-	const noteRef = useRef();
+	const noteRef = useRef(null);
 
 	useEffect(() => {
 		gsap.from(noteRef.current, {
@@ -71,7 +72,7 @@ const Notes = (props) => {
 							saveNotes();
 						}}
 						id="saveButton"
-						class="material-icons"
+						className="material-icons"
 					>
 						save
 					</span>
@@ -106,7 +107,7 @@ const Notes = (props) => {
 								saveNotes();
 							}}
 							id="saveButton"
-							class="material-icons"
+							className="material-icons"
 						>
 							save
 						</span>
@@ -133,7 +134,7 @@ const Notes = (props) => {
 				</div>
 			</Draggable>
 		);
-	} else if (maximized) {
+	} else {
 		return (
 			<div className="maximized">
 				<div className="windowBarAdvanced">
@@ -142,7 +143,7 @@ const Notes = (props) => {
 							saveNotes();
 						}}
 						id="saveButton"
-						class="material-icons"
+						className="material-icons"
 					>
 						save
 					</span>

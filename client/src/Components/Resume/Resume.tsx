@@ -3,8 +3,10 @@ import Draggable from "react-draggable";
 import "./Resume.scss";
 import resume from "./resume.pdf";
 import { isMobile } from "react-device-detect";
+import React from "react";
+import { Props } from "../App/App";
 
-const Resume = (props) => {
+const Resume = (props:Props) => {
 	const [maximized, setMaximized] = useState(false);
 	const [resumeClass, setResumeClass] = useState("resume-focused");
 
@@ -37,7 +39,7 @@ const Resume = (props) => {
 
 	if (!maximized) {
 		return (
-			<Draggable className="window">
+			<Draggable>
 				<div
 					id="resume-window"
 					className={resumeClass}
@@ -67,7 +69,7 @@ const Resume = (props) => {
 				</div>
 			</Draggable>
 		);
-	} else if (maximized) {
+	} else {
 		return (
 			<div className="maximized">
 				<div className="windowBar">

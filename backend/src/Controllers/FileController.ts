@@ -1,9 +1,12 @@
-const fs = require("fs");
-const path = require("path");
-const asyncHandler = require("express-async-handler");
+import fs from "fs";
+import path from "path";
+import asyncHandler from "express-async-handler";
+import { File } from "../Types/FileInterface";
+import { Request,Response } from "express";
 
-const getDirContents = asyncHandler(async (req, res) => {
-	let dirContents = [];
+
+export const getDirContents = asyncHandler(async (req, res) => {
+	let dirContents: File[] = [];
 	let stats;
 
 	try {
@@ -36,9 +39,9 @@ const getDirContents = asyncHandler(async (req, res) => {
 	}
 });
 
-const getParentDir = (req, res) => {
+export const getParentDir = (req: Request, res: Response) => {
 	const parentDir = path.dirname(req.body.currentDir);
 	res.status(200).json({ currentDir: parentDir });
 };
 
-module.exports = { getDirContents, getParentDir };
+

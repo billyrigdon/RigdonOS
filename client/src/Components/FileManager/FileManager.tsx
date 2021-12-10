@@ -6,17 +6,20 @@ import fileIcon from "../../Icons/resume-icon.svg";
 import axios from "axios";
 import { gsap } from "gsap";
 import { isMobile } from "react-device-detect";
+import React from "react";
+import File from "../../Types/FileInterface";
+import { Props } from "../App/App";
 
 const URL = "http://127.0.0.1:1313";
 
-const FileManager = (props) => {
+const FileManager = (props: Props) => {
 	const [maximized, setMaximized] = useState(false);
 	const [fileManagerClass, setFileManagerClass] = useState(
 		"file-manager-focused"
 	);
-	const [files, setFiles] = useState([]);
+	const [files, setFiles] = useState<Array<File>>([]);
 
-	const changeDirectory = (name) => {
+	const changeDirectory = (name: string) => {
 		console.log(name);
 		props.changeFolder(name);
 		console.log(props);
@@ -26,11 +29,12 @@ const FileManager = (props) => {
 		const parentDir = await axios.post(URL + "/api/files/parent", {
 			currentDir: props.currentDir,
 		});
-		//console.log(parentDir);
+
 		props.changeFolder(parentDir.data.currentDir);
 	};
 
-	const openFile = (file) => {
+	//PLACEHOLDER - No real functionality yet
+	const openFile = (file: File) => {
 		console.log(file);
 	};
 
@@ -73,7 +77,7 @@ const FileManager = (props) => {
 		fetchDir();
 	}, [props.currentDir]);
 
-	const fileRef = useRef();
+	const fileRef = useRef(null);
 
 	useEffect(() => {
 		gsap.from(fileRef.current, {
@@ -88,7 +92,6 @@ const FileManager = (props) => {
 			return (
 				<div className="file">
 					<img
-						value={item.name}
 						src={folderIcon}
 						alt="Folder Icon"
 						onDoubleClick={() => {
@@ -105,7 +108,6 @@ const FileManager = (props) => {
 			return (
 				<div className="file">
 					<img
-						value={item.name}
 						src={fileIcon}
 						alt="File Icon"
 						onDoubleClick={() => {
@@ -135,7 +137,7 @@ const FileManager = (props) => {
 		);
 	} else if (!maximized) {
 		return (
-			<Draggable className="window">
+			<Draggable>
 				<div
 					className={fileManagerClass}
 					tabIndex={0}
@@ -173,7 +175,7 @@ const FileManager = (props) => {
 				</div>
 			</Draggable>
 		);
-	} else if (maximized) {
+	} else {
 		return (
 			<div id="max-file" className="maximized">
 				<div className="windowBar">

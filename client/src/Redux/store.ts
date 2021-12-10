@@ -1,6 +1,8 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware, Store } from "redux";
+import thunk from "redux-thunk";
+import { State, Action, DispatchType } from "Interfaces/ReduxInterface";
 
-const initialState = {
+const initialState: State = {
 	menuOpen: false,
 	terminalOpen: false,
 	browserOpen: false,
@@ -9,72 +11,76 @@ const initialState = {
 	fileManagerOpen: false,
 	currentDir: "/",
 	fileContent: "",
-	currentFile: {},
+	currentFile: {
+		name: "",
+		isDirectory: false,
+		path: "",
+	},
 	musicPlayerOpen: false,
 };
 
-const toggleMenu = (menuOpen) => {
+const toggleMenu = (menuOpen: boolean) => {
 	return {
 		type: "TOGGLEMENU",
 	};
 };
 
-const toggleTerminal = (terminalOpen) => {
+const toggleTerminal = (terminalOpen: boolean) => {
 	return {
 		type: "TOGGLETERMINAL",
 	};
 };
 
-const toggleBrowser = (browserOpen) => {
+const toggleBrowser = (browserOpen: boolean) => {
 	return {
 		type: "TOGGLEBROWSER",
 	};
 };
 
-const toggleNotes = (notesOpen) => {
+const toggleNotes = (notesOpen: boolean) => {
 	return {
 		type: "TOGGLENOTES",
 	};
 };
 
-const toggleResume = (resumeOpen) => {
+const toggleResume = (resumeOpen: boolean) => {
 	return {
 		type: "TOGGLERESUME",
 	};
 };
 
-const toggleFileManager = (fileManagerOpen) => {
+const toggleFileManager = (fileManagerOpen: boolean) => {
 	return {
 		type: "TOGGLEFILEMANAGER",
 	};
 };
 
-const changeDirectory = (newDir) => {
+const changeDirectory = (newDir: string) => {
 	return {
 		type: "CHANGEDIR",
 		payload: newDir,
 	};
 };
 
-const setFileContent = (content) => {
+const setFileContent = (content: string) => {
 	return {
 		type: "SETFILECONTENT",
 		payload: content,
 	};
 };
 
-const openFile = (fileObj) => {
+const openFile = (fileObj: File) => {
 	return {
 		type: "OPENFILE",
-		payload: fileObj,
+		file: fileObj,
 	};
 };
 
-const toggleMusicPlayer = (musicPlayerOpen) => {
+const toggleMusicPlayer = (musicPlayerOpen: boolean) => {
 	return { type: "TOGGLEMUSICPLAYER" };
 };
 
-const osReducer = (state = initialState, action) => {
+const osReducer = (state = initialState, action: Action): State => {
 	switch (action.type) {
 		case "TOGGLEMENU":
 			return {
@@ -107,20 +113,24 @@ const osReducer = (state = initialState, action) => {
 				fileManagerOpen: !state.fileManagerOpen,
 			};
 		case "CHANGEDIR":
-			return {
-				...state,
-				currentDir: action.payload,
-			};
+			if (typeof action.payload === "string") {
+				return {
+					...state,
+					currentDir: action.payload,
+				};
+			}
 		case "SETFILECONTENT":
 			return {
 				...state,
 				fileContent: action.payload,
 			};
 		case "OPENFILE":
-			return {
-				...state,
-				currentFile: action.payload,
-			};
+			if (action.file) {
+				return {
+					...state,
+					currentFile: action.file,
+				};
+			}
 		case "TOGGLEMUSICPLAYER":
 			return {
 				...state,
@@ -131,7 +141,10 @@ const osReducer = (state = initialState, action) => {
 	}
 };
 
-const store = createStore(osReducer);
+const store: Store<State, Action> & { dispatch: DispatchType } = createStore(
+	osReducer,
+	applyMiddleware(thunk)
+);
 
 export {
 	store,

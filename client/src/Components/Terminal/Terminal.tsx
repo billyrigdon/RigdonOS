@@ -1,21 +1,19 @@
 import "./Terminal.scss";
-import "./xterm.css";
+import "./xterm.scss";
 import React, { useRef, useEffect, useState } from "react";
 import Draggable from "react-draggable";
 import { gsap } from "gsap";
 import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
 import io from "socket.io-client";
+import { Props } from "../App/App";
 
-const fitAddon = new FitAddon();
-
-const RigdonOSTerminal = (props) => {
+const RigdonOSTerminal = (props: Props) => {
 	const [termClass, setTermClass] = useState("terminal-focused");
 	const URL = "http://127.0.0.1:1313";
-	const termRef = useRef();
+	const termRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		console.log("test");
 		//Create websocket
 		const socket = io(URL);
 
@@ -28,7 +26,10 @@ const RigdonOSTerminal = (props) => {
 		});
 
 		//Use fit addon so terminal takes up all available space
+		const fitAddon = new FitAddon();
 		term.loadAddon(fitAddon);
+
+		term.options;
 
 		//Set theme
 		term.setOption("theme", {
@@ -47,18 +48,21 @@ const RigdonOSTerminal = (props) => {
 		});
 
 		//Attach terminal to #terminal-window
-		const termDiv = termRef.current;
-		term.open(termDiv);
-		fitAddon.fit();
+		if (termRef.current !== null) {
+			const termDiv = termRef.current;
+			term.open(termDiv);
+			fitAddon.fit();
+		}
 
 		//Kill socket when component unmounts
-		return () => socket.disconnect;
+		return () => {
+			socket.disconnect;
+		};
 	}, []);
 
 	//Close terminal
 	const closeTerminal = () => {
 		props.openTerminal(props.terminalOpen);
-		console.log(props);
 	};
 
 	//Changes z-index of window to bring to front if in focus
@@ -70,7 +74,7 @@ const RigdonOSTerminal = (props) => {
 		setTermClass("terminal-app");
 	};
 
-	const windowRef = useRef();
+	const windowRef = useRef(null);
 
 	//Opening animation
 	useEffect(() => {
@@ -82,7 +86,7 @@ const RigdonOSTerminal = (props) => {
 	}, [props.terminalOpen]);
 
 	return (
-		<Draggable className="window">
+		<Draggable>
 			<div
 				id="terminal"
 				className={termClass}

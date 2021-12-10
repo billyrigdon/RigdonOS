@@ -8,7 +8,8 @@ import MobileBar from "../MobileBar/MobileBar";
 import Notes from "../Notes/Notes";
 import Resume from "../Resume/Resume";
 import FileManager from "../FileManager/FileManager";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
+import React from "react";
 import {
 	toggleResume,
 	toggleNotes,
@@ -22,8 +23,11 @@ import {
 	toggleMusicPlayer,
 } from "../../Redux/store";
 import { isMobile } from "react-device-detect";
+import { State } from "../../Types/ReduxInterface";
+import { ThunkDispatch } from "redux-thunk";
+import { Action } from "redux";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: State) => {
 	return {
 		menuOpen: state.menuOpen,
 		terminalOpen: state.terminalOpen,
@@ -38,42 +42,48 @@ const mapStateToProps = (state) => {
 	};
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>) => {
 	return {
-		openMenu: (menuOpen) => {
+		openMenu: (menuOpen: boolean) => {
 			dispatch(toggleMenu(menuOpen));
 		},
-		openTerminal: (terminalOpen) => {
+		openTerminal: (terminalOpen: boolean) => {
 			dispatch(toggleTerminal(terminalOpen));
 		},
-		openBrowser: (browserOpen) => {
+		openBrowser: (browserOpen: boolean) => {
 			dispatch(toggleBrowser(browserOpen));
 		},
-		openNotes: (notesOpen) => {
+		openNotes: (notesOpen: boolean) => {
 			dispatch(toggleNotes(notesOpen));
 		},
-		openResume: (resumeOpen) => {
+		openResume: (resumeOpen: boolean) => {
 			dispatch(toggleResume(resumeOpen));
 		},
-		openFileManager: (fileManagerOpen) => {
+		openFileManager: (fileManagerOpen: boolean) => {
 			dispatch(toggleFileManager(fileManagerOpen));
 		},
-		changeFolder: (newDir) => {
+		changeFolder: (newDir: string) => {
 			dispatch(changeDirectory(newDir));
 		},
-		setContent: (content) => {
+		setContent: (content: string) => {
 			dispatch(setFileContent(content));
 		},
-		setFile: (fileObj) => {
+		setFile: (fileObj: any) => {
 			dispatch(openFile(fileObj));
 		},
-		openMusicPlayer: (musicPlayerOpen) => {
+		openMusicPlayer: (musicPlayerOpen: boolean) => {
 			dispatch(toggleMusicPlayer(musicPlayerOpen));
 		},
 	};
 };
 
-const App = (props) => {
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export type Props = PropsFromRedux;
+
+const App = (props: any) => {
 	return (
 		<div id="app-container">
 			<ConnectedDesktop />

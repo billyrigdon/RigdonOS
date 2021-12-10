@@ -1,10 +1,10 @@
 #!/bin/bash
 cd ..
-rm -r ./backend/build;
+rm -r ./backend/client;
 cd ./client;
-npm install
+npm install;
 npm run build;
-mv ./build ../backend/build;
+mv ./dist ../backend/client;
 cd ../backend;
 docker build -t rigdonos:latest .;
 docker kill RigdonOS;
