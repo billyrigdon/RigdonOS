@@ -1,0 +1,66 @@
+$mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
+$lightPurple: #776d87;
+$darkColor: #4a4453;
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap");
+
+/* width */
+::-webkit-scrollbar {
+	width: 0px;
+}
+
+.terminal-app {
+	width: 699px;
+	height: 472px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	resize: both;
+	box-shadow: $mediumShadow;
+	position: absolute;
+	top: 30%;
+	left: 30%;
+}
+
+#terminal-window {
+	width: 100%;
+	height: calc(100% - 2.5rem);
+	box-sizing: content-box;
+}
+
+#prompt {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+#prompt form input {
+	background-color: transparent;
+	border: none;
+	color: beige;
+	outline: none;
+	font-size: 1rem;
+	font-family: "Noto Sans Mono", monospace;
+}
+
+.terminal-line {
+	color: beige;
+	font-size: 1rem;
+	font-family: "Noto Sans Mono", monospace;
+}
+
+.terminal-focused {
+	width: 699px;
+	height: 472px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	resize: both;
+	box-shadow: $mediumShadow;
+	position: absolute;
+	top: 30%;
+	left: 30%;
+	z-index: 6;
+}

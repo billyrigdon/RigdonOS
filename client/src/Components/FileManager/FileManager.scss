@@ -1,0 +1,76 @@
+$mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
+
+#backButton {
+	color: #dadada;
+	cursor: pointer;
+}
+
+#max-file {
+	background-color: #dadada;
+	color: #1b1b1b;
+}
+
+.file-manager {
+	width: 45vw;
+	height: 55vh;
+	overflow: hidden;
+	flex-direction: column;
+	align-items: center;
+	resize: both;
+	box-shadow: $mediumShadow;
+	position: absolute;
+	top: 30%;
+	left: 30%;
+	background-color: #dadada;
+	color: #1b1b1b;
+}
+
+.file-manager-focused {
+	width: 45vw;
+	height: 55vh;
+	overflow: hidden;
+	flex-direction: column;
+	align-items: center;
+	resize: both;
+	box-shadow: $mediumShadow;
+	position: absolute;
+	top: 30%;
+	left: 30%;
+	background-color: #dadada;
+	color: #1b1b1b;
+	z-index:6;
+}
+
+#file-view {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: flex-start;
+	overflow-y: scroll;
+	height:calc(100% - 2.5rem);
+	width:100%;
+}
+
+.file {
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 10%;
+	height:auto;
+	margin-left: 1rem;
+}
+
+.file img {
+	width:100%;
+	height:auto;
+}
+
+.file p {
+	font-weight: 400;
+	font-family: "Ubuntu", sans-serif;
+	color: #1b1b1b;
+	font-size: .9rem;
+	
+}

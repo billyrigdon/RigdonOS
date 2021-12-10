@@ -1,0 +1,74 @@
+$mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
+$lightPurple: #776d87;
+$darkColor: rgba(74, 68, 83, 0.85);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Ubuntu&display=swap');
+
+#taskbar-container {
+	background-color: red;
+}
+
+#taskbar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	box-shadow: $mediumShadow;
+	align-items: center;
+	background-color: $darkColor;
+	width: 100vw;
+	height: 5vh;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 7;
+}
+
+#start-container {
+	height: 100%;
+	width: 20%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+#startMenuButton {
+	margin-left: .5rem;
+	height: 100%;
+	width: auto;
+}
+
+#taskbarTime {
+	padding: .4rem
+}
+
+#taskbarApps {
+	display: flex;
+	height:90%;
+}
+
+#taskbarApps img {
+	margin-left: .5rem;
+	margin-right: .5rem;
+}
+
+#time-container p {
+	font-size: 1rem;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 600;
+	color: #dadada;
+	text-align: right;
+	margin-right: .5rem;
+}
+
+#time-container {
+	width:20%;
+}
+
+@media only screen and (max-width: 600px) {
+	#startMenuButton {
+		display: none;
+	}
+
+	#time-container p {
+		display: none;
+	}
+}
