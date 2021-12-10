@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, Store } from "redux";
 import thunk from "redux-thunk";
-import { State, Action, DispatchType } from "Interfaces/ReduxInterface";
+import { State, Action, DispatchType } from "Types/ReduxInterface";
 
 const initialState: State = {
 	menuOpen: false,
