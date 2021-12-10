@@ -1,7 +1,7 @@
 {
 	"name": "rigdonos",
-	"version": "0.0.1",
-	"description": "A desktop environment written in the MERN stack",
+	"version": "1.1.0",
+	"description": "A desktop environment written in TypeScript and React",
 	"main": "dist/index.js",
 	"scripts": {
 		"build": "npm run clean && tsc && npm run copy-files",
