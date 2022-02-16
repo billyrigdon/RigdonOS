@@ -28,6 +28,17 @@ const Desktop = (props: Props) => {
 					</a>
 					<p>Github</p>
 				</div>
+				<div id="Auri" className="shortcut">
+					<a href="http://45.33.126.222:1944/" target="_blank">
+						<span
+							style={{ fontSize: "42px" }}
+							className="material-icons"
+						>
+							pets
+						</span>
+					</a>
+					<p>Auri</p>
+				</div>
 			</div>
 		</div>
 	);

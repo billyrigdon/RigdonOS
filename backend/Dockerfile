@@ -1,10 +1,10 @@
 FROM archlinux as base
-WORKDIR /opt/RigdonOS
-COPY . ./
-RUN rm -rf node_modules
 RUN pacman -Syu --noconfirm
 RUN pacman -Sy base-devel --noconfirm
 RUN pacman -S nodejs npm vim --noconfirm
+WORKDIR /opt/RigdonOS
+COPY . ./
+RUN rm -rf node_modules
 RUN useradd -m -d /opt/RigdonOS rigdon
 RUN chown -R rigdon:rigdon /opt/RigdonOS
 USER rigdon
