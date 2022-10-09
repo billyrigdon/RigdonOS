@@ -10,7 +10,7 @@ import React from "react";
 import File from "../../Types/FileInterface";
 import { Props } from "../App/App";
 
-const URL = "http://127.0.0.1:1313";
+const URL = "http://localhost:1313";
 
 const FileManager = (props: Props) => {
 	const [maximized, setMaximized] = useState(false);

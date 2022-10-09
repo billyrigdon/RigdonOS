@@ -10,7 +10,7 @@ import { Props } from "../App/App";
 
 const RigdonOSTerminal = (props: Props) => {
 	const [termClass, setTermClass] = useState("terminal-focused");
-	const URL = "http://127.0.0.1:1313";
+	const URL = "http://localhost:1313";
 	const termRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
