@@ -1,6 +1,8 @@
 import "./Desktop.scss";
 import resumeIcon from "../../Icons/resume-icon.svg";
 import githubIcon from "../../Icons/github.png";
+import pillIcon from "../../Icons/pill.png";
+import soundcloudIcon from "../../Icons/soundcloud.svg";
 import React from "react";
 import background from "./background.jpg";
 import { Props } from "../App/App";
@@ -38,6 +40,18 @@ const Desktop = (props: Props) => {
 						</span>
 					</a>
 					<p>Auri</p>
+				</div>
+				<div id="Shulgin" className="shortcut">
+					<a href="https://shulgin.io" target="_blank">
+						<img src={pillIcon} alt="Pill Icon" />
+					</a>
+					<p>Shulgin</p>
+				</div>
+				<div id="Violet" className="shortcut">
+					<a href="http://violetapparition.com" target="_blank">
+						<img src={soundcloudIcon} alt="Soundcloud Icon" />
+					</a>
+					<p>Violet Apparition</p>
 				</div>
 			</div>
 		</div>

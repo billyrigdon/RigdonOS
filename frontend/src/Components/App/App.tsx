@@ -21,11 +21,13 @@ import {
 	setFileContent,
 	openFile,
 	toggleMusicPlayer,
+	toggleSoundcloud,
 } from "../../Redux/store";
 import { isMobile } from "react-device-detect";
 import { State } from "../../Types/ReduxInterface";
 import { ThunkDispatch } from "redux-thunk";
 import { Action } from "redux";
+import Soundcloud from "../Soundcloud/Soundcloud";
 
 const mapStateToProps = (state: State) => {
 	return {
@@ -39,6 +41,7 @@ const mapStateToProps = (state: State) => {
 		fileContent: state.fileContent,
 		currentFile: state.currentFile,
 		musicPlayerOpen: state.musicPlayerOpen,
+		soundcloudOpen: state.soundcloudOpen
 	};
 };
 
@@ -61,6 +64,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>) => {
 		},
 		openFileManager: (fileManagerOpen: boolean) => {
 			dispatch(toggleFileManager(fileManagerOpen));
+		},
+		openSoundcloud: (soundcloudOpen: boolean) => {
+			dispatch(toggleSoundcloud(soundcloudOpen));
 		},
 		changeFolder: (newDir: string) => {
 			dispatch(changeDirectory(newDir));
@@ -95,6 +101,7 @@ const App = (props: any) => {
 			{props.notesOpen && <ConnectedNotes />}
 			{props.resumeOpen && <ConnectedResume />}
 			{props.fileManagerOpen && <ConnectedFileManager />}
+			{props.soundcloudOpen && <ConnectedSoundcloud />}
 		</div>
 	);
 };
@@ -104,6 +111,7 @@ const ConnectedBrowser = connect(mapStateToProps, mapDispatchToProps)(Browser);
 const ConnectedDesktop = connect(mapStateToProps, mapDispatchToProps)(Desktop);
 const ConnectedNotes = connect(mapStateToProps, mapDispatchToProps)(Notes);
 const ConnectedResume = connect(mapStateToProps, mapDispatchToProps)(Resume);
+const ConnectedSoundcloud = connect(mapStateToProps, mapDispatchToProps)(Soundcloud);
 
 const ConnectedTerminal = connect(
 	mapStateToProps,

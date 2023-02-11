@@ -11,6 +11,7 @@ export interface State {
 	fileContent: string;
 	currentFile: File;
 	musicPlayerOpen: boolean;
+	soundcloudOpen: boolean;
 }
 
 export interface Action {

@@ -3,6 +3,7 @@ import terminalIcon from "../../Icons/terminal.svg";
 import browserIcon from "../../Icons/browser.svg";
 import notesIcon from "../../Icons/notepad-48.svg";
 import filesIcon from "../../Icons/file-manager.svg";
+import soundcloudIcon from "../../Icons/soundcloud.svg";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 import React from "react";
@@ -34,6 +35,13 @@ const StartMenu = (props: Props) => {
 		console.log(props);
 	};
 
+	
+	const openSoundcloud = () => {
+		// props.openSoundcloud(props.soundcloudOpen);
+		console.log(props);
+		window.open('http://violetapparition.com', "_blank")
+	};
+
 	const startRef = useRef(null);
 
 	useEffect(() => {
@@ -62,6 +70,10 @@ const StartMenu = (props: Props) => {
 			<div className="startApps" onClick={openNotes}>
 				<img src={notesIcon} alt="Notes" />
 				<p>Notes</p>
+			</div>
+			<div className="startApps" onClick={openSoundcloud}>
+				<img src={soundcloudIcon} alt="Soundcloud" />
+				<p>Soundcloud</p>
 			</div>
 		</div>
 	);

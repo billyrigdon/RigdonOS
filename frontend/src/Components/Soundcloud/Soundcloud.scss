@@ -1,0 +1,55 @@
+$mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
+$lightPurple: #776d87;
+$darkColor: #4a4453;
+
+.soundcloud {
+	width: 70vw;
+	height: 80vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	resize: both;
+	box-shadow: $mediumShadow;
+	position: absolute;
+	top: 10%;
+	left: 15%;
+}
+
+.soundcloud-focused {
+	width: 70vw;
+	height: 80vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	resize: both;
+	box-shadow: $mediumShadow;
+	z-index: 6;
+	position: absolute;
+	top: 10%;
+	left: 15%;
+}
+
+#soundcloudPage {
+	width: 100%;
+	height: calc(100% - 2.5rem);
+	border: none;
+}
+
+.sc-div {
+	font-size: 10px; 
+	color: #cccccc;
+	line-break: anywhere;
+	word-break: normal;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis; 
+	font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
+	font-weight: 100;
+}
+
+.sc-a {
+	color: #cccccc; 
+	text-decoration: none;
+}

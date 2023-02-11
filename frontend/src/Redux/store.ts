@@ -17,6 +17,7 @@ const initialState: State = {
 		path: "",
 	},
 	musicPlayerOpen: false,
+	soundcloudOpen: false
 };
 
 const toggleMenu = (menuOpen: boolean) => {
@@ -52,6 +53,12 @@ const toggleResume = (resumeOpen: boolean) => {
 const toggleFileManager = (fileManagerOpen: boolean) => {
 	return {
 		type: "TOGGLEFILEMANAGER",
+	};
+};
+
+const toggleSoundcloud = (soundcloudOpen: boolean) => {
+	return {
+		type: "TOGGLESOUNDCLOUD",
 	};
 };
 
@@ -136,6 +143,11 @@ const osReducer = (state = initialState, action: Action): State => {
 				...state,
 				musicPlayerOpen: !state.musicPlayerOpen,
 			};
+		case "TOGGLESOUNDCLOUD":
+			return {
+				...state,
+				soundcloudOpen: !state.soundcloudOpen
+			}
 		default:
 			return state;
 	}
@@ -158,4 +170,5 @@ export {
 	setFileContent,
 	openFile,
 	toggleMusicPlayer,
+	toggleSoundcloud
 };
