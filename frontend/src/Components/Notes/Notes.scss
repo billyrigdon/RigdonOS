@@ -55,3 +55,9 @@ textarea {
 	cursor: pointer;
 	margin-left:.2rem;
 }
+
+@media only screen and (max-width: 600px) {
+	textarea {
+		font-size: 1rem;
+	}
+}

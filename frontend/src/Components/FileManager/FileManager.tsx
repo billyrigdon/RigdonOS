@@ -7,7 +7,7 @@ import axios from "axios";
 import { gsap } from "gsap";
 import { isMobile } from "react-device-detect";
 import React from "react";
-import File from "../../Types/FileInterface";
+import FileObj from "../../Types/FileInterface";
 import { Props } from "../App/App";
 
 const URL = "http://localhost:1313";
@@ -17,7 +17,7 @@ const FileManager = (props: Props) => {
 	const [fileManagerClass, setFileManagerClass] = useState(
 		"file-manager-focused"
 	);
-	const [files, setFiles] = useState<Array<File>>([]);
+	const [files, setFiles] = useState<Array<FileObj>>([]);
 
 	const changeDirectory = (name: string) => {
 		console.log(name);
@@ -34,8 +34,11 @@ const FileManager = (props: Props) => {
 	};
 
 	//PLACEHOLDER - No real functionality yet
-	const openFile = (file: File) => {
-		console.log(file);
+	const openFile = (file: FileObj) => {
+		props.setContent(file.txtContents? file.txtContents : '')
+		if (!props.notesOpen) {
+			props.openNotes(true);
+		}
 	};
 
 	const closeFileManager = () => {
@@ -120,7 +123,7 @@ const FileManager = (props: Props) => {
 		}
 	});
 
-	if (isMobile) {
+	if (props.isMobile) {
 		return (
 			<div id="max-file" className="maximized">
 				<div className="windowBar">

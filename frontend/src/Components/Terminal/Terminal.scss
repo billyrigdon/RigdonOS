@@ -64,3 +64,65 @@ $darkColor: #4a4453;
 	left: 30%;
 	z-index: 6;
 }
+
+@media only screen and (max-width: 600px) {
+	.terminal-app {
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		resize: both;
+		box-shadow: $mediumShadow;
+		position: absolute;
+		top: 30%;
+		left: 30%;
+	}
+	
+	#terminal-window {
+		width: 100%;
+		height: calc(100vh - 2.5rem);
+		box-sizing: content-box;
+		div {
+			height: calc(100vh - 2.5rem);
+		}
+	}
+	
+	#prompt {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
+	}
+	
+	#prompt form input {
+		background-color: transparent;
+		border: none;
+		color: beige;
+		outline: none;
+		font-size: 1rem;
+		font-family: "Noto Sans Mono", monospace;
+	}
+	
+	.terminal-line {
+		color: beige;
+		font-size: 1rem;
+		font-family: "Noto Sans Mono", monospace;
+	}
+	
+	.terminal-focused {
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		resize: both;
+		box-shadow: $mediumShadow;
+		position: absolute;
+		top: 30%;
+		left: 30%;
+		z-index: 6;
+	}
+}

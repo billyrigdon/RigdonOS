@@ -61,9 +61,10 @@ const Notes = (props: Props) => {
 			x: 50,
 			duration: 0.2,
 		});
+
 	}, [props.notesOpen]);
 
-	if (isMobile) {
+	if (props.isMobile) {
 		return (
 			<div className="maximized">
 				<div className="windowBarAdvanced">

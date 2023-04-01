@@ -9,7 +9,7 @@ import Notes from "../Notes/Notes";
 import Resume from "../Resume/Resume";
 import FileManager from "../FileManager/FileManager";
 import { connect, ConnectedProps } from "react-redux";
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	toggleResume,
 	toggleNotes,
@@ -22,12 +22,14 @@ import {
 	openFile,
 	toggleMusicPlayer,
 	toggleSoundcloud,
+	getMobile,
 } from "../../Redux/store";
 import { isMobile } from "react-device-detect";
 import { State } from "../../Types/ReduxInterface";
 import { ThunkDispatch } from "redux-thunk";
 import { Action } from "redux";
 import Soundcloud from "../Soundcloud/Soundcloud";
+import FileObj from "Types/FileInterface";
 
 const mapStateToProps = (state: State) => {
 	return {
@@ -41,7 +43,8 @@ const mapStateToProps = (state: State) => {
 		fileContent: state.fileContent,
 		currentFile: state.currentFile,
 		musicPlayerOpen: state.musicPlayerOpen,
-		soundcloudOpen: state.soundcloudOpen
+		soundcloudOpen: state.soundcloudOpen,
+		isMobile: state.isMobile
 	};
 };
 
@@ -74,12 +77,15 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>) => {
 		setContent: (content: string) => {
 			dispatch(setFileContent(content));
 		},
-		setFile: (fileObj: any) => {
+		setFile: (fileObj: FileObj) => {
 			dispatch(openFile(fileObj));
 		},
 		openMusicPlayer: (musicPlayerOpen: boolean) => {
 			dispatch(toggleMusicPlayer(musicPlayerOpen));
 		},
+		setIsMobile: (isMobile: boolean) => {
+			dispatch(getMobile(isMobile));
+		}
 	};
 };
 
@@ -90,11 +96,12 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 export type Props = PropsFromRedux;
 
 const App = (props: any) => {
+
 	return (
 		<div id="app-container">
 			<ConnectedDesktop />
 			<ConnectedTaskbar />
-			{isMobile && <MobileBar />}
+			{props.isMobile && <MobileBar />}
 			{props.menuOpen && <ConnectedStartMenu />}
 			{props.terminalOpen && <ConnectedTerminal />}
 			{props.browserOpen && <ConnectedBrowser />}

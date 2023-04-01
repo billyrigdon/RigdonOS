@@ -25,6 +25,23 @@ const Taskbar = (props: Props) => {
 		};
 	});
 
+	useEffect(() => {
+		if (window.innerWidth <= 500) {
+			props.setIsMobile(true);
+		}
+		
+		const handleResize = () => {
+			if (window.innerWidth <= 500) {
+				props.setIsMobile(true);
+			} else {
+				props.setIsMobile(false);
+			}
+		}
+		window.addEventListener('resize', handleResize);
+
+		return () => window.removeEventListener('resize', handleResize)
+	},[])
+
 	const superKeyHandler = ({key}: KeyboardEvent) => {
 		if (key === 'Control') {
 			openMenu()

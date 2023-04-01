@@ -18,7 +18,7 @@ const io = new Server(server, {
 		methods: ["GET", "POST"],
 	},
 });
-
+ 
 //Express middleware configuration
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -62,6 +62,6 @@ app.get("/", (req, res) => {
 });
 app.use(express.static(path.join(__dirname, "client")));
 
-server.listen(process.env.PORT, () => {
-	console.log("Server listening on port: " + process.env.PORT);
+server.listen(1313, () => {
+	console.log("Server listening on port: " + 1313);
 });

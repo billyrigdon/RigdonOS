@@ -1,4 +1,4 @@
-import File from "./FileInterface";
+import FileObj from "./FileInterface";
 
 export interface State {
 	menuOpen: boolean;
@@ -9,15 +9,17 @@ export interface State {
 	fileManagerOpen: boolean;
 	currentDir: string;
 	fileContent: string;
-	currentFile: File;
+	currentFile: FileObj;
 	musicPlayerOpen: boolean;
 	soundcloudOpen: boolean;
+	isMobile: boolean;
 }
 
 export interface Action {
 	type: string;
 	payload: string;
-	file?: File;
+	file?: FileObj;
+	isMobile: boolean;
 }
 
 export type DispatchType = (args: Action) => Action;

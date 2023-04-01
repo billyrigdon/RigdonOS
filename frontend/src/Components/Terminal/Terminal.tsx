@@ -85,32 +85,62 @@ const RigdonOSTerminal = (props: Props) => {
 		});
 	}, [props.terminalOpen]);
 
-	return (
-		<Draggable>
-			<div
-				id="terminal"
-				className={termClass}
-				tabIndex={0}
-				onFocus={focusTerminal}
-				onBlur={blurTerminal}
-				ref={windowRef}
-			>
+	if (props.isMobile) {
+		return (
+			<div className="maximized">
 				<div className="windowBar">
-					<div
-						className="windowButtons minimize"
-						onClick={closeTerminal}
-					></div>
-					<div
-						className="windowButtons close"
-						onClick={closeTerminal}
-					></div>
+						<div
+							className="windowButtons minimize"
+							onClick={closeTerminal}
+						></div>
+						<div
+							className="windowButtons close"
+							onClick={closeTerminal}
+						></div>
+					{/* <div
+						id="terminal"
+						className={termClass}
+						tabIndex={0}
+						onFocus={focusTerminal}
+						onBlur={blurTerminal}
+						ref={windowRef}
+					> */}
+						
+					</div>
+					<div id="terminal-window">
+						<div ref={termRef}></div>
+					</div>
 				</div>
-				<div id="terminal-window">
-					<div ref={termRef}></div>
+			// </div>
+		);
+	} else {
+		return (
+			<Draggable>
+				<div
+					id="terminal"
+					className={termClass}
+					tabIndex={0}
+					onFocus={focusTerminal}
+					onBlur={blurTerminal}
+					ref={windowRef}
+				>
+					<div className="windowBar">
+						<div
+							className="windowButtons minimize"
+							onClick={closeTerminal}
+						></div>
+						<div
+							className="windowButtons close"
+							onClick={closeTerminal}
+						></div>
+					</div>
+					<div id="terminal-window">
+						<div ref={termRef}></div>
+					</div>
 				</div>
-			</div>
-		</Draggable>
-	);
+			</Draggable>
+		);
+	}
 };
 
 export default RigdonOSTerminal;

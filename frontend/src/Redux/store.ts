@@ -1,6 +1,8 @@
 import { createStore, applyMiddleware, Store } from "redux";
 import thunk from "redux-thunk";
 import { State, Action, DispatchType } from "Types/ReduxInterface";
+import FileObj from "Types/FileInterface";
+
 
 const initialState: State = {
 	menuOpen: false,
@@ -15,10 +17,19 @@ const initialState: State = {
 		name: "",
 		isDirectory: false,
 		path: "",
+		txtContents: null
 	},
 	musicPlayerOpen: false,
-	soundcloudOpen: false
+	soundcloudOpen: false,
+	isMobile: false
 };
+
+const getMobile = (isMobile: boolean) => {
+	return {
+		type: "SETMOBILE",
+		isMobile: isMobile
+	}
+}
 
 const toggleMenu = (menuOpen: boolean) => {
 	return {
@@ -76,7 +87,7 @@ const setFileContent = (content: string) => {
 	};
 };
 
-const openFile = (fileObj: File) => {
+const openFile = (fileObj: FileObj) => {
 	return {
 		type: "OPENFILE",
 		file: fileObj,
@@ -89,6 +100,11 @@ const toggleMusicPlayer = (musicPlayerOpen: boolean) => {
 
 const osReducer = (state = initialState, action: Action): State => {
 	switch (action.type) {
+		case 'SETMOBILE':
+			return {
+				...state,
+				isMobile: action.isMobile
+			}
 		case "TOGGLEMENU":
 			return {
 				...state,
@@ -170,5 +186,6 @@ export {
 	setFileContent,
 	openFile,
 	toggleMusicPlayer,
-	toggleSoundcloud
+	toggleSoundcloud,
+	getMobile
 };

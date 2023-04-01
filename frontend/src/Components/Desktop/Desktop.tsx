@@ -13,17 +13,18 @@ const Desktop = (props: Props) => {
 		console.log(props);
 	};
 
+	// <div id="resume" className="shortcut">
+	// 				<img
+	// 					src={resumeIcon}
+	// 					alt="Resume Icon"
+	// 					onClick={openResume}
+	// 				/>
+	// 				<p>Resume.pdf</p>
+	// 			</div>
+
 	return (
 		<div id="desktop" style={{ backgroundImage: `url(${background})` }}>
 			<div id="shortcutContainer">
-				<div id="resume" className="shortcut">
-					<img
-						src={resumeIcon}
-						alt="Resume Icon"
-						onClick={openResume}
-					/>
-					<p>Resume.pdf</p>
-				</div>
 				<div id="github" className="shortcut">
 					<a href="https://github.com/billyrigdon" target="_blank">
 						<img src={githubIcon} alt="Github Icon" />
