@@ -8,20 +8,23 @@ import filesIcon from "../../Icons/file-manager.svg";
 import soundcloudIcon from "../../Icons/soundcloud.svg";
 import React from "react";
 import { Props } from "../App/App";
+import NetworkManager from "Components/NetworkManager/NetworkManager";
+import {FaWifi} from 'react-icons/fa'
 
 const Taskbar = (props: Props) => {
 	const [currentTime, setCurrentTime] = useState(new Date());
+	const [networkManagerOpen, setNetworkManagerOpen] = useState(false);
 
 	useEffect(() => {
 		let timer = setInterval(() => {
 			setCurrentTime(new Date());
 		}, 1000);
 
-		window.addEventListener('keyup', superKeyHandler)
+		window.addEventListener("keyup", superKeyHandler);
 
 		return () => {
 			clearInterval(timer);
-			window.removeEventListener('keyup', superKeyHandler)
+			window.removeEventListener("keyup", superKeyHandler);
 		};
 	});
 
@@ -29,24 +32,28 @@ const Taskbar = (props: Props) => {
 		if (window.innerWidth <= 500) {
 			props.setIsMobile(true);
 		}
-		
+
 		const handleResize = () => {
 			if (window.innerWidth <= 500) {
 				props.setIsMobile(true);
 			} else {
 				props.setIsMobile(false);
 			}
-		}
-		window.addEventListener('resize', handleResize);
+		};
+		window.addEventListener("resize", handleResize);
 
-		return () => window.removeEventListener('resize', handleResize)
-	},[])
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
 
-	const superKeyHandler = ({key}: KeyboardEvent) => {
-		if (key === 'Control') {
-			openMenu()
+	const superKeyHandler = ({ key }: KeyboardEvent) => {
+		if (key === "Control") {
+			openMenu();
 		}
-	}
+	};
+
+	const openNetworkManager = () => {
+		props.openNetworkManager(props.networkManagerOpen);
+	};
 
 	const openMenu = () => {
 		props.openMenu(props.menuOpen);
@@ -76,7 +83,7 @@ const Taskbar = (props: Props) => {
 	const openSoundcloud = () => {
 		// props.openSoundcloud(props.soundcloudOpen);
 		console.log(props);
-		window.open('http://violetapparition.com', "_blank")
+		window.open("http://violetapparition.com", "_blank");
 	};
 
 	return (
@@ -129,6 +136,7 @@ const Taskbar = (props: Props) => {
 						height="100%"
 					/>
 				</div>
+				<FaWifi size={24} onClick={openNetworkManager} />
 				<div id="time-container">
 					<p id="taskbarTime">{currentTime.toLocaleString()}</p>
 				</div>

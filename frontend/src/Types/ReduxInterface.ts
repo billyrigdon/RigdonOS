@@ -13,6 +13,7 @@ export interface State {
 	musicPlayerOpen: boolean;
 	soundcloudOpen: boolean;
 	isMobile: boolean;
+	networkManagerOpen: boolean;
 }
 
 export interface Action {

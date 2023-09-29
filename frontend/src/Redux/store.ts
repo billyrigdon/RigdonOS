@@ -21,7 +21,8 @@ const initialState: State = {
 	},
 	musicPlayerOpen: false,
 	soundcloudOpen: false,
-	isMobile: false
+	isMobile: false,
+	networkManagerOpen:false
 };
 
 const getMobile = (isMobile: boolean) => {
@@ -70,6 +71,12 @@ const toggleFileManager = (fileManagerOpen: boolean) => {
 const toggleSoundcloud = (soundcloudOpen: boolean) => {
 	return {
 		type: "TOGGLESOUNDCLOUD",
+	};
+};
+
+const toggleNetworkManager = (soundcloudOpen: boolean) => {
+	return {
+		type: "TOGGLENETWORKMANAGER",
 	};
 };
 
@@ -163,6 +170,11 @@ const osReducer = (state = initialState, action: Action): State => {
 			return {
 				...state,
 				soundcloudOpen: !state.soundcloudOpen
+			};
+		case "TOGGLENETWORKMANAGER":
+			return {
+				...state,
+				networkManagerOpen: !state.networkManagerOpen
 			}
 		default:
 			return state;
@@ -187,5 +199,6 @@ export {
 	openFile,
 	toggleMusicPlayer,
 	toggleSoundcloud,
-	getMobile
+	getMobile,
+	toggleNetworkManager
 };

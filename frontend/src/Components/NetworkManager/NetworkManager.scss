@@ -1,0 +1,23 @@
+$mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
+$lightPurple: #776d87;
+$darkColor: #4A4453;
+$trafficRed: #e18999;
+$trafficYellow: #f9f871;
+$trafficGreen: #00c9a4;
+
+#nm-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	position: absolute;
+	bottom: 6vh;
+	left: .5rem;
+	background-color: $darkColor;
+	height: 32vh;
+	overflow: auto;
+	width: 20vw;
+	z-index: 7;
+	border-radius: 10px;
+	box-shadow: $mediumShadow;
+}

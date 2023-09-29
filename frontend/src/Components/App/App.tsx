@@ -23,6 +23,7 @@ import {
 	toggleMusicPlayer,
 	toggleSoundcloud,
 	getMobile,
+	toggleNetworkManager,
 } from "../../Redux/store";
 import { isMobile } from "react-device-detect";
 import { State } from "../../Types/ReduxInterface";
@@ -30,6 +31,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { Action } from "redux";
 import Soundcloud from "../Soundcloud/Soundcloud";
 import FileObj from "Types/FileInterface";
+import NetworkManager from "../NetworkManager/NetworkManager";
 
 const mapStateToProps = (state: State) => {
 	return {
@@ -44,7 +46,8 @@ const mapStateToProps = (state: State) => {
 		currentFile: state.currentFile,
 		musicPlayerOpen: state.musicPlayerOpen,
 		soundcloudOpen: state.soundcloudOpen,
-		isMobile: state.isMobile
+		isMobile: state.isMobile,
+		networkManagerOpen: state.networkManagerOpen,
 	};
 };
 
@@ -83,9 +86,12 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>) => {
 		openMusicPlayer: (musicPlayerOpen: boolean) => {
 			dispatch(toggleMusicPlayer(musicPlayerOpen));
 		},
+		openNetworkManager: (networkManagerOpen: boolean) => {
+			dispatch(toggleNetworkManager(networkManagerOpen));
+		},
 		setIsMobile: (isMobile: boolean) => {
 			dispatch(getMobile(isMobile));
-		}
+		},
 	};
 };
 
@@ -96,7 +102,6 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 export type Props = PropsFromRedux;
 
 const App = (props: any) => {
-
 	return (
 		<div id="app-container">
 			<ConnectedDesktop />
@@ -109,6 +114,7 @@ const App = (props: any) => {
 			{props.resumeOpen && <ConnectedResume />}
 			{props.fileManagerOpen && <ConnectedFileManager />}
 			{props.soundcloudOpen && <ConnectedSoundcloud />}
+			{props.networkManagerOpen && <ConnectedNetworkManager />}
 		</div>
 	);
 };
@@ -118,7 +124,14 @@ const ConnectedBrowser = connect(mapStateToProps, mapDispatchToProps)(Browser);
 const ConnectedDesktop = connect(mapStateToProps, mapDispatchToProps)(Desktop);
 const ConnectedNotes = connect(mapStateToProps, mapDispatchToProps)(Notes);
 const ConnectedResume = connect(mapStateToProps, mapDispatchToProps)(Resume);
-const ConnectedSoundcloud = connect(mapStateToProps, mapDispatchToProps)(Soundcloud);
+const ConnectedSoundcloud = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Soundcloud);
+const ConnectedNetworkManager = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(NetworkManager);
 
 const ConnectedTerminal = connect(
 	mapStateToProps,
