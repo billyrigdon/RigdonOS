@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./NetworkManager.scss";
-const { ipcRenderer } = window.require("electron");
+// const { ipcRenderer } = window.require("electron");
 
 const NetworkManager: React.FC = () => {
 	const [ssid, setSsid] = useState<string>("");
@@ -14,47 +14,47 @@ const NetworkManager: React.FC = () => {
 	const [currentNetwork, setCurrentNetwork] = useState<string>("");
 	const [selectedNetwork, setSelectedNetwork] = useState<string | null>(null);
 
-	useEffect(() => {
-		ipcRenderer.send("get-available-networks");
-		ipcRenderer.send("get-current-network");
+	// useEffect(() => {
+	// 	ipcRenderer.send("get-available-networks");
+	// 	ipcRenderer.send("get-current-network");
 
-		ipcRenderer.on("available-networks", (_, networks) => {
-			setAvailableNetworks(networks);
-		});
+	// 	ipcRenderer.on("available-networks", (_, networks) => {
+	// 		setAvailableNetworks(networks);
+	// 	});
 
-		ipcRenderer.on("current-network", (_, network) => {
-			setCurrentNetwork(network);
-		});
+	// 	ipcRenderer.on("current-network", (_, network) => {
+	// 		setCurrentNetwork(network);
+	// 	});
 
-		return () => {
-			ipcRenderer.removeAllListeners("available-networks");
-			ipcRenderer.removeAllListeners("current-network");
-		};
-	}, []);
+	// 	return () => {
+	// 		ipcRenderer.removeAllListeners("available-networks");
+	// 		ipcRenderer.removeAllListeners("current-network");
+	// 	};
+	// }, []);
 
-	const connectToSelectedWifi = () => {
-		if (selectedNetwork && password) {
-			ipcRenderer.send("connect-to-wifi", selectedNetwork, password);
-		}
-	};
+	// const connectToSelectedWifi = () => {
+	// 	if (selectedNetwork && password) {
+	// 		ipcRenderer.send("connect-to-wifi", selectedNetwork, password);
+	// 	}
+	// };
 
-	const connectWifi = () => {
-		ipcRenderer.send("connect-to-wifi", ssid, password);
-	};
+	// const connectWifi = () => {
+	// 	ipcRenderer.send("connect-to-wifi", ssid, password);
+	// };
 
-	const setStaticIP = () => {
-		ipcRenderer.send("set-static-ip", interfaceName, ip, gateway, dns);
-	};
+	// const setStaticIP = () => {
+	// 	ipcRenderer.send("set-static-ip", interfaceName, ip, gateway, dns);
+	// };
 
-	const setDHCP = () => {
-		ipcRenderer.send("set-dhcp", interfaceName);
-	};
+	// const setDHCP = () => {
+	// 	ipcRenderer.send("set-dhcp", interfaceName);
+	// };
 
-	const toggleAirplaneMode = () => {
-		const newStatus = airplaneMode === "on" ? "off" : "on";
-		setAirplaneMode(newStatus);
-		ipcRenderer.send("toggle-airplane-mode", newStatus);
-	};
+	// const toggleAirplaneMode = () => {
+	// 	const newStatus = airplaneMode === "on" ? "off" : "on";
+	// 	setAirplaneMode(newStatus);
+	// 	ipcRenderer.send("toggle-airplane-mode", newStatus);
+	// };
 
 	return (
 		<div id="nm-container">
@@ -78,7 +78,7 @@ const NetworkManager: React.FC = () => {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-					<button onClick={connectToSelectedWifi}>Connect</button>
+					{/* <button onClick={connectToSelectedWifi}>Connect</button> */}
 				</div>
 			)}
 			{/* <div>
@@ -125,9 +125,9 @@ const NetworkManager: React.FC = () => {
 				<button onClick={setDHCP}>Set to DHCP</button>
 			</div> */}
 			<div>
-				<button onClick={toggleAirplaneMode}>
+				{/* <button onClick={toggleAirplaneMode}>
 					Toggle Airplane Mode (Current: {airplaneMode})
-				</button>
+				</button> */}
 			</div>
 		</div>
 	);

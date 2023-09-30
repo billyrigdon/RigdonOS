@@ -8,7 +8,7 @@
 		"outDir": "./dist",
 		"rootDir": "./",
 		"isolatedModules": true,
-		"strict": true,
+		"strict": false,
 		"moduleResolution": "node",
 		"baseUrl": "./src",
 		"typeRoots": ["node_modules/@types", "src/Types"],
