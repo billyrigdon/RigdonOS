@@ -107,7 +107,53 @@ io.on("connection", (socket: Socket) => {
 		console.log(
 			"------------------------------------------------Launching app------------------------------------------------------------------------------------------"
 		);
-		launchApp("xclock", 99);
+		launchApp("min --no-sandbox --disable-gpu", 99);
+	});
+	socket.on("launchCode", () => {
+		console.log(
+			"------------------------------------------------Launching app------------------------------------------------------------------------------------------"
+		);
+		launchApp("code --no-sandbox --disable-gpu", 98);
+	});
+
+	socket.on("resizeApp", (message: string) => {
+		const dimensions = JSON.parse(message);
+		console.log(dimensions);
+		if (dimensions.width && dimensions.height) {
+			exec(
+				`export DISPLAY=:99 && xrandr --fb ${dimensions.width}x${dimensions.height}x0`,
+				(error, stdout, stderr) => {
+					if (error) {
+						console.log(`Error resizing Xvfb: ${error}`);
+					}
+					console.log(`stdout: ${stdout}`);
+					console.log(`stderr: ${stderr}`);
+				}
+			);
+
+			const commandToGetWindowID = `xdotool search --name "min"`;
+
+			exec(commandToGetWindowID, (err, stdout, stderr) => {
+				if (err) {
+					console.error("Error getting window ID: ", err);
+					return;
+				}
+
+				const windowID = stdout.trim();
+
+				if (windowID) {
+					const commandToResize = `xdotool windowsize ${windowID} ${dimensions.width} ${dimensions.height}`;
+
+					exec(commandToResize, (err, stdout, stderr) => {
+						if (err) {
+							console.error("Error resizing window: ", err);
+						} else {
+							console.log("Window resized successfully");
+						}
+					});
+				}
+			});
+		}
 	});
 });
 

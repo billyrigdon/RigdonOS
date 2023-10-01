@@ -3,10 +3,14 @@ RUN apt update
 RUN apt install -y tzdata
 ENV TZ="America/Chicago"
 RUN apt update && \
-    apt install -y tzdata build-essential nodejs npm vim neofetch xvfb x11-apps x11vnc libx11-dev firefox websockify matchbox-window-manager epiphany-browser
+    apt install -y tzdata build-essential nodejs npm vim neofetch xvfb x11-apps x11vnc libx11-dev firefox websockify matchbox-window-manager epiphany-browser mesa-utils-extra dbus-x11
 WORKDIR /opt/RigdonOS
 COPY . ./
 RUN rm -rf node_modules
+RUN apt install -y ./min.deb
+RUN apt install -y ./google.deb
+RUN apt install -y ./code.deb
+RUN dbus-daemon --session --fork
 # RUN ufw disable
 RUN useradd -m -d /opt/RigdonOS rigdon
 RUN chown -R rigdon:rigdon /opt/RigdonOS
