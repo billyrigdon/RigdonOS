@@ -3,13 +3,17 @@ LABEL maintainer="billy@billyrigdon.dev"
 
 # Install Deps
 RUN pacman -Syu --noconfirm && \
-    pacman -S --noconfirm zsh xpra xvfb base-devel curl acl sudo && \
+    pacman -S --noconfirm zsh xpra base-devel curl acl sudo firefox && \
     pacman -Scc --noconfirm
 
 # Create system users and folders to obfuscate from underlying Arch install
 RUN useradd -m -d /RigdonOS/filesystem -s /usr/bin/zsh RigdonOS
 RUN mkdir -p /RigdonOS/filesystem && \
-    chown -R RigdonOS:RigdonOS /RigdonOS/filesystem
+    chown -R RigdonOS:RigdonOS /RigdonOS
+
+# Create node_modules folder and set the permissions
+RUN mkdir -p /RigdonOS/node_modules && \
+    chown -R RigdonOS:RigdonOS /RigdonOS/node_modules
 
 # Create logging folder/file
 RUN mkdir -p /RigdonOS/filesystem/logs && \
@@ -18,6 +22,7 @@ RUN mkdir -p /RigdonOS/filesystem/logs && \
     chmod 0600 /RigdonOS/filesystem/logs/node-server.log
 
 # Node setup
+RUN mkdir /RigdonOS/filesystem/nvm
 ENV NVM_DIR /RigdonOS/filesystem/nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | HOME=/RigdonOS/filesystem bash && \
     . $NVM_DIR/nvm.sh && \
@@ -35,10 +40,11 @@ WORKDIR /RigdonOS
 COPY . /RigdonOS
 
 # Modify permissions for system user to only have access to the obfuscated filesystem 
-RUN chmod 750 -R /RigdonOS && \
-    chown -R root:RigdonOS /RigdonOS && \
-    setfacl -m u:RigdonOS:rx /RigdonOS && \
-    setfacl -m u:RigdonOS:rwx /RigdonOS/filesystem
+RUN chmod 755 -R /RigdonOS && \
+    chown -R RigdonOS:RigdonOS /RigdonOS && \
+    setfacl -m u:RigdonOS:rwx /RigdonOS && \
+    setfacl -m u:RigdonOS:rwx /RigdonOS/filesystem && \
+    setfacl -m u:RigdonOS:rwx /RigdonOS/filesystem/logs 
 
 # Switch to limited permissions system user
 USER RigdonOS

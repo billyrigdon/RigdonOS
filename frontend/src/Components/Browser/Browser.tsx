@@ -29,7 +29,7 @@ const Browser = (props: Props) => {
 		// Connect specifically to the '/xpra' namespace
 		const socket = io("http://localhost:1313/xpra");
 
-		socket.emit("launchApp", "min");
+		socket.emit("launchApp", "firefox");
 
 		socket.on("appLaunched", (connString: string) => {
 			setConnectionString(connString);
