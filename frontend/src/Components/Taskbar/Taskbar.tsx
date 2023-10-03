@@ -9,7 +9,7 @@ import soundcloudIcon from "../../Icons/soundcloud.svg";
 import React from "react";
 import { Props } from "../App/App";
 import NetworkManager from "Components/NetworkManager/NetworkManager";
-import {FaWifi} from 'react-icons/fa'
+import { FaWifi } from "react-icons/fa";
 
 const Taskbar = (props: Props) => {
 	const [currentTime, setCurrentTime] = useState(new Date());
@@ -136,7 +136,7 @@ const Taskbar = (props: Props) => {
 						height="100%"
 					/>
 				</div>
-				<FaWifi size={24} onClick={openNetworkManager} />
+				{/* <FaWifi size={24} onClick={openNetworkManager} /> */}
 				<div id="time-container">
 					<p id="taskbarTime">{currentTime.toLocaleString()}</p>
 				</div>
