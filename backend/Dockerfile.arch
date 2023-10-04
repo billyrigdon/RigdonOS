@@ -1,25 +1,12 @@
-# Use the latest Ubuntu base image
-FROM ubuntu:latest
+FROM archlinux:latest
 LABEL maintainer="billy@billyrigdon.dev"
 
-ENV DEBIAN_FRONTEND=noninteractive
+# Install Deps
+RUN pacman -Syu --noconfirm && \
+    pacman -S --noconfirm xorg-server python-paramiko zsh xpra base-devel curl acl sudo firefox && \
+    pacman -Scc --noconfirm
 
-# Install dependencies
-RUN apt-get update && \
-    apt-get install -y xvfb xpra x11-apps python3-paramiko zsh xpra curl acl sudo firefox build-essential python3-requests && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN apt update \
- && DEBIAN_FRONTEND=noninteractive apt install -y wget gnupg xvfb x11-xserver-utils python3-pip \
- && pip3 install pyinotify \
- && echo "deb [arch=amd64] https://xpra.org/ jammy main" > /etc/apt/sources.list.d/xpra.list \
- && wget -q https://xpra.org/gpg.asc -O- | apt-key add - \
- && apt update \
- && DEBIAN_FRONTEND=noninteractive apt install -y xpra \
- && mkdir -p /run/user/0/xpra
-
-# Create system users and folders
+# Create system users and folders to obfuscate from underlying Arch install
 RUN useradd -m -d /RigdonOS/filesystem -s /usr/bin/zsh RigdonOS
 RUN mkdir -p /RigdonOS/filesystem && \
     chown -R RigdonOS:RigdonOS /RigdonOS
@@ -48,22 +35,22 @@ ENV PATH $NVM_DIR/versions/node/v18.0.0/bin:$PATH
 # Set a display for x11 applications
 ENV DISPLAY :20
 
-# Copy application files into the container
+# Copy application files into container
 WORKDIR /RigdonOS
 COPY . /RigdonOS
 
-# Modify permissions for the system user
+# Modify permissions for system user to only have access to the obfuscated filesystem 
 RUN chmod 755 -R /RigdonOS && \
     chown -R RigdonOS:RigdonOS /RigdonOS && \
     setfacl -m u:RigdonOS:rwx /RigdonOS && \
     setfacl -m u:RigdonOS:rwx /RigdonOS/filesystem && \
-    setfacl -m u:RigdonOS:rwx /RigdonOS/filesystem/logs
+    setfacl -m u:RigdonOS:rwx /RigdonOS/filesystem/logs 
 
 # Switch to limited permissions system user
 USER RigdonOS
 RUN /usr/bin/zsh -c "source $NVM_DIR/nvm.sh && npm install && npm run build"
 
-# Expose ports
+# Allows up to 100 xpra apps simultaneously
 EXPOSE 10000-10100
 EXPOSE 1313
 

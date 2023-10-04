@@ -15,21 +15,17 @@ const logFile = "/RigdonOS/filesystem/logs/node-server.log";
 const log = (message: string) => {
 	const formattedMessage = `${new Date().toISOString()} - ${message}\n`;
 	fs.appendFileSync(logFile, formattedMessage);
+	console.log(formattedMessage);
 };
 
-const launchApplication = (appName: string, socket: Socket) => {
-	const currentDisplayNumber =
-		availableDisplayNumbers.length > 0
-			? availableDisplayNumbers.shift()!
-			: nextDisplayNumber++;
+const launchApplication = (
+	appName: string,
+	socket: Socket,
+	tcpPort: number
+) => {
+	const command = `xpra start --bind-tcp=0.0.0.0:${tcpPort} --start-child="${appName}" --html=on --exit-with-children`;
 
-	socketToDisplayMap.set(socket.id, currentDisplayNumber);
-
-	const command = `xpra start :${currentDisplayNumber} --start-child="${appName}" --exit-with-children`;
-
-	log(
-		`Attempting to launch app: ${appName} on display :${currentDisplayNumber}`
-	);
+	log(`Attempting to launch app: ${appName} on port ${tcpPort}`);
 
 	exec(command, (error, stdout, stderr) => {
 		if (error) {
@@ -38,14 +34,10 @@ const launchApplication = (appName: string, socket: Socket) => {
 			return;
 		}
 
-		const username = "someUsername";
-		const password = "someVeryLongPasswordString";
-		const connectionString = `http://localhost:1313?display=:${currentDisplayNumber}&username=${username}&password=${password}`;
+		const connectionString = `http://localhost:${tcpPort}`;
 
 		socket.emit("appLaunched", connectionString);
-		log(
-			`Successfully launched app: ${appName} on display :${currentDisplayNumber}`
-		);
+		log(`Successfully launched app: ${appName} on port ${tcpPort}`);
 	});
 };
 
@@ -58,12 +50,6 @@ const io = new Server(server, {
 		methods: ["GET", "POST"],
 	},
 });
-
-// Starting port for XPRA
-let availableDisplayNumbers: number[] = [];
-let nextDisplayNumber = 100;
-let nextTcpPort = 10000;
-const socketToDisplayMap = new Map<string, number>();
 
 // Websocket for terminal and starting GUI applications
 io.of("/pty").on("connection", (socket: Socket) => {
@@ -95,23 +81,29 @@ io.of("/pty").on("connection", (socket: Socket) => {
 	});
 });
 
-// Initialize xpra on a different route
+// Xpra routes, uses dynamically assigned ports which free up upon disconnect
+let availableTcpPorts: number[] = [];
+let nextTcpPort = 10000;
+const socketToTcpPortMap = new Map<string, number>();
+
 io.of("/xpra").on("connection", (socket: Socket) => {
 	log(`New connection for XPRA: ${socket.id}`);
 
-	// Handle launching apps
+	let tcpPort =
+		availableTcpPorts.length > 0 ? availableTcpPorts.shift()! : nextTcpPort++;
+	socketToTcpPortMap.set(socket.id, tcpPort);
+
 	socket.on("launchApp", (appName: string) => {
-		launchApplication(appName, socket);
+		launchApplication(appName, socket, tcpPort);
 	});
 
-	// Handle disconnects
 	socket.on("disconnect", () => {
-		const displayToKill = socketToDisplayMap.get(socket.id);
-		if (displayToKill !== undefined) {
-			log(`Killing XPRA display :${displayToKill}`);
-			exec(`xpra stop :${displayToKill}`, () => {
-				availableDisplayNumbers.push(displayToKill);
-				socketToDisplayMap.delete(socket.id);
+		const tcpPortToKill = socketToTcpPortMap.get(socket.id);
+		if (tcpPortToKill !== undefined) {
+			log(`Killing XPRA on port ${tcpPortToKill}`);
+			exec(`xpra stop tcp:0.0.0.0:${tcpPortToKill}`, () => {
+				availableTcpPorts.push(tcpPortToKill);
+				socketToTcpPortMap.delete(socket.id);
 			});
 		}
 	});
