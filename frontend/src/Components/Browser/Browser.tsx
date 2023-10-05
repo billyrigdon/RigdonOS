@@ -26,10 +26,12 @@ const Browser = (props: Props) => {
 	};
 
 	const removeFloatMenu = () => {
-		const floatMenuElement = document.getElementById("float-menu");
-		if (floatMenuElement) {
-			floatMenuElement.remove();
-		}
+		setTimeout(() => {
+			const floatMenuElement = document.getElementById("float-menu");
+			if (floatMenuElement) {
+				floatMenuElement.remove();
+			}
+		}, 500);
 	};
 
 	useEffect(() => {
