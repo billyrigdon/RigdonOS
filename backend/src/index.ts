@@ -8,7 +8,7 @@ import { exec } from "child_process";
 import fileRoute from "./Routes/FileRoute";
 import cors from "cors";
 import path from "path";
-
+import net from "net";
 // Setup logging
 const logFile = "/RigdonOS/filesystem/logs/node-server.log";
 
@@ -18,6 +18,26 @@ const log = (message: string) => {
 	console.log(message);
 };
 
+const isPortReachable = (port: number, host = "localhost") => {
+	return new Promise((resolve) => {
+		const socket = new net.Socket();
+
+		const onError = () => {
+			socket.destroy();
+			resolve(false);
+		};
+
+		socket.setTimeout(1000);
+		socket.once("error", onError);
+		socket.once("timeout", onError);
+
+		socket.connect(port, host, () => {
+			socket.end();
+			resolve(true);
+		});
+	});
+};
+
 const launchApplication = (
 	appName: string,
 	socket: Socket,
@@ -25,25 +45,26 @@ const launchApplication = (
 ) => {
 	const command = `xpra start --bind-tcp=:${tcpPort} --start="${appName}" --desktop-scaling=on --tray=no --opengl=yes --keyboard-layout=us --no-tray`;
 
-	log(`Attempting to launch app: ${appName} on port ${tcpPort}`);
+	console.log(`Attempting to launch app: ${appName} on port ${tcpPort}`);
 
-	exec(command, (error, stdout, stderr) => {
+	exec(command, async (error, stdout, stderr) => {
 		if (error) {
-			log(`Error launching app: ${error}`);
+			console.log(`Error launching app: ${error}`);
 			socket.emit("appError", `Failed to launch ${appName}`);
 			return;
 		}
 
-		const connectionString = `http://localhost:${tcpPort}`;
-
-		setTimeout(() => {
-			socket.emit("appLaunched", connectionString);
+		// Continuously check if the port is open
+		const intervalId = setInterval(async () => {
+			if (await isPortReachable(tcpPort)) {
+				clearInterval(intervalId);
+				const connectionString = `http://localhost:${tcpPort}`;
+				socket.emit("appLaunched", connectionString);
+				console.log(`Successfully launched app: ${appName} on port ${tcpPort}`);
+			}
 		}, 1000);
-
-		log(`Successfully launched app: ${appName} on port ${tcpPort}`);
 	});
 };
-
 //Initialize express and socket.io server
 const app = express();
 const server = http.createServer(app);
