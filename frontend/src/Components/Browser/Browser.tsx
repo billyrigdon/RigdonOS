@@ -25,11 +25,18 @@ const Browser = (props: Props) => {
 		setBrowserClass("browser");
 	};
 
+	const removeFloatMenu = () => {
+		const floatMenuElement = document.getElementById("float-menu");
+		if (floatMenuElement) {
+			floatMenuElement.remove();
+		}
+	};
+
 	useEffect(() => {
 		// Connect specifically to the '/xpra' namespace
 		const socket = io("http://localhost:1313/xpra");
 
-		socket.emit("launchApp", "firefox");
+		socket.emit("launchApp", "epiphany-browser");
 
 		socket.on("appLaunched", (connString: string) => {
 			setConnectionString(connString);
@@ -57,6 +64,7 @@ const Browser = (props: Props) => {
 				<div style={{ width: "100%", height: "100%" }}>
 					{connectionString ? (
 						<iframe
+							onLoad={removeFloatMenu}
 							src={connectionString}
 							style={{ width: "100%", height: "100%" }}
 						/>

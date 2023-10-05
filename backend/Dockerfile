@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y xvfb xpra x11-apps python3-paramiko zsh xpra curl acl sudo firefox build-essential python3-requests && \
+    apt-get install -y xorg i3 x11-utils xvfb xpra x11-apps python3-paramiko zsh xpra curl acl sudo firefox build-essential python3-requests && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

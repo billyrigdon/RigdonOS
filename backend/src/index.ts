@@ -13,9 +13,9 @@ import path from "path";
 const logFile = "/RigdonOS/filesystem/logs/node-server.log";
 
 const log = (message: string) => {
-	const formattedMessage = `${new Date().toISOString()} - ${message}\n`;
-	fs.appendFileSync(logFile, formattedMessage);
-	console.log(formattedMessage);
+	//	const formattedMessage = `${new Date().toISOString()} - ${message}\n`;
+	//	fs.appendFileSync(logFile, formattedMessage);
+	console.log(message);
 };
 
 const launchApplication = (
@@ -23,7 +23,7 @@ const launchApplication = (
 	socket: Socket,
 	tcpPort: number
 ) => {
-	const command = `xpra start --bind-tcp=0.0.0.0:${tcpPort} --start-child="${appName}" --html=on --exit-with-children`;
+	const command = `xpra start :72 --bind-tcp=:${tcpPort} --start="${appName}" --desktop-scaling=on --tray=no --opengl=yes --keyboard-layout=us --no-tray`;
 
 	log(`Attempting to launch app: ${appName} on port ${tcpPort}`);
 
