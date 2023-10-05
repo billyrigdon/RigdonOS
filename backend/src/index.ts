@@ -23,7 +23,7 @@ const launchApplication = (
 	socket: Socket,
 	tcpPort: number
 ) => {
-	const command = `xpra start :72 --bind-tcp=:${tcpPort} --start="${appName}" --desktop-scaling=on --tray=no --opengl=yes --keyboard-layout=us --no-tray`;
+	const command = `xpra start :72 --bind-tcp=:${tcpPort} --start="${appName}" --desktop-scaling=on --tray=no --opengl=yes --keyboard-layout=us --no-tray --html=on`;
 
 	log(`Attempting to launch app: ${appName} on port ${tcpPort}`);
 
@@ -36,7 +36,10 @@ const launchApplication = (
 
 		const connectionString = `http://localhost:${tcpPort}`;
 
-		socket.emit("appLaunched", connectionString);
+		setTimeout(() => {
+			socket.emit("appLaunched", connectionString);
+		}, 1000);
+
 		log(`Successfully launched app: ${appName} on port ${tcpPort}`);
 	});
 };
