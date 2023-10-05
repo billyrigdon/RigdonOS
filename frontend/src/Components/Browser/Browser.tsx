@@ -27,7 +27,7 @@ const Browser = (props: Props) => {
 
 	const removeFloatMenu = () => {
 		setTimeout(() => {
-			const floatMenuElement = document.getElementById("float-menu");
+			const floatMenuElement = document.getElementById("float_menu");
 			if (floatMenuElement) {
 				floatMenuElement.remove();
 			}

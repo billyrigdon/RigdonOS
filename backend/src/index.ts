@@ -23,7 +23,7 @@ const launchApplication = (
 	socket: Socket,
 	tcpPort: number
 ) => {
-	const command = `xpra start --bind-tcp=:${tcpPort} --start="${appName}" --desktop-scaling=on --tray=no --opengl=yes --keyboard-layout=us --no-tray --html=on`;
+	const command = `xpra start --bind-tcp=:${tcpPort} --start="${appName}" --desktop-scaling=on --tray=no --opengl=yes --keyboard-layout=us --no-tray`;
 
 	log(`Attempting to launch app: ${appName} on port ${tcpPort}`);
 
