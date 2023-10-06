@@ -114,7 +114,7 @@ const App = (props: any) => {
 			{props.resumeOpen && <ConnectedResume />}
 			{props.fileManagerOpen && <ConnectedFileManager />}
 			{props.soundcloudOpen && <ConnectedSoundcloud />}
-			{props.networkManagerOpen && <ConnectedNetworkManager />}
+			{/* {props.networkManagerOpen && <ConnectedNetworkManager />} */}
 		</div>
 	);
 };

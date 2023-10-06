@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./NetworkManager.scss";
-const { ipcRenderer } = window.require("electron");
+// const { ipcRenderer } = require("electron");
 
 const NetworkManager: React.FC = () => {
 	const [ssid, setSsid] = useState<string>("");
@@ -15,45 +15,45 @@ const NetworkManager: React.FC = () => {
 	const [selectedNetwork, setSelectedNetwork] = useState<string | null>(null);
 
 	useEffect(() => {
-		ipcRenderer.send("get-available-networks");
-		ipcRenderer.send("get-current-network");
+		// ipcRenderer.send("get-available-networks");
+		// ipcRenderer.send("get-current-network");
 
-		ipcRenderer.on("available-networks", (_, networks) => {
-			setAvailableNetworks(networks);
-		});
+		// ipcRenderer.on("available-networks", (_, networks) => {
+		// 	setAvailableNetworks(networks);
+		// });
 
-		ipcRenderer.on("current-network", (_, network) => {
-			setCurrentNetwork(network);
-		});
+		// ipcRenderer.on("current-network", (_, network) => {
+		// 	setCurrentNetwork(network);
+		// });
 
-		return () => {
-			ipcRenderer.removeAllListeners("available-networks");
-			ipcRenderer.removeAllListeners("current-network");
-		};
+		// return () => {
+		// 	ipcRenderer.removeAllListeners("available-networks");
+		// 	ipcRenderer.removeAllListeners("current-network");
+		// };
 	}, []);
 
 	const connectToSelectedWifi = () => {
 		if (selectedNetwork && password) {
-			ipcRenderer.send("connect-to-wifi", selectedNetwork, password);
+			// ipcRenderer.send("connect-to-wifi", selectedNetwork, password);
 		}
 	};
 
 	const connectWifi = () => {
-		ipcRenderer.send("connect-to-wifi", ssid, password);
+		// ipcRenderer.send("connect-to-wifi", ssid, password);
 	};
 
 	const setStaticIP = () => {
-		ipcRenderer.send("set-static-ip", interfaceName, ip, gateway, dns);
+		// ipcRenderer.send("set-static-ip", interfaceName, ip, gateway, dns);
 	};
 
 	const setDHCP = () => {
-		ipcRenderer.send("set-dhcp", interfaceName);
+		// ipcRenderer.send("set-dhcp", interfaceName);
 	};
 
 	const toggleAirplaneMode = () => {
 		const newStatus = airplaneMode === "on" ? "off" : "on";
 		setAirplaneMode(newStatus);
-		ipcRenderer.send("toggle-airplane-mode", newStatus);
+		// ipcRenderer.send("toggle-airplane-mode", newStatus);
 	};
 
 	return (

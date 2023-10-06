@@ -1,0 +1,57 @@
+$mediumShadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25);
+$lightPurple: #776d87;
+$darkColor: #4A4453;
+$trafficRed: #e18999;
+$trafficYellow: #f9f871;
+$trafficGreen: #00c9a4;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Ubuntu&display=swap');
+
+.windowContainer {
+    height:600px;
+    width: 800px;
+	background-color: red;
+}
+
+.windowBar {
+	width: 100%;
+	height:2.5rem;
+	background-color: $lightPurple;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.windowBarAdvanced {
+	width: 100%;
+	height:2.5rem;
+	background-color: $lightPurple;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.windowButtonsContainer {
+	display: flex;
+	align-items: center;
+}
+
+.windowButtons {
+	height: .8rem;
+	width:.8rem;
+	border-radius: 360px;
+	margin:.2rem;
+	cursor: pointer;
+}
+
+.minimize {
+	background-color: $trafficYellow;
+}
+
+.maximize {
+	background-color: $trafficGreen;
+}
+
+.close {
+	background-color: $trafficRed;
+	margin-right: .5rem;
+}

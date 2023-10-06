@@ -6,7 +6,7 @@
 		"allowJs": true,
 		"jsx": "react",
 		"outDir": "./dist",
-		"rootDir": "./",
+		"rootDir": "./src",
 		"isolatedModules": true,
 		"strict": false,
 		"moduleResolution": "node",

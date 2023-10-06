@@ -6,8 +6,9 @@
 	"scripts": {
 		"build": "webpack",
 		"dev": "webpack-dev-server --open",
+		"build-lib": "cd ../lib && npm run build",
 		"electron-build": "tsc --project tsconfig.electron.json",
-		"start": "npm run build && npm run electron-build && electron dist/electron/main.js"
+		"start": "npm run build-lib && npm run build && npm run electron-build && electron dist/electron/main.js"
 	},
 	"repository": {
 		"type": "git",
@@ -57,6 +58,7 @@
 		"redux-thunk": "^2.4.1",
 		"sass": "^1.55.0",
 		"socket.io-client": "^4.4.0",
+		"x11": "^2.3.0",
 		"xterm": "^4.15.0",
 		"xterm-addon-fit": "^0.5.0"
 	}
