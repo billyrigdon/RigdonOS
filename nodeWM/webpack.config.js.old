@@ -1,0 +1,23 @@
+const path = require('path');
+
+module.exports = {
+  mode: 'production', // or 'development'
+  entry: './src/index.ts', // Entry point, change this as needed
+  target: 'electron-main',
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: 'ts-loader',
+        include: [path.resolve(__dirname, 'src')],
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
+  output: {
+    filename: 'index.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
