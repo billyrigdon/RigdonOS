@@ -5,6 +5,7 @@ ENV TZ="America/Chicago"
 RUN apt install -y build-essential
 RUN apt install -y nodejs npm vim 
 RUN apt install -y neofetch
+RUN apt-get purge -y openssh-client
 WORKDIR /opt/RigdonOS
 COPY . ./
 RUN rm -rf node_modules
